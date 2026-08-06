@@ -25,9 +25,9 @@ export async function POST(request: Request) {
 
 
 
-    await resend.emails.send({
+    const { data, error } = await resend.emails.send({
 
-      from: "Vertex Studio Works <hello.vertexstudioworks@gmail.com>",
+      from: "onboarding@resend.dev",
 
       to: "hello.vertexstudioworks@gmail.com",
 
@@ -155,6 +155,28 @@ export async function POST(request: Request) {
 
 
 
+    if (error) {
+
+      console.error("Resend Error:", error);
+
+
+      return NextResponse.json(
+        {
+          success:false,
+          error:error.message,
+        },
+        {
+          status:500,
+        }
+      );
+
+    }
+
+
+
+    console.log("Email Sent:", data);
+
+
 
     return NextResponse.json({
 
@@ -167,7 +189,7 @@ export async function POST(request: Request) {
   } catch(error) {
 
 
-    console.error(error);
+    console.error("Server Error:", error);
 
 
 
