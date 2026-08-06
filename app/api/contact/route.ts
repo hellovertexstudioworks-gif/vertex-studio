@@ -27,7 +27,7 @@ export async function POST(request: Request) {
 
     await resend.emails.send({
 
-      from: "onboarding@resend.dev",
+      from: "Vertex Studio Works <hello.vertexstudioworks@gmail.com>",
 
       to: "hello.vertexstudioworks@gmail.com",
 
@@ -64,7 +64,7 @@ export async function POST(request: Request) {
             color:#38bdf8;
             "
           >
-            Vertex Studio
+            Vertex Studio Works
           </h1>
 
 
@@ -90,28 +90,24 @@ export async function POST(request: Request) {
 
 
           <p>
-            <strong>Name:</strong>
-            ${name}
+            <strong>Name:</strong> ${name}
           </p>
 
 
           <p>
-            <strong>Email:</strong>
-            ${email}
-          </p>
-
-
-
-          <p>
-            <strong>Business:</strong>
-            ${business}
+            <strong>Email:</strong> ${email}
           </p>
 
 
 
           <p>
-            <strong>Website Type:</strong>
-            ${websiteType}
+            <strong>Business:</strong> ${business}
+          </p>
+
+
+
+          <p>
+            <strong>Website Type:</strong> ${websiteType}
           </p>
 
 
