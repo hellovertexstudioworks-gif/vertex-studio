@@ -6,7 +6,7 @@ import Button from "../ui/Button";
 const packages = [
   {
     name: "Launch",
-    price: "₱19,990",
+    price: "$349",
     description:
       "Perfect for startups and new businesses that need a professional website to establish credibility online.",
     button: "Start Your Project",
@@ -26,7 +26,7 @@ const packages = [
 
   {
     name: "Scale",
-    price: "₱39,990",
+    price: "$699",
     description:
       "Built for growing businesses that need stronger features, better visibility, and a website designed for growth.",
     button: "Book Free Strategy Call",
@@ -505,7 +505,7 @@ font-bold
 text-blue-400
 "
 >
-₱2,500
+$49
 <span className="text-lg text-slate-400">
 /month
 </span>
@@ -571,7 +571,7 @@ font-bold
 text-blue-400
 "
 >
-₱5,000
+$99
 <span className="text-lg text-slate-400">
 /month
 </span>
@@ -619,7 +619,7 @@ font-bold
 text-blue-400
 "
 >
-₱8,000+
+$149+
 </p>
 
 
