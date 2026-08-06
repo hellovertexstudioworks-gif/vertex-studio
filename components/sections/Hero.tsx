@@ -135,24 +135,28 @@ export default function Hero() {
             "
           >
 
-            <button
-              className="
-              rounded-full
-              bg-gradient-to-r
-              from-blue-600
-              to-cyan-500
-              px-8
-              py-4
-              font-semibold
-              text-white
-              transition
-              hover:-translate-y-1
-              hover:shadow-xl
-              hover:shadow-blue-500/30
-              "
-            >
-              Book a Free Discovery Call
-            </button>
+           <a
+href="https://calendly.com/hello-vertexstudioworks/30min"
+target="_blank"
+rel="noopener noreferrer"
+className="
+rounded-full
+bg-gradient-to-r
+from-blue-600
+to-cyan-500
+px-8
+py-4
+font-semibold
+text-white
+transition
+hover:-translate-y-1
+hover:shadow-xl
+hover:shadow-blue-500/30
+inline-block
+"
+>
+Book a Free Discovery Call
+</a>
 
 
 
