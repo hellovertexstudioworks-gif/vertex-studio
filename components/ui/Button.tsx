@@ -6,6 +6,9 @@ interface ButtonProps {
   className?: string;
   onClick?: () => void;
   type?: "button" | "submit";
+  href?: string;
+  target?: string;
+  rel?: string;
 }
 
 export default function Button({
@@ -14,9 +17,14 @@ export default function Button({
   className = "",
   onClick,
   type = "button",
+  href,
+  target,
+  rel,
 }: ButtonProps) {
+
   const baseStyles =
     "inline-flex items-center justify-center rounded-full px-7 py-3.5 font-semibold transition-all duration-300 focus:outline-none";
+
 
   const variants = {
     primary:
@@ -26,13 +34,34 @@ export default function Button({
       "border border-white/10 bg-transparent text-white hover:border-blue-500 hover:text-blue-400",
   };
 
+
+  const styles = `${baseStyles} ${variants[variant]} ${className}`;
+
+
+  if (href) {
+
+    return (
+      <a
+        href={href}
+        target={target}
+        rel={rel}
+        className={styles}
+      >
+        {children}
+      </a>
+    );
+
+  }
+
+
   return (
     <button
       type={type}
       onClick={onClick}
-      className={`${baseStyles} ${variants[variant]} ${className}`}
+      className={styles}
     >
       {children}
     </button>
   );
+
 }

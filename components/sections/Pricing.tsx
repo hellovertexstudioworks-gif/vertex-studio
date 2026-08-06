@@ -10,6 +10,7 @@ const packages = [
     description:
       "Perfect for startups and new businesses that need a professional website to establish credibility online.",
     button: "Start Your Project",
+    link: "https://calendly.com/hello-vertexstudioworks/30min",
     popular: false,
     features: [
       "Up to 5 Custom Pages",
@@ -30,6 +31,7 @@ const packages = [
     description:
       "Built for growing businesses that need stronger features, better visibility, and a website designed for growth.",
     button: "Book Free Strategy Call",
+    link: "https://calendly.com/hello-vertexstudioworks/30min",
     popular: true,
     features: [
       "Everything in Launch",
@@ -45,11 +47,12 @@ const packages = [
   },
 
   {
-    name: "Enterprise",
+     name: "Enterprise",
     price: "Custom Quote",
     description:
       "For businesses needing custom solutions, integrations, and advanced website functionality.",
     button: "Request a Quote",
+    link: "https://calendly.com/hello-vertexstudioworks/30min",
     popular: false,
     features: [
       "Unlimited Pages",
@@ -275,17 +278,15 @@ mt-10
 >
 
 <Button
-
-className="
-w-full
-"
-
+href={pkg.link}
+target="_blank"
+rel="noopener noreferrer"
+className="w-full"
 >
 
 {pkg.button}
 
 </Button>
-
 
 </div>
 
