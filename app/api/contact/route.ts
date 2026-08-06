@@ -12,6 +12,9 @@ export async function POST(request: Request) {
 
   try {
 
+    console.log("CONTACT API STARTED");
+
+
     const body = await request.json();
 
 
@@ -22,6 +25,20 @@ export async function POST(request: Request) {
       websiteType,
       message,
     } = body;
+
+
+
+    console.log("FORM DATA:", {
+      name,
+      email,
+      business,
+      websiteType,
+      message,
+    });
+
+
+
+    console.log("SENDING EMAIL...");
 
 
 
@@ -47,7 +64,6 @@ export async function POST(request: Request) {
         "
       >
 
-
         <div
           style="
           max-width:600px;
@@ -58,12 +74,7 @@ export async function POST(request: Request) {
           "
         >
 
-
-          <h1
-            style="
-            color:#38bdf8;
-            "
-          >
+          <h1 style="color:#38bdf8;">
             Vertex Studio Works
           </h1>
 
@@ -73,15 +84,12 @@ export async function POST(request: Request) {
           </h2>
 
 
-
           <p>
             You received a new message from your website.
           </p>
 
 
-
           <hr />
-
 
 
           <h3>
@@ -99,11 +107,9 @@ export async function POST(request: Request) {
           </p>
 
 
-
           <p>
             <strong>Business:</strong> ${business}
           </p>
-
 
 
           <p>
@@ -111,9 +117,7 @@ export async function POST(request: Request) {
           </p>
 
 
-
           <hr />
-
 
 
           <h3>
@@ -126,10 +130,7 @@ export async function POST(request: Request) {
           </p>
 
 
-
-
           <br />
-
 
 
           <p
@@ -143,9 +144,7 @@ export async function POST(request: Request) {
           </p>
 
 
-
         </div>
-
 
       </div>
 
@@ -155,32 +154,37 @@ export async function POST(request: Request) {
 
 
 
-    if (error) {
+    console.log("RESEND RESPONSE:", {
+      data,
+      error,
+    });
 
-      console.error("Resend Error:", error);
+
+
+    if (error) {
 
 
       return NextResponse.json(
+
         {
           success:false,
           error:error.message,
         },
+
         {
           status:500,
         }
+
       );
 
     }
 
 
 
-    console.log("Email Sent:", data);
-
-
-
     return NextResponse.json({
 
       success:true,
+      id:data?.id,
 
     });
 
@@ -189,7 +193,7 @@ export async function POST(request: Request) {
   } catch(error) {
 
 
-    console.error("Server Error:", error);
+    console.error("CONTACT API ERROR:", error);
 
 
 
@@ -197,6 +201,7 @@ export async function POST(request: Request) {
 
       {
         success:false,
+        error:"Something went wrong",
       },
 
       {
