@@ -160,22 +160,26 @@ Book a Free Discovery Call
 
 
 
-            <button
-              className="
-              rounded-full
-              border
-              border-white/20
-              px-8
-              py-4
-              font-semibold
-              text-white
-              transition
-              hover:bg-white
-              hover:text-black
-              "
-            >
-              View Portfolio
-            </button>
+           <a href="#portfolio">
+
+<button
+  className="
+  rounded-full
+  border
+  border-white/20
+  px-8
+  py-4
+  font-semibold
+  text-white
+  transition
+  hover:bg-white
+  hover:text-black
+  "
+>
+  View Portfolio
+</button>
+
+</a>
 
 
           </div>
