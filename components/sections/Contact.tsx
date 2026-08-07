@@ -278,20 +278,19 @@ export default function Contact() {
 
 
               <div>
+  <p className="text-sm text-blue-400">
+    WhatsApp
+  </p>
 
-                <p className="text-sm text-blue-400">
-                  WhatsApp
-                </p>
-
-                <a
-                  href="https://wa.me/639676824238"
-                  target="_blank"
-                  className="mt-2 block text-xl font-semibold text-white hover:text-blue-400"
-                >
-                  +63 967 682 4238
-                </a>
-
-              </div>
+  <a
+    href="https://api.whatsapp.com/send?phone=639676824238&text=Hi%20Vertex%20Studio!%20I'm%20interested%20in%20getting%20a%20website."
+    target="_blank"
+    rel="noopener noreferrer"
+    className="mt-2 block text-xl font-semibold text-white hover:text-blue-400"
+  >
+    +63 967 682 4238
+  </a>
+</div>
 
 
 

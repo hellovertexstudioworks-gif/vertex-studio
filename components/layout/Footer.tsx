@@ -238,7 +238,7 @@ export default function Footer() {
 
 
               <a
-                href="https://wa.me/639676824238"
+                href="https://api.whatsapp.com/send?phone=639676824238&text=Hi%20Vertex%20Studio!"
                 target="_blank"
                 className="
                 block
