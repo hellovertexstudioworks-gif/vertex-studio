@@ -1,7 +1,6 @@
 import Container from "../ui/Container";
 import SectionTitle from "../ui/SectionTitle";
 
-
 const projects = [
   {
     title: "Restaurant Website",
@@ -17,6 +16,7 @@ const projects = [
       "Modern healthcare websites focused on building patient trust, showcasing services, and appointment bookings.",
     image: "/projects/clinic.png",
     tags: ["Healthcare", "Booking", "Trust"],
+    link: "https://brightsmile-dental-psi.vercel.app",
   },
 
   {
@@ -76,221 +76,170 @@ const projects = [
   },
 ];
 
-
-
 export default function Portfolio() {
-
   return (
-
     <section
       id="portfolio"
       className="bg-[#050816] py-28"
     >
-
       <Container>
 
+        {/* Section Title */}
 
         <SectionTitle
-
           badge="WEBSITE CONCEPTS"
-
           title="Websites Built"
-
           highlight="For Every Business"
-
-          description="
-          Explore premium website concepts created for different industries.
-          Each design focuses on credibility, user experience, and business growth.
-          "
-
+          description="Explore premium website concepts created for different industries. Each design focuses on credibility, user experience, and business growth."
         />
 
-
+        {/* Portfolio Grid */}
 
         <div
           className="
-          mt-16
-          grid
-          gap-8
-          md:grid-cols-2
-          lg:grid-cols-3
+            mt-16
+            grid
+            gap-8
+            md:grid-cols-2
+            lg:grid-cols-3
           "
         >
-
-
-          {projects.map((project)=>(
-
-
+          {projects.map((project) => (
             <div
-
               key={project.title}
-
               className="
-              group
-              overflow-hidden
-              rounded-3xl
-              border
-              border-white/10
-              bg-white/5
-              transition
-              duration-300
-              hover:-translate-y-2
-              hover:border-blue-500/50
+                group
+                overflow-hidden
+                rounded-3xl
+                border
+                border-white/10
+                bg-white/5
+                transition
+                duration-300
+                hover:-translate-y-2
+                hover:border-blue-500/50
               "
-
             >
-
-
 
               {/* IMAGE */}
 
               <div
                 className="
-                h-64
-                overflow-hidden
-                bg-[#111827]
+                  h-64
+                  overflow-hidden
+                  bg-[#111827]
                 "
               >
-
                 <img
-
                   src={project.image}
-
                   alt={project.title}
-
                   className="
-                  h-full
-                  w-full
-                  object-cover
-                  transition
-                  duration-500
-                  group-hover:scale-105
+                    h-full
+                    w-full
+                    object-cover
+                    transition
+                    duration-500
+                    group-hover:scale-105
                   "
-
                 />
-
               </div>
-
-
-
-
 
               {/* CONTENT */}
 
-
               <div className="p-8">
 
+                {/* Title */}
 
                 <h3
                   className="
-                  text-2xl
-                  font-bold
-                  text-white
+                    text-2xl
+                    font-bold
+                    text-white
                   "
                 >
-
                   {project.title}
-
                 </h3>
 
-
-
+                {/* Description */}
 
                 <p
                   className="
-                  mt-4
-                  leading-7
-                  text-slate-400
+                    mt-4
+                    leading-7
+                    text-slate-400
                   "
                 >
-
                   {project.description}
-
                 </p>
 
-
-
+                {/* Tags */}
 
                 <div
                   className="
-                  mt-6
-                  flex
-                  flex-wrap
-                  gap-3
+                    mt-6
+                    flex
+                    flex-wrap
+                    gap-3
                   "
                 >
-
-
-                  {project.tags.map((tag)=>(
-
-
+                  {project.tags.map((tag) => (
                     <span
-
                       key={tag}
-
                       className="
-                      rounded-full
-                      border
-                      border-blue-500/20
-                      bg-blue-500/10
-                      px-3
-                      py-1
-                      text-xs
-                      text-blue-400
+                        rounded-full
+                        border
+                        border-blue-500/20
+                        bg-blue-500/10
+                        px-3
+                        py-1
+                        text-xs
+                        text-blue-400
                       "
-
                     >
-
                       {tag}
-
                     </span>
-
-
                   ))}
-
-
                 </div>
 
+                {/* Project Link */}
 
-
-
-                <button
-
-                  className="
-                  mt-8
-                  font-semibold
-                  text-blue-400
-                  transition
-                  hover:text-blue-300
-                  "
-
-                >
-
-                  View Concept →
-
-                </button>
-
-
+                {project.link ? (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="
+                      mt-8
+                      inline-block
+                      font-semibold
+                      text-blue-400
+                      transition
+                      hover:text-blue-300
+                    "
+                  >
+                    View Live Website →
+                  </a>
+                ) : (
+                  <button
+                    type="button"
+                    className="
+                      mt-8
+                      font-semibold
+                      text-blue-400
+                      transition
+                      hover:text-blue-300
+                    "
+                  >
+                    View Concept →
+                  </button>
+                )}
 
               </div>
-
-
-
             </div>
-
-
           ))}
-
-
         </div>
 
-
-
       </Container>
-
-
     </section>
-
   );
-
 }
