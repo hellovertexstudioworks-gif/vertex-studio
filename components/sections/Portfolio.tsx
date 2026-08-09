@@ -45,11 +45,12 @@ const projects = [
   },
 
   {
-    title: "Coaching Business Website",
+    title: "Elevate Coaching Website",
     description:
-      "Professional platforms for coaches to showcase programs and attract new clients.",
-    image: "/projects/coaching.png",
-    tags: ["Coaching", "CMS", "Branding"],
+      "A premium coaching website designed to build trust, communicate personal growth programs, and turn visitors into potential clients.",
+    image: "/projects/elevate.png",
+    tags: ["Coaching", "Personal Growth", "Branding"],
+    link: "https://elevate-coaching-mauve.vercel.app/",
   },
 
   {
@@ -79,9 +80,11 @@ const projects = [
 
 export default function Portfolio() {
   return (
-    <section id="portfolio" className="relative overflow-hidden">
+    <section
+      id="portfolio"
+      className="py-24 sm:py-28 lg:py-32"
+    >
       <Container>
-
         {/* Section Title */}
 
         <SectionTitle
@@ -118,7 +121,6 @@ export default function Portfolio() {
                 hover:border-blue-500/50
               "
             >
-
               {/* IMAGE */}
 
               <div
@@ -145,7 +147,6 @@ export default function Portfolio() {
               {/* CONTENT */}
 
               <div className="p-8">
-
                 {/* Title */}
 
                 <h3
@@ -231,12 +232,10 @@ export default function Portfolio() {
                     View Concept →
                   </button>
                 )}
-
               </div>
             </div>
           ))}
         </div>
-
       </Container>
     </section>
   );
