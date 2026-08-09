@@ -8,6 +8,7 @@ const projects = [
       "Premium restaurant websites designed to showcase menus, reservations, and create memorable customer experiences.",
     image: "/projects/restaurant.png",
     tags: ["Restaurant", "Reservations", "SEO"],
+    type: "concept",
   },
 
   {
@@ -17,6 +18,7 @@ const projects = [
     image: "/projects/clinic.png",
     tags: ["Healthcare", "Booking", "Trust"],
     link: "https://brightsmile-dental-psi.vercel.app",
+    type: "live",
   },
 
   {
@@ -26,14 +28,17 @@ const projects = [
     image: "/projects/construction.png",
     tags: ["Construction", "Leads", "Business"],
     link: "https://forgebuild-construction.vercel.app",
+    type: "live",
   },
 
   {
     title: "E-Commerce Store",
     description:
-      "Online shopping experiences designed to improve product presentation, customer experience, and conversions.",
+      "A premium furniture ecommerce experience designed around timeless interiors, thoughtful product presentation, and modern living.",
     image: "/projects/ecommerce.png",
-    tags: ["E-Commerce", "Payments", "Conversion"],
+    tags: ["E-Commerce", "Furniture", "Premium Design"],
+    link: "https://nova-home-khaki.vercel.app",
+    type: "live",
   },
 
   {
@@ -42,6 +47,7 @@ const projects = [
       "Modern startup websites designed to explain products, build credibility, and convert visitors.",
     image: "/projects/saas.png",
     tags: ["SaaS", "Startup", "Growth"],
+    type: "concept",
   },
 
   {
@@ -51,6 +57,7 @@ const projects = [
     image: "/projects/elevate.png",
     tags: ["Coaching", "Personal Growth", "Branding"],
     link: "https://elevate-coaching-mauve.vercel.app/",
+    type: "live",
   },
 
   {
@@ -59,6 +66,7 @@ const projects = [
       "Property websites with listings, inquiries, and lead generation features.",
     image: "/projects/realestate.png",
     tags: ["Real Estate", "Listings", "Leads"],
+    type: "concept",
   },
 
   {
@@ -67,6 +75,7 @@ const projects = [
       "Beautiful hospitality websites designed to highlight experiences and bookings.",
     image: "/projects/hotel.png",
     tags: ["Hospitality", "Booking", "Experience"],
+    type: "concept",
   },
 
   {
@@ -75,15 +84,13 @@ const projects = [
       "Elegant websites for salons, spas, and wellness brands.",
     image: "/projects/wellness.png",
     tags: ["Beauty", "Booking", "Mobile"],
+    type: "concept",
   },
 ];
 
 export default function Portfolio() {
   return (
-    <section
-      id="portfolio"
-      className="py-24 sm:py-28 lg:py-32"
-    >
+    <section id="portfolio" className="py-24">
       <Container>
         {/* Section Title */}
 
@@ -147,7 +154,7 @@ export default function Portfolio() {
               {/* CONTENT */}
 
               <div className="p-8">
-                {/* Title */}
+                {/* TITLE */}
 
                 <h3
                   className="
@@ -159,7 +166,7 @@ export default function Portfolio() {
                   {project.title}
                 </h3>
 
-                {/* Description */}
+                {/* DESCRIPTION */}
 
                 <p
                   className="
@@ -171,7 +178,7 @@ export default function Portfolio() {
                   {project.description}
                 </p>
 
-                {/* Tags */}
+                {/* TAGS */}
 
                 <div
                   className="
@@ -200,9 +207,9 @@ export default function Portfolio() {
                   ))}
                 </div>
 
-                {/* Project Link */}
+                {/* ACTION */}
 
-                {project.link ? (
+                {project.type === "live" && project.link && (
                   <a
                     href={project.link}
                     target="_blank"
@@ -218,19 +225,19 @@ export default function Portfolio() {
                   >
                     View Live Website →
                   </a>
-                ) : (
-                  <button
-                    type="button"
+                )}
+
+                {project.type === "concept" && (
+                  <span
                     className="
                       mt-8
+                      inline-block
                       font-semibold
-                      text-blue-400
-                      transition
-                      hover:text-blue-300
+                      text-blue-400/60
                     "
                   >
                     View Concept →
-                  </button>
+                  </span>
                 )}
               </div>
             </div>
