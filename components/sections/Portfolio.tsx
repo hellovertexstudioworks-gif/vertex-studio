@@ -25,6 +25,7 @@ const projects = [
       "Professional websites that showcase projects, generate leads, and establish business credibility.",
     image: "/projects/construction.png",
     tags: ["Construction", "Leads", "Business"],
+    link: "https://forgebuild-construction.vercel.app",
   },
 
   {
@@ -78,10 +79,7 @@ const projects = [
 
 export default function Portfolio() {
   return (
-    <section
-      id="portfolio"
-      className="bg-[#050816] py-28"
-    >
+    <section id="portfolio" className="relative overflow-hidden">
       <Container>
 
         {/* Section Title */}
