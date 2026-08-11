@@ -3,12 +3,13 @@ import SectionTitle from "../ui/SectionTitle";
 
 const projects = [
   {
-    title: "Restaurant Website",
+    title: "Luna Bistro Website",
     description:
-      "Premium restaurant websites designed to showcase menus, reservations, and create memorable customer experiences.",
+      "A premium restaurant experience designed around elegant dining, storytelling, menus, reservations, and memorable customer experiences.",
     image: "/projects/restaurant.png",
-    tags: ["Restaurant", "Reservations", "SEO"],
-    type: "concept",
+    tags: ["Restaurant", "Reservations", "Premium Design"],
+    link: "/work/lunabistro",
+    type: "live",
   },
 
   {
@@ -90,10 +91,9 @@ const projects = [
 
 export default function Portfolio() {
   return (
-    <section id="portfolio" className="py-24">
+    <section id="portfolio" className="py-24 sm:py-32">
       <Container>
         {/* Section Title */}
-
         <SectionTitle
           badge="WEBSITE CONCEPTS"
           title="Websites Built"
@@ -102,7 +102,6 @@ export default function Portfolio() {
         />
 
         {/* Portfolio Grid */}
-
         <div
           className="
             mt-16
@@ -129,7 +128,6 @@ export default function Portfolio() {
               "
             >
               {/* IMAGE */}
-
               <div
                 className="
                   h-64
@@ -152,10 +150,8 @@ export default function Portfolio() {
               </div>
 
               {/* CONTENT */}
-
               <div className="p-8">
                 {/* TITLE */}
-
                 <h3
                   className="
                     text-2xl
@@ -167,7 +163,6 @@ export default function Portfolio() {
                 </h3>
 
                 {/* DESCRIPTION */}
-
                 <p
                   className="
                     mt-4
@@ -179,7 +174,6 @@ export default function Portfolio() {
                 </p>
 
                 {/* TAGS */}
-
                 <div
                   className="
                     mt-6
@@ -208,12 +202,17 @@ export default function Portfolio() {
                 </div>
 
                 {/* ACTION */}
-
                 {project.type === "live" && project.link && (
                   <a
                     href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    target={
+                      project.link.startsWith("http") ? "_blank" : undefined
+                    }
+                    rel={
+                      project.link.startsWith("http")
+                        ? "noopener noreferrer"
+                        : undefined
+                    }
                     className="
                       mt-8
                       inline-block
@@ -223,7 +222,7 @@ export default function Portfolio() {
                       hover:text-blue-300
                     "
                   >
-                    View Live Website →
+                    View Website →
                   </a>
                 )}
 
