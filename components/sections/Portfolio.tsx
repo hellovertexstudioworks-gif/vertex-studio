@@ -1,5 +1,4 @@
 import Container from "../ui/Container";
-import SectionTitle from "../ui/SectionTitle";
 
 const projects = [
   {
@@ -13,9 +12,9 @@ const projects = [
   },
 
   {
-    title: "Dental Clinic Website",
+    title: "BrightSmile Dental Website",
     description:
-      "Modern healthcare websites focused on building patient trust, showcasing services, and appointment bookings.",
+      "A modern dental clinic experience focused on patient trust, clear services, professional presentation, and convenient appointment booking.",
     image: "/projects/clinic.png",
     tags: ["Healthcare", "Booking", "Trust"],
     link: "https://brightsmile-dental-psi.vercel.app",
@@ -23,9 +22,9 @@ const projects = [
   },
 
   {
-    title: "Construction Website",
+    title: "ForgeBuild Construction",
     description:
-      "Professional websites that showcase projects, generate leads, and establish business credibility.",
+      "A professional construction website designed to showcase projects, establish credibility, and generate qualified business inquiries.",
     image: "/projects/construction.png",
     tags: ["Construction", "Leads", "Business"],
     link: "https://forgebuild-construction.vercel.app",
@@ -33,7 +32,7 @@ const projects = [
   },
 
   {
-    title: "E-Commerce Store",
+    title: "Nova Home E-Commerce",
     description:
       "A premium furniture ecommerce experience designed around timeless interiors, thoughtful product presentation, and modern living.",
     image: "/projects/ecommerce.png",
@@ -43,12 +42,13 @@ const projects = [
   },
 
   {
-    title: "SaaS Startup Website",
+    title: "Horizon Realty",
     description:
-      "Modern startup websites designed to explain products, build credibility, and convert visitors.",
-    image: "/projects/saas.png",
-    tags: ["SaaS", "Startup", "Growth"],
-    type: "concept",
+      "A premium real estate experience designed around luxury properties, thoughtful service, property discovery, and high-end visual storytelling.",
+    image: "/projects/realestate.png",
+    tags: ["Real Estate", "Listings", "Premium Design"],
+    link: "https://horizon-realty-alpha.vercel.app",
+    type: "live",
   },
 
   {
@@ -62,18 +62,18 @@ const projects = [
   },
 
   {
-    title: "Real Estate Website",
+    title: "SaaS Startup Website",
     description:
-      "Property websites with listings, inquiries, and lead generation features.",
-    image: "/projects/realestate.png",
-    tags: ["Real Estate", "Listings", "Leads"],
+      "Modern startup websites designed to explain products, build credibility, and convert visitors.",
+    image: "/projects/saas.png",
+    tags: ["SaaS", "Startup", "Growth"],
     type: "concept",
   },
 
   {
     title: "Hotel & Resort Website",
     description:
-      "Beautiful hospitality websites designed to highlight experiences and bookings.",
+      "Beautiful hospitality websites designed to highlight experiences, destinations, and booking opportunities.",
     image: "/projects/hotel.png",
     tags: ["Hospitality", "Booking", "Experience"],
     type: "concept",
@@ -82,7 +82,7 @@ const projects = [
   {
     title: "Beauty & Wellness Website",
     description:
-      "Elegant websites for salons, spas, and wellness brands.",
+      "Elegant websites for salons, spas, and wellness brands designed around premium presentation and convenient booking.",
     image: "/projects/wellness.png",
     tags: ["Beauty", "Booking", "Mobile"],
     type: "concept",
@@ -91,28 +91,44 @@ const projects = [
 
 export default function Portfolio() {
   return (
-    <section id="portfolio" className="py-24 sm:py-32">
+    <section
+      id="portfolio"
+      className="relative overflow-hidden bg-[#050816] py-24 sm:py-28 lg:py-32"
+    >
       <Container>
-        {/* Section Title */}
-        <SectionTitle
-          badge="WEBSITE CONCEPTS"
-          title="Websites Built"
-          highlight="For Every Business"
-          description="Explore premium website concepts created for different industries. Each design focuses on credibility, user experience, and business growth."
-        />
+        {/* =====================================================
+            SECTION HEADER
+        ===================================================== */}
 
-        {/* Portfolio Grid */}
-        <div
-          className="
-            mt-16
-            grid
-            gap-8
-            md:grid-cols-2
-            lg:grid-cols-3
-          "
-        >
+        <div className="max-w-3xl">
+          <div className="mb-6 flex items-center gap-4">
+            <span className="h-px w-10 bg-blue-500" />
+
+            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-blue-400">
+              Selected Work
+            </p>
+          </div>
+
+          <h2 className="text-4xl font-bold leading-tight tracking-[-0.04em] text-white sm:text-5xl lg:text-6xl">
+            Websites built to{" "}
+            <span className="text-blue-400">
+              move businesses forward.
+            </span>
+          </h2>
+
+          <p className="mt-6 max-w-2xl text-base leading-8 text-slate-400">
+            Explore a selection of websites we've designed and developed for
+            businesses, brands, and ambitious ideas.
+          </p>
+        </div>
+
+        {/* =====================================================
+            PORTFOLIO GRID
+        ===================================================== */}
+
+        <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project) => (
-            <div
+            <article
               key={project.title}
               className="
                 group
@@ -120,21 +136,19 @@ export default function Portfolio() {
                 rounded-3xl
                 border
                 border-white/10
-                bg-white/5
-                transition
-                duration-300
+                bg-white/[0.04]
+                transition-all
+                duration-500
                 hover:-translate-y-2
-                hover:border-blue-500/50
+                hover:border-white/20
+                hover:bg-white/[0.06]
               "
             >
-              {/* IMAGE */}
-              <div
-                className="
-                  h-64
-                  overflow-hidden
-                  bg-[#111827]
-                "
-              >
+              {/* =================================================
+                  IMAGE
+              ================================================= */}
+
+              <div className="relative h-64 overflow-hidden bg-[#111827]">
                 <img
                   src={project.image}
                   alt={project.title}
@@ -142,46 +156,48 @@ export default function Portfolio() {
                     h-full
                     w-full
                     object-cover
-                    transition
-                    duration-500
+                    transition-transform
+                    duration-700
                     group-hover:scale-105
                   "
                 />
+
+                {/* IMAGE OVERLAY */}
+
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60" />
+
+                {/* LIVE BADGE */}
+
+                {project.type === "live" && (
+                  <div className="absolute left-5 top-5">
+                    <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/40 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.14em] text-white backdrop-blur-md">
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                      Live Project
+                    </span>
+                  </div>
+                )}
               </div>
 
-              {/* CONTENT */}
+              {/* =================================================
+                  CONTENT
+              ================================================= */}
+
               <div className="p-8">
                 {/* TITLE */}
-                <h3
-                  className="
-                    text-2xl
-                    font-bold
-                    text-white
-                  "
-                >
+
+                <h3 className="text-2xl font-bold tracking-tight text-white">
                   {project.title}
                 </h3>
 
                 {/* DESCRIPTION */}
-                <p
-                  className="
-                    mt-4
-                    leading-7
-                    text-slate-400
-                  "
-                >
+
+                <p className="mt-4 leading-7 text-slate-400">
                   {project.description}
                 </p>
 
                 {/* TAGS */}
-                <div
-                  className="
-                    mt-6
-                    flex
-                    flex-wrap
-                    gap-3
-                  "
-                >
+
+                <div className="mt-6 flex flex-wrap gap-2.5">
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
@@ -201,7 +217,10 @@ export default function Portfolio() {
                   ))}
                 </div>
 
-                {/* ACTION */}
+                {/* =================================================
+                    ACTION
+                ================================================= */}
+
                 {project.type === "live" && project.link && (
                   <a
                     href={project.link}
@@ -215,14 +234,19 @@ export default function Portfolio() {
                     }
                     className="
                       mt-8
-                      inline-block
+                      inline-flex
+                      items-center
+                      gap-2
                       font-semibold
                       text-blue-400
-                      transition
+                      transition-all
+                      duration-300
+                      hover:gap-3
                       hover:text-blue-300
                     "
                   >
-                    View Website →
+                    View Website
+                    <span>→</span>
                   </a>
                 )}
 
@@ -230,16 +254,19 @@ export default function Portfolio() {
                   <span
                     className="
                       mt-8
-                      inline-block
+                      inline-flex
+                      items-center
+                      gap-2
                       font-semibold
                       text-blue-400/60
                     "
                   >
-                    View Concept →
+                    View Concept
+                    <span>→</span>
                   </span>
                 )}
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </Container>
