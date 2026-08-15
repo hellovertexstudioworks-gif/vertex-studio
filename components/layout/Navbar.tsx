@@ -61,10 +61,7 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener(
-        "scroll",
-        handleScroll
-      );
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [isBrightSmile]);
 
@@ -92,8 +89,8 @@ export default function Navbar() {
     <header
       className={`
         fixed
-        top-0
         left-0
+        top-0
         z-50
         w-full
         transition-all
@@ -104,9 +101,7 @@ export default function Navbar() {
             ? scrolled
               ? "border-b border-slate-200 bg-white/95 shadow-sm backdrop-blur-xl"
               : "border-b border-slate-200 bg-white"
-            : scrolled
-              ? "border-b border-white/10 bg-[#050816]/80 shadow-lg backdrop-blur-xl"
-              : "bg-transparent"
+            : "border-b border-white/10 bg-[#050816]/95 shadow-lg backdrop-blur-xl"
         }
       `}
     >
@@ -121,7 +116,9 @@ export default function Navbar() {
           py-5
         "
       >
-        {/* LOGO */}
+        {/* =====================================================
+            LOGO
+        ===================================================== */}
 
         <a
           href={isBrightSmile ? "/" : "#"}
@@ -134,7 +131,7 @@ export default function Navbar() {
         >
           <Image
             src="/icon.png"
-            alt="Vertex Studio Logo"
+            alt="Vertex Studio Works Logo"
             width={55}
             height={55}
             className="
@@ -180,8 +177,9 @@ export default function Navbar() {
           </div>
         </a>
 
-        {/* DESKTOP NAVIGATION */}
-        {/* Desktop begins at 1024px */}
+        {/* =====================================================
+            DESKTOP NAVIGATION
+        ===================================================== */}
 
         <nav
           className="
@@ -191,6 +189,7 @@ export default function Navbar() {
             lg:flex
             xl:gap-8
           "
+          aria-label="Main navigation"
         >
           {navItems.map((item) => (
             <a
@@ -236,7 +235,9 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* DESKTOP BUTTON */}
+        {/* =====================================================
+            DESKTOP CTA
+        ===================================================== */}
 
         <div className="hidden lg:block">
           <a
@@ -265,15 +266,19 @@ export default function Navbar() {
           </a>
         </div>
 
-        {/* MOBILE / TABLET BUTTON */}
+        {/* =====================================================
+            MOBILE / TABLET BUTTON
+        ===================================================== */}
 
         <button
+          type="button"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label={
             mobileOpen
-              ? "Close menu"
-              : "Open menu"
+              ? "Close navigation menu"
+              : "Open navigation menu"
           }
+          aria-expanded={mobileOpen}
           className={`
             lg:hidden
 
@@ -292,7 +297,9 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* MOBILE / TABLET MENU */}
+      {/* =====================================================
+          MOBILE / TABLET MENU
+      ===================================================== */}
 
       <div
         className={`
@@ -316,7 +323,7 @@ export default function Navbar() {
             ${
               isBrightSmile
                 ? "border-slate-200 bg-white"
-                : "border-white/10 bg-[#050816]/95"
+                : "border-white/10 bg-[#050816]"
             }
           `}
         >
@@ -332,9 +339,7 @@ export default function Navbar() {
               <a
                 key={item.name}
                 href={getNavHref(item.href)}
-                onClick={() =>
-                  setMobileOpen(false)
-                }
+                onClick={() => setMobileOpen(false)}
                 className={`
                   border-b
                   py-4
@@ -362,9 +367,7 @@ export default function Navbar() {
 
             <a
               href={getContactHref()}
-              onClick={() =>
-                setMobileOpen(false)
-              }
+              onClick={() => setMobileOpen(false)}
               className="
                 mt-6
                 rounded-full

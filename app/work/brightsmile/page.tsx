@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 
-import Navbar from "@/components/layout/Navbar";
-import ShowcaseHeader from "./components/ShowcaseHeader";
-import ProjectOverview from "./components/ProjectOverview";
+import Navbar from "../../../components/layout/Navbar";
+
+import Footer from "./components/Footer";
+
 import Hero from "./components/hero";
 import Trust from "./components/Trust";
 import Services from "./components/Services";
@@ -12,7 +13,7 @@ import Doctors from "./components/Doctors";
 import Testimonials from "./components/Testimonials";
 import Gallery from "./components/Gallery";
 import CTA from "./components/CTA";
-import Footer from "./components/Footer";
+import Contact from "./components/Contact";
 
 /* =====================================================
    BRIGHTSMILE SEO
@@ -88,82 +89,35 @@ export const metadata: Metadata = {
 
 export default function BrightSmilePage() {
   return (
-    <>
-      {/* =====================================================
-          PROJECT STRUCTURED DATA
-      ===================================================== */}
+    <main className="min-h-screen overflow-x-hidden bg-white">
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
+      {/* BRIGHTSMILE NAVBAR */}
+      <Navbar />
 
-            "@type": "CreativeWork",
+      {/* BRIGHTSMILE WEBSITE */}
+      <Hero />
 
-            name: "BrightSmile Dental Website",
+      <Trust />
 
-            description:
-              "A modern dental website designed by Vertex Studio Works with a focus on patient trust, dental services, professional presentation, and convenient appointment booking.",
+      <Services />
 
-            url:
-              "https://www.vertexstudioworks.com/work/brightsmile",
+      <About />
 
-            image:
-              "https://www.vertexstudioworks.com/projects/clinic.png",
+      <WhyChooseUs />
 
-            creator: {
-              "@type": "Organization",
+      <Doctors />
 
-              name: "Vertex Studio Works",
+      <Testimonials />
 
-              url:
-                "https://www.vertexstudioworks.com/",
-            },
+      <Gallery />
 
-            about: {
-              "@type": "Thing",
+      <CTA />
 
-              name: "Dental Website Design",
-            },
-          }),
-        }}
-      />
+      <Contact />
 
-      <main className="min-h-screen overflow-x-hidden bg-white">
+      {/* BRIGHTSMILE FOOTER */}
+      <Footer />
 
-        {/* ORIGINAL VERTEX NAVBAR */}
-        <Navbar />
-
-        {/* BRIGHTSMILE PORTFOLIO BAR */}
-        <ShowcaseHeader />
-
-        {/* PROJECT OVERVIEW */}
-        <ProjectOverview />
-
-        {/* BRIGHTSMILE WEBSITE */}
-        <Hero />
-
-        <Trust />
-
-        <Services />
-
-        <About />
-
-        <WhyChooseUs />
-
-        <Doctors />
-
-        <Testimonials />
-
-        <Gallery />
-
-        <CTA />
-
-        {/* BRIGHTSMILE FOOTER */}
-        <Footer />
-
-      </main>
-    </>
+    </main>
   );
 }

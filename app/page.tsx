@@ -22,9 +22,10 @@ export const metadata: Metadata = {
   title: "Premium Website Design & Development",
 
   description:
-    "Vertex Studio Works creates premium, affordable websites for startups, entrepreneurs, and small businesses. Get a modern, fast, mobile-friendly, and SEO-ready website designed to help your business grow online.",
+    "Vertex Studio Works creates premium websites at affordable pricing for startups, entrepreneurs, and small businesses. Get a modern, fast, mobile-friendly, and SEO-ready website built to help your business grow online.",
 
   keywords: [
+    "Vertex Studio Works",
     "website design",
     "website development",
     "custom website design",
@@ -36,11 +37,23 @@ export const metadata: Metadata = {
     "modern website design",
     "custom web development",
     "website design Philippines",
-    "Vertex Studio Works",
   ],
 
   alternates: {
     canonical: "https://www.vertexstudioworks.com/",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
 
   openGraph: {
@@ -64,7 +77,7 @@ export const metadata: Metadata = {
         width: 1536,
         height: 1024,
         alt:
-          "Vertex Studio Works — Premium Website Design & Development",
+          "Vertex Studio Works premium website design and development",
       },
     ],
   },
@@ -83,6 +96,87 @@ export const metadata: Metadata = {
 };
 
 /* =====================================================
+   HOMEPAGE STRUCTURED DATA
+===================================================== */
+
+const structuredData = {
+  "@context": "https://schema.org",
+
+  "@graph": [
+    {
+      "@type": "Organization",
+
+      "@id":
+        "https://www.vertexstudioworks.com/#organization",
+
+      name: "Vertex Studio Works",
+
+      url:
+        "https://www.vertexstudioworks.com/",
+
+      logo:
+        "https://www.vertexstudioworks.com/icon.png",
+
+      description:
+        "Vertex Studio Works designs and develops premium websites at affordable pricing for startups, entrepreneurs, and small businesses.",
+
+      image:
+        "https://www.vertexstudioworks.com/vertex-preview.png",
+    },
+
+    {
+      "@type": "WebSite",
+
+      "@id":
+        "https://www.vertexstudioworks.com/#website",
+
+      name: "Vertex Studio Works",
+
+      url:
+        "https://www.vertexstudioworks.com/",
+
+      description:
+        "Premium website design and development at affordable pricing for startups, entrepreneurs, and growing businesses.",
+
+      publisher: {
+        "@id":
+          "https://www.vertexstudioworks.com/#organization",
+      },
+
+      inLanguage: "en-US",
+    },
+
+    {
+      "@type": "WebPage",
+
+      "@id":
+        "https://www.vertexstudioworks.com/#webpage",
+
+      url:
+        "https://www.vertexstudioworks.com/",
+
+      name:
+        "Premium Website Design & Development | Vertex Studio Works",
+
+      description:
+        "Premium websites at affordable pricing for startups, entrepreneurs, and small businesses.",
+
+      isPartOf: {
+        "@id":
+          "https://www.vertexstudioworks.com/#website",
+      },
+
+      about: {
+        "@id":
+          "https://www.vertexstudioworks.com/#organization",
+      },
+
+      inLanguage: "en-US",
+    },
+  ],
+};
+
+/* =====================================================
    HOMEPAGE
 ===================================================== */
 
@@ -96,27 +190,7 @@ export default function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-
-            "@id":
-              "https://www.vertexstudioworks.com/#website",
-
-            name: "Vertex Studio Works",
-
-            url: "https://www.vertexstudioworks.com/",
-
-            description:
-              "Premium website design and development for startups, entrepreneurs, and growing businesses.",
-
-            publisher: {
-              "@id":
-                "https://www.vertexstudioworks.com/#organization",
-            },
-
-            inLanguage: "en-US",
-          }),
+          __html: JSON.stringify(structuredData),
         }}
       />
 

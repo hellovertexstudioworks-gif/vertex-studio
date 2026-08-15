@@ -75,19 +75,27 @@ export default function Pricing() {
         bg-[#050816]
         py-28
       "
+      aria-labelledby="pricing-heading"
     >
       <Container>
+
+        {/* =====================================================
+            PRICING HEADER
+        ===================================================== */}
+
         <SectionTitle
           badge="PRICING"
           title="Premium Websites"
           highlight="Built For Growth"
           description="
-            Transparent pricing designed for startups,
-            growing businesses, and established companies.
+            Premium website design and development at affordable pricing
+            for startups, growing businesses, and established companies.
           "
         />
 
-        {/* PRICING PACKAGES */}
+        {/* =====================================================
+            PRICING PACKAGES
+        ===================================================== */}
 
         <div
           className="
@@ -98,7 +106,7 @@ export default function Pricing() {
           "
         >
           {packages.map((pkg) => (
-            <div
+            <article
               key={pkg.name}
               className={`
                 relative
@@ -107,7 +115,6 @@ export default function Pricing() {
                 transition-all
                 duration-300
                 hover:-translate-y-2
-
                 ${
                   pkg.popular
                     ? "border-2 border-blue-500 bg-white/5 shadow-xl shadow-blue-500/20"
@@ -115,7 +122,9 @@ export default function Pricing() {
                 }
               `}
             >
-              {/* Recommended Badge */}
+              {/* =================================================
+                  RECOMMENDED BADGE
+              ================================================= */}
 
               {pkg.popular && (
                 <div
@@ -138,7 +147,9 @@ export default function Pricing() {
                 </div>
               )}
 
-              {/* Package Name */}
+              {/* =================================================
+                  PACKAGE NAME
+              ================================================= */}
 
               <h3
                 className="
@@ -150,7 +161,9 @@ export default function Pricing() {
                 {pkg.name}
               </h3>
 
-              {/* Price */}
+              {/* =================================================
+                  PRICE
+              ================================================= */}
 
               <p
                 className="
@@ -163,7 +176,9 @@ export default function Pricing() {
                 {pkg.price}
               </p>
 
-              {/* Description */}
+              {/* =================================================
+                  DESCRIPTION
+              ================================================= */}
 
               <p
                 className="
@@ -175,7 +190,9 @@ export default function Pricing() {
                 {pkg.description}
               </p>
 
-              {/* Features */}
+              {/* =================================================
+                  FEATURES
+              ================================================= */}
 
               <ul
                 className="
@@ -196,16 +213,21 @@ export default function Pricing() {
                       className="
                         text-blue-400
                       "
+                      aria-hidden="true"
                     >
                       ✓
                     </span>
 
-                    {feature}
+                    <span>
+                      {feature}
+                    </span>
                   </li>
                 ))}
               </ul>
 
-              {/* CTA */}
+              {/* =================================================
+                  CTA
+              ================================================= */}
 
               <div
                 className="
@@ -221,11 +243,13 @@ export default function Pricing() {
                   {pkg.button}
                 </Button>
               </div>
-            </div>
+            </article>
           ))}
         </div>
 
-        {/* STARTUP PROGRAM */}
+        {/* =====================================================
+            STARTUP PROGRAM
+        ===================================================== */}
 
         <div
           className="
@@ -262,7 +286,9 @@ export default function Pricing() {
           </p>
         </div>
 
-        {/* WEBSITE CARE */}
+        {/* =====================================================
+            WEBSITE CARE
+        ===================================================== */}
 
         <div
           className="
@@ -281,6 +307,7 @@ export default function Pricing() {
           >
             <span
               className="
+                inline-block
                 rounded-full
                 border
                 border-blue-500/20
@@ -322,6 +349,10 @@ export default function Pricing() {
             </p>
           </div>
 
+          {/* =================================================
+              WEBSITE CARE PLANS
+          ================================================= */}
+
           <div
             className="
               mt-12
@@ -330,9 +361,11 @@ export default function Pricing() {
               lg:grid-cols-3
             "
           >
-            {/* Essential Care */}
+            {/* =================================================
+                ESSENTIAL CARE
+            ================================================= */}
 
-            <div
+            <article
               className="
                 rounded-2xl
                 border
@@ -383,11 +416,13 @@ export default function Pricing() {
                 <li>✓ Performance Checks</li>
                 <li>✓ Email Support</li>
               </ul>
-            </div>
+            </article>
 
-            {/* Growth Care */}
+            {/* =================================================
+                GROWTH CARE
+            ================================================= */}
 
-            <div
+            <article
               className="
                 rounded-2xl
                 border-2
@@ -457,11 +492,13 @@ export default function Pricing() {
                 <li>✓ Performance Optimization</li>
                 <li>✓ Priority Support</li>
               </ul>
-            </div>
+            </article>
 
-            {/* Premium Care */}
+            {/* =================================================
+                PREMIUM CARE
+            ================================================= */}
 
-            <div
+            <article
               className="
                 rounded-2xl
                 border
@@ -504,11 +541,13 @@ export default function Pricing() {
                 <li>✓ Custom Improvements</li>
                 <li>✓ Dedicated Support</li>
               </ul>
-            </div>
+            </article>
           </div>
         </div>
 
-        {/* PAYMENT */}
+        {/* =====================================================
+            PAYMENT OPTIONS
+        ===================================================== */}
 
         <div
           className="
@@ -536,6 +575,7 @@ export default function Pricing() {
             50% Deposit • 25% Midway • 25% Upon Completion
           </p>
         </div>
+
       </Container>
     </section>
   );
