@@ -116,8 +116,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/vertex-preview.png",
-        width: 1200,
-        height: 630,
+        width: 1536,
+        height: 1024,
         alt:
           "Vertex Studio Works — Premium Website Design & Development",
       },
@@ -146,29 +146,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  /* =====================================================
-     ORGANIZATION STRUCTURED DATA
-  ===================================================== */
-
-  const organizationSchema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-
-    "@id": "https://www.vertexstudioworks.com/#organization",
-
-    name: "Vertex Studio Works",
-
-    url: "https://www.vertexstudioworks.com/",
-
-    logo: "https://www.vertexstudioworks.com/icon.png",
-
-    description:
-      "Vertex Studio Works designs and develops premium custom websites for startups, entrepreneurs, and growing businesses.",
-
-    image:
-      "https://www.vertexstudioworks.com/vertex-preview.png",
-  };
-
   return (
     <html
       lang="en"
@@ -176,20 +153,43 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
 
-        {/* =================================================
-            GOOGLE ORGANIZATION STRUCTURED DATA
-        ================================================= */}
+        {/* =====================================================
+            ORGANIZATION STRUCTURED DATA
+        ===================================================== */}
 
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationSchema),
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+
+              "@id":
+                "https://www.vertexstudioworks.com/#organization",
+
+              name: "Vertex Studio Works",
+
+              url: "https://www.vertexstudioworks.com/",
+
+              logo: {
+                "@type": "ImageObject",
+                url: "https://www.vertexstudioworks.com/icon.png",
+              },
+
+              description:
+                "Vertex Studio Works designs and develops premium custom websites for startups, entrepreneurs, and growing businesses. Modern, fast, mobile-friendly, and built to turn visitors into customers.",
+
+              sameAs: [],
+            }),
           }}
         />
 
         {children}
 
-        {/* Vercel Web Analytics */}
+        {/* =====================================================
+            VERCEL WEB ANALYTICS
+        ===================================================== */}
+
         <Analytics />
 
       </body>
