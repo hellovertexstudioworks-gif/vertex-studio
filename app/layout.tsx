@@ -14,20 +14,20 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    "https://www.vertexstudioworks.com"
-  ),
+  metadataBase: new URL("https://www.vertexstudioworks.com"),
+
+  /* =====================================================
+     BASIC SEO
+  ===================================================== */
 
   title: {
     default:
       "Vertex Studio Works | Premium Website Design & Development",
-
-    template:
-      "%s | Vertex Studio Works",
+    template: "%s | Vertex Studio Works",
   },
 
   description:
-    "Vertex Studio Works creates premium custom websites for startups, entrepreneurs, and growing businesses. We design fast, modern, SEO-ready websites that help businesses grow online.",
+    "Vertex Studio Works designs and develops premium custom websites for startups, entrepreneurs, and growing businesses. Modern, fast, mobile-friendly, and built to turn visitors into customers.",
 
   keywords: [
     "Vertex Studio Works",
@@ -35,37 +35,77 @@ export const metadata: Metadata = {
     "website design",
     "web development",
     "custom website design",
-    "startup website",
-    "business website",
-    "SEO website",
-    "professional web design",
-    "website development agency",
-    "website design Philippines",
+    "business website design",
+    "professional website design",
+    "website development",
+    "web design agency",
     "custom web development",
+    "SEO website design",
+    "modern website design",
+    "startup website design",
+    "small business website",
   ],
+
+  /* =====================================================
+     CANONICAL
+  ===================================================== */
+
+  alternates: {
+    canonical: "https://www.vertexstudioworks.com/",
+  },
+
+  /* =====================================================
+     SEARCH ENGINE DIRECTIVES
+  ===================================================== */
+
+  robots: {
+    index: true,
+    follow: true,
+
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+
+  /* =====================================================
+     BRAND / AUTHOR
+  ===================================================== */
 
   authors: [
     {
       name: "Vertex Studio Works",
+      url: "https://www.vertexstudioworks.com",
     },
   ],
 
   creator: "Vertex Studio Works",
-
   publisher: "Vertex Studio Works",
+  category: "Web Design and Development",
+
+  /* =====================================================
+     FAVICON
+  ===================================================== */
 
   icons: {
     icon: "/icon.png",
   },
+
+  /* =====================================================
+     OPEN GRAPH
+  ===================================================== */
 
   openGraph: {
     title:
       "Vertex Studio Works | Premium Website Design & Development",
 
     description:
-      "Modern websites built for startups, entrepreneurs, and growing businesses.",
+      "Premium custom websites for startups, entrepreneurs, and growing businesses. Modern design, strong performance, and experiences built to grow your business online.",
 
-    url: "https://www.vertexstudioworks.com",
+    url: "https://www.vertexstudioworks.com/",
 
     siteName: "Vertex Studio Works",
 
@@ -78,10 +118,15 @@ export const metadata: Metadata = {
         url: "/vertex-preview.png",
         width: 1200,
         height: 630,
-        alt: "Vertex Studio Works Website Design Agency",
+        alt:
+          "Vertex Studio Works — Premium Website Design & Development",
       },
     ],
   },
+
+  /* =====================================================
+     TWITTER / X
+  ===================================================== */
 
   twitter: {
     card: "summary_large_image",
@@ -90,7 +135,7 @@ export const metadata: Metadata = {
       "Vertex Studio Works | Premium Website Design",
 
     description:
-      "Helping businesses build credibility and grow online with modern websites.",
+      "Premium custom websites for startups, entrepreneurs, and growing businesses.",
 
     images: ["/vertex-preview.png"],
   },
