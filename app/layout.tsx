@@ -146,16 +146,52 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  /* =====================================================
+     ORGANIZATION STRUCTURED DATA
+  ===================================================== */
+
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+
+    "@id": "https://www.vertexstudioworks.com/#organization",
+
+    name: "Vertex Studio Works",
+
+    url: "https://www.vertexstudioworks.com/",
+
+    logo: "https://www.vertexstudioworks.com/icon.png",
+
+    description:
+      "Vertex Studio Works designs and develops premium custom websites for startups, entrepreneurs, and growing businesses.",
+
+    image:
+      "https://www.vertexstudioworks.com/vertex-preview.png",
+  };
+
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+
+        {/* =================================================
+            GOOGLE ORGANIZATION STRUCTURED DATA
+        ================================================= */}
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationSchema),
+          }}
+        />
+
         {children}
 
         {/* Vercel Web Analytics */}
         <Analytics />
+
       </body>
     </html>
   );
