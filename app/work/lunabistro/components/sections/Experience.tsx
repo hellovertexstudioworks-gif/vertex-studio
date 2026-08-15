@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Experience() {
   return (
     <section
@@ -54,10 +56,11 @@ export default function Experience() {
 
           <div className="relative min-h-[430px] overflow-hidden sm:min-h-[520px] lg:min-h-[600px]">
 
-            <img
-              src="/images/hero/luna-hero.jpg"
+            <Image
+              src="/images/luna/luna-hero.jpg"
               alt="Luna Bistro dining experience"
-              className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-[1200ms] group-hover:scale-105"
+              fill
+              className="object-cover object-center transition-transform duration-[1200ms] group-hover:scale-105"
             />
 
             {/* IMAGE OVERLAY */}
