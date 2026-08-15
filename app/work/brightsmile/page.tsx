@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 
-import Navbar from "../../../components/layout/Navbar";
-
+import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
 import Hero from "./components/hero";
@@ -91,10 +90,8 @@ export default function BrightSmilePage() {
   return (
     <main className="min-h-screen overflow-x-hidden bg-white">
 
-      {/* BRIGHTSMILE NAVBAR */}
       <Navbar />
 
-      {/* BRIGHTSMILE WEBSITE */}
       <Hero />
 
       <Trust />
@@ -115,7 +112,6 @@ export default function BrightSmilePage() {
 
       <Contact />
 
-      {/* BRIGHTSMILE FOOTER */}
       <Footer />
 
     </main>
