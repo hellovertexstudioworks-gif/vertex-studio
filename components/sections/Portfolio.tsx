@@ -17,7 +17,7 @@ const projects = [
       "A modern dental clinic experience focused on patient trust, clear services, professional presentation, and convenient appointment booking.",
     image: "/projects/clinic.png",
     tags: ["Healthcare", "Booking", "Trust"],
-    link: "https://brightsmile-dental-psi.vercel.app",
+    link: "/work/brightsmile",
     type: "live",
   },
 
@@ -27,7 +27,7 @@ const projects = [
       "A professional construction website designed to showcase projects, establish credibility, and generate qualified business inquiries.",
     image: "/projects/construction.png",
     tags: ["Construction", "Leads", "Business"],
-    link: "https://forgebuild-construction.vercel.app",
+    link: "/work/forgebuild",
     type: "live",
   },
 
@@ -37,7 +37,7 @@ const projects = [
       "A premium furniture ecommerce experience designed around timeless interiors, thoughtful product presentation, and modern living.",
     image: "/projects/ecommerce.png",
     tags: ["E-Commerce", "Furniture", "Premium Design"],
-    link: "https://nova-home-khaki.vercel.app",
+    link: "/work/novahome",
     type: "live",
   },
 
@@ -47,7 +47,7 @@ const projects = [
       "A premium real estate experience designed around luxury properties, thoughtful service, property discovery, and high-end visual storytelling.",
     image: "/projects/realestate.png",
     tags: ["Real Estate", "Listings", "Premium Design"],
-    link: "https://horizon-realty-alpha.vercel.app",
+    link: "/work/horizon-realty",
     type: "live",
   },
 
@@ -57,7 +57,7 @@ const projects = [
       "A premium coaching website designed to build trust, communicate personal growth programs, and turn visitors into potential clients.",
     image: "/projects/elevate.png",
     tags: ["Coaching", "Personal Growth", "Branding"],
-    link: "https://elevate-coaching-mauve.vercel.app/",
+    link: "/work/elevate-coaching",
     type: "live",
   },
 
@@ -224,14 +224,6 @@ export default function Portfolio() {
                 {project.type === "live" && project.link && (
                   <a
                     href={project.link}
-                    target={
-                      project.link.startsWith("http") ? "_blank" : undefined
-                    }
-                    rel={
-                      project.link.startsWith("http")
-                        ? "noopener noreferrer"
-                        : undefined
-                    }
                     className="
                       mt-8
                       inline-flex

@@ -10,20 +10,44 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 1,
     },
+
     {
       url: `${baseUrl}/work/brightsmile`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,
     },
+
     {
       url: `${baseUrl}/work/lunabistro`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,
     },
+
     {
       url: `${baseUrl}/work/novahome`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+
+    {
+      url: `${baseUrl}/work/forgebuild`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+
+    {
+      url: `${baseUrl}/work/horizon-realty`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+
+    {
+      url: `${baseUrl}/work/elevate-coaching`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,
