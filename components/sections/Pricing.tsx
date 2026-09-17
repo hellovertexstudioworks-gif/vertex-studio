@@ -5,9 +5,9 @@ import Button from "../ui/Button";
 const packages = [
   {
     name: "Launch",
-    price: "$249",
+    price: "$75",
     description:
-      "Perfect for startups and new businesses that need a professional website to establish credibility online.",
+      "Perfect for startups and new businesses that need a professional website to establish credibility and start generating opportunities online.",
     button: "Start Your Project",
     link: "https://calendly.com/hello-vertexstudioworks/30min",
     popular: false,
@@ -18,31 +18,41 @@ const packages = [
       "Basic SEO Setup",
       "Google Analytics Setup",
       "Contact Form Integration",
+      "Basic Lead Capture Setup",
+      "Conversion-Focused Layout",
       "Performance Optimization",
       "Website Backup Before Launch",
-      "3 Months Complimentary Website Care",
+      "1 Month Complimentary Website Care",
     ],
   },
 
   {
     name: "Scale",
-    price: "$499",
+    price: "$150",
     description:
-      "Built for growing businesses that need stronger features, better visibility, AI capabilities, and a website designed for growth.",
+      "Built for growing businesses that want more than a website — a conversion-focused online presence with lead generation, tracking, outreach, and growth tools.",
     button: "Book Free Strategy Call",
     link: "https://calendly.com/hello-vertexstudioworks/30min",
     popular: true,
     features: [
       "Everything in Launch",
-      "CMS Integration",
-      "Blog / Content Management",
+      "Additional Pages",
+      "CMS / Blog Integration",
       "Advanced SEO Setup",
       "Premium Animations",
-      "Additional Pages",
       "Speed Optimization",
-      "AI Chatbot Integration",
+      "Lead Generation Dashboard",
+      "Lead Capture & Tracking",
+      "Conversion Optimization",
+      "Google Analytics + Search Console",
+      "Basic CRM / Lead Tracking Setup",
+      "Cold Email Campaign Setup",
+      "Prospect & Lead List Structure",
+      "Email Outreach Templates",
+      "Lead Follow-Up System",
+      "Website + Lead Funnel Strategy",
       "Priority Support",
-      "6 Months Complimentary Website Care",
+      "3 Months Complimentary Website Care",
     ],
   },
 
@@ -50,7 +60,7 @@ const packages = [
     name: "Enterprise",
     price: "Custom Quote",
     description:
-      "For businesses needing custom solutions, integrations, and advanced website functionality.",
+      "For businesses needing custom solutions, advanced integrations, e-commerce, automation, and more complex growth systems.",
     button: "Request a Quote",
     link: "https://calendly.com/hello-vertexstudioworks/30min",
     popular: false,
@@ -60,6 +70,10 @@ const packages = [
       "Booking Systems",
       "E-Commerce Solutions",
       "API / CRM Integrations",
+      "Lead Generation Systems",
+      "Advanced Analytics & Dashboards",
+      "Marketing Automation",
+      "Custom Outreach Systems",
       "Dedicated Planning",
       "Priority Development",
       "12 Months Premium Website Care",
@@ -85,11 +99,12 @@ export default function Pricing() {
 
         <SectionTitle
           badge="PRICING"
-          title="Premium Websites"
-          highlight="Built For Growth"
+          title="Websites Built"
+          highlight="For Growth"
           description="
-            Premium website design and development at affordable pricing
-            for startups, growing businesses, and established companies.
+            We don't just build your website. We help you turn it into
+            a growth system designed to attract visitors, capture leads,
+            and create opportunities for your business.
           "
         />
 
@@ -122,6 +137,7 @@ export default function Pricing() {
                 }
               `}
             >
+
               {/* =================================================
                   RECOMMENDED BADGE
               ================================================= */}
@@ -248,6 +264,148 @@ export default function Pricing() {
         </div>
 
         {/* =====================================================
+            GROWTH SYSTEM
+        ===================================================== */}
+
+        <div
+          className="
+            mt-20
+            rounded-3xl
+            border
+            border-blue-500/30
+            bg-blue-500/10
+            p-10
+            text-center
+          "
+        >
+          <h3
+            className="
+              text-3xl
+              font-bold
+              text-white
+            "
+          >
+            🚀 More Than Just A Website
+          </h3>
+
+          <p
+            className="
+              mx-auto
+              mt-5
+              max-w-3xl
+              text-lg
+              leading-8
+              text-slate-300
+            "
+          >
+            Your website should do more than look good. We can help structure
+            your website to capture leads, track opportunities, improve
+            conversions, and support your outreach efforts.
+          </p>
+
+          <div
+            className="
+              mx-auto
+              mt-10
+              grid
+              max-w-5xl
+              gap-6
+              md:grid-cols-3
+            "
+          >
+            <div
+              className="
+                rounded-2xl
+                border
+                border-white/10
+                bg-white/5
+                p-6
+              "
+            >
+              <h4
+                className="
+                  text-xl
+                  font-bold
+                  text-white
+                "
+              >
+                Capture
+              </h4>
+
+              <p
+                className="
+                  mt-3
+                  text-slate-400
+                "
+              >
+                Turn website visitors into inquiries through strategic
+                forms, calls-to-action, and lead capture systems.
+              </p>
+            </div>
+
+            <div
+              className="
+                rounded-2xl
+                border
+                border-white/10
+                bg-white/5
+                p-6
+              "
+            >
+              <h4
+                className="
+                  text-xl
+                  font-bold
+                  text-white
+                "
+              >
+                Track
+              </h4>
+
+              <p
+                className="
+                  mt-3
+                  text-slate-400
+                "
+              >
+                Understand where visitors and leads come from with analytics,
+                tracking, and simple lead dashboards.
+              </p>
+            </div>
+
+            <div
+              className="
+                rounded-2xl
+                border
+                border-white/10
+                bg-white/5
+                p-6
+              "
+            >
+              <h4
+                className="
+                  text-xl
+                  font-bold
+                  text-white
+                "
+              >
+                Reach
+              </h4>
+
+              <p
+                className="
+                  mt-3
+                  text-slate-400
+                "
+              >
+                Build a structured outreach process with prospect lists,
+                cold-email templates, and follow-up workflows.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* =====================================================
             STARTUP PROGRAM
         ===================================================== */}
 
@@ -361,6 +519,7 @@ export default function Pricing() {
               lg:grid-cols-3
             "
           >
+
             {/* =================================================
                 ESSENTIAL CARE
             ================================================= */}
@@ -490,6 +649,8 @@ export default function Pricing() {
                 <li>✓ Content Updates</li>
                 <li>✓ SEO Health Checks</li>
                 <li>✓ Performance Optimization</li>
+                <li>✓ Lead Conversion Improvements</li>
+                <li>✓ Analytics Monitoring</li>
                 <li>✓ Priority Support</li>
               </ul>
             </article>
@@ -539,9 +700,12 @@ export default function Pricing() {
                 <li>✓ Priority Development</li>
                 <li>✓ Strategy Sessions</li>
                 <li>✓ Custom Improvements</li>
+                <li>✓ Advanced SEO Support</li>
+                <li>✓ Lead Generation Improvements</li>
                 <li>✓ Dedicated Support</li>
               </ul>
             </article>
+
           </div>
         </div>
 
