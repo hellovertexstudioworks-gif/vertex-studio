@@ -5,7 +5,8 @@ import Button from "../ui/Button";
 const packages = [
   {
     name: "Launch",
-    price: "$75",
+    price: "$49",
+    billing: "ONE-TIME PAYMENT",
     description:
       "Perfect for startups and new businesses that need a professional website to establish credibility and start generating opportunities online.",
     button: "Start Your Project",
@@ -22,13 +23,14 @@ const packages = [
       "Conversion-Focused Layout",
       "Performance Optimization",
       "Website Backup Before Launch",
-      "1 Month Complimentary Website Care",
+      "2 Months Complimentary Vertex Care",
     ],
   },
 
   {
     name: "Scale",
-    price: "$150",
+    price: "$99",
+    billing: "ONE-TIME PAYMENT",
     description:
       "Built for growing businesses that want more than a website — a conversion-focused online presence with lead generation, tracking, outreach, and growth tools.",
     button: "Book Free Strategy Call",
@@ -36,7 +38,7 @@ const packages = [
     popular: true,
     features: [
       "Everything in Launch",
-      "Additional Pages",
+      "Unlimited Standard Website Pages",
       "CMS / Blog Integration",
       "Advanced SEO Setup",
       "Premium Animations",
@@ -52,13 +54,14 @@ const packages = [
       "Lead Follow-Up System",
       "Website + Lead Funnel Strategy",
       "Priority Support",
-      "3 Months Complimentary Website Care",
+      "4 Months Complimentary Vertex Care",
     ],
   },
 
   {
     name: "Enterprise",
     price: "Custom Quote",
+    billing: "PROJECT-BASED",
     description:
       "For businesses needing custom solutions, advanced integrations, e-commerce, automation, and more complex growth systems.",
     button: "Request a Quote",
@@ -76,7 +79,7 @@ const packages = [
       "Custom Outreach Systems",
       "Dedicated Planning",
       "Priority Development",
-      "12 Months Premium Website Care",
+      "Custom Website Care Options",
     ],
   },
 ];
@@ -109,12 +112,56 @@ export default function Pricing() {
         />
 
         {/* =====================================================
+            ONE-TIME PAYMENT MESSAGE
+        ===================================================== */}
+
+        <div
+          className="
+            mx-auto
+            mt-10
+            max-w-2xl
+            rounded-2xl
+            border
+            border-blue-500/20
+            bg-blue-500/[0.06]
+            px-6
+            py-5
+            text-center
+          "
+        >
+          <p
+            className="
+              text-sm
+              font-bold
+              uppercase
+              tracking-[0.2em]
+              text-blue-400
+            "
+          >
+            Simple, One-Time Website Pricing
+          </p>
+
+          <p
+            className="
+              mt-2
+              text-sm
+              leading-6
+              text-slate-400
+            "
+          >
+            No monthly website subscription required. Pay once for
+            your website project. Optional Vertex Care is available
+            separately for ongoing maintenance and support.
+          </p>
+        </div>
+
+        {/* =====================================================
             PRICING PACKAGES
         ===================================================== */}
 
         <div
           className="
-            mt-20
+            mt-16
             grid
             gap-8
             lg:grid-cols-3
@@ -193,6 +240,30 @@ export default function Pricing() {
               </p>
 
               {/* =================================================
+                  BILLING TYPE
+              ================================================= */}
+
+              <div
+                className="
+                  mt-3
+                  inline-flex
+                  rounded-full
+                  border
+                  border-blue-500/20
+                  bg-blue-500/10
+                  px-3
+                  py-1.5
+                  text-[10px]
+                  font-bold
+                  uppercase
+                  tracking-[0.18em]
+                  text-blue-400
+                "
+              >
+                {pkg.billing}
+              </div>
+
+              {/* =================================================
                   DESCRIPTION
               ================================================= */}
 
@@ -259,8 +330,34 @@ export default function Pricing() {
                   {pkg.button}
                 </Button>
               </div>
+
             </article>
           ))}
+        </div>
+
+        {/* =====================================================
+            CARE SEPARATION MESSAGE
+        ===================================================== */}
+
+        <div
+          className="
+            mx-auto
+            mt-10
+            max-w-3xl
+            text-center
+          "
+        >
+          <p
+            className="
+              text-sm
+              leading-6
+              text-slate-500
+            "
+          >
+            Website packages are one-time project fees. Ongoing
+            maintenance and support are optional and available
+            separately through Vertex Care.
+          </p>
         </div>
 
         {/* =====================================================
@@ -298,9 +395,9 @@ export default function Pricing() {
               text-slate-300
             "
           >
-            Your website should do more than look good. We can help structure
-            your website to capture leads, track opportunities, improve
-            conversions, and support your outreach efforts.
+            Your website should do more than look good. We can help
+            structure your website to capture leads, track opportunities,
+            improve conversions, and support your outreach efforts.
           </p>
 
           <div
@@ -313,6 +410,9 @@ export default function Pricing() {
               md:grid-cols-3
             "
           >
+
+            {/* CAPTURE */}
+
             <div
               className="
                 rounded-2xl
@@ -343,6 +443,8 @@ export default function Pricing() {
               </p>
             </div>
 
+            {/* TRACK */}
+
             <div
               className="
                 rounded-2xl
@@ -368,10 +470,12 @@ export default function Pricing() {
                   text-slate-400
                 "
               >
-                Understand where visitors and leads come from with analytics,
-                tracking, and simple lead dashboards.
+                Understand where visitors and leads come from with
+                analytics, tracking, and simple lead dashboards.
               </p>
             </div>
+
+            {/* REACH */}
 
             <div
               className="
@@ -402,6 +506,7 @@ export default function Pricing() {
                 cold-email templates, and follow-up workflows.
               </p>
             </div>
+
           </div>
         </div>
 
@@ -439,274 +544,9 @@ export default function Pricing() {
               text-slate-300
             "
           >
-            Qualified startups may receive special launch incentives and
-            flexible payment options.
+            Qualified startups may receive special launch incentives
+            and flexible payment options.
           </p>
-        </div>
-
-        {/* =====================================================
-            WEBSITE CARE
-        ===================================================== */}
-
-        <div
-          className="
-            mt-16
-            rounded-3xl
-            border
-            border-white/10
-            bg-white/5
-            p-10
-          "
-        >
-          <div
-            className="
-              text-center
-            "
-          >
-            <span
-              className="
-                inline-block
-                rounded-full
-                border
-                border-blue-500/20
-                bg-blue-500/10
-                px-4
-                py-2
-                text-sm
-                font-semibold
-                uppercase
-                tracking-wider
-                text-blue-400
-              "
-            >
-              Vertex Care
-            </span>
-
-            <h3
-              className="
-                mt-6
-                text-4xl
-                font-bold
-                text-white
-              "
-            >
-              Keep Your Website Growing After Launch
-            </h3>
-
-            <p
-              className="
-                mx-auto
-                mt-5
-                max-w-3xl
-                text-slate-400
-              "
-            >
-              Ongoing maintenance, security, updates, and performance
-              improvements so your website continues working for your
-              business.
-            </p>
-          </div>
-
-          {/* =================================================
-              WEBSITE CARE PLANS
-          ================================================= */}
-
-          <div
-            className="
-              mt-12
-              grid
-              gap-8
-              lg:grid-cols-3
-            "
-          >
-
-            {/* =================================================
-                ESSENTIAL CARE
-            ================================================= */}
-
-            <article
-              className="
-                rounded-2xl
-                border
-                border-white/10
-                bg-[#0B1220]
-                p-8
-              "
-            >
-              <h4
-                className="
-                  text-2xl
-                  font-bold
-                  text-white
-                "
-              >
-                Essential Care
-              </h4>
-
-              <p
-                className="
-                  mt-3
-                  text-4xl
-                  font-bold
-                  text-blue-400
-                "
-              >
-                $49
-                <span
-                  className="
-                    text-lg
-                    text-slate-400
-                  "
-                >
-                  /month
-                </span>
-              </p>
-
-              <ul
-                className="
-                  mt-8
-                  space-y-3
-                  text-slate-300
-                "
-              >
-                <li>✓ Monthly Updates</li>
-                <li>✓ Security Monitoring</li>
-                <li>✓ Website Backups</li>
-                <li>✓ Performance Checks</li>
-                <li>✓ Email Support</li>
-              </ul>
-            </article>
-
-            {/* =================================================
-                GROWTH CARE
-            ================================================= */}
-
-            <article
-              className="
-                rounded-2xl
-                border-2
-                border-blue-500
-                bg-[#0B1220]
-                p-8
-                shadow-xl
-                shadow-blue-500/10
-              "
-            >
-              <div
-                className="
-                  mb-4
-                  inline-block
-                  rounded-full
-                  bg-blue-600
-                  px-3
-                  py-1
-                  text-xs
-                  font-bold
-                  uppercase
-                  text-white
-                "
-              >
-                Popular
-              </div>
-
-              <h4
-                className="
-                  text-2xl
-                  font-bold
-                  text-white
-                "
-              >
-                Growth Care
-              </h4>
-
-              <p
-                className="
-                  mt-3
-                  text-4xl
-                  font-bold
-                  text-blue-400
-                "
-              >
-                $99
-                <span
-                  className="
-                    text-lg
-                    text-slate-400
-                  "
-                >
-                  /month
-                </span>
-              </p>
-
-              <ul
-                className="
-                  mt-8
-                  space-y-3
-                  text-slate-300
-                "
-              >
-                <li>✓ Everything in Essential</li>
-                <li>✓ Content Updates</li>
-                <li>✓ SEO Health Checks</li>
-                <li>✓ Performance Optimization</li>
-                <li>✓ Lead Conversion Improvements</li>
-                <li>✓ Analytics Monitoring</li>
-                <li>✓ Priority Support</li>
-              </ul>
-            </article>
-
-            {/* =================================================
-                PREMIUM CARE
-            ================================================= */}
-
-            <article
-              className="
-                rounded-2xl
-                border
-                border-white/10
-                bg-[#0B1220]
-                p-8
-              "
-            >
-              <h4
-                className="
-                  text-2xl
-                  font-bold
-                  text-white
-                "
-              >
-                Premium Care
-              </h4>
-
-              <p
-                className="
-                  mt-3
-                  text-4xl
-                  font-bold
-                  text-blue-400
-                "
-              >
-                $149+
-              </p>
-
-              <ul
-                className="
-                  mt-8
-                  space-y-3
-                  text-slate-300
-                "
-              >
-                <li>✓ Advanced Maintenance</li>
-                <li>✓ Priority Development</li>
-                <li>✓ Strategy Sessions</li>
-                <li>✓ Custom Improvements</li>
-                <li>✓ Advanced SEO Support</li>
-                <li>✓ Lead Generation Improvements</li>
-                <li>✓ Dedicated Support</li>
-              </ul>
-            </article>
-
-          </div>
         </div>
 
         {/* =====================================================

@@ -19,13 +19,16 @@ import Footer from "@/components/layout/Footer";
 ===================================================== */
 
 export const metadata: Metadata = {
-  title: "Premium Website Design & Development",
+  title: "Websites, E-Commerce & Business Systems",
 
   description:
-    "Vertex Studio Works creates premium websites at affordable pricing for startups, entrepreneurs, and small businesses. Get a modern, fast, mobile-friendly, and SEO-ready website built to help your business grow online.",
+    "Vertex Studio Works builds modern websites, e-commerce experiences, and custom business systems for startups, entrepreneurs, and growing businesses. Designed for growth and built around your business.",
 
   keywords: [
     "Vertex Studio Works",
+    "Vertex Studio",
+
+    // Websites
     "website design",
     "website development",
     "custom website design",
@@ -37,6 +40,27 @@ export const metadata: Metadata = {
     "modern website design",
     "custom web development",
     "website design Philippines",
+
+    // E-Commerce
+    "e-commerce website design",
+    "ecommerce development",
+    "online store development",
+    "e-commerce development",
+    "custom online store",
+
+    // Business Systems
+    "business systems",
+    "custom business systems",
+    "digital business solutions",
+    "custom web solutions",
+    "business automation",
+
+    // Growth
+    "digital growth",
+    "business growth",
+    "marketing automation",
+    "website maintenance",
+    "website care",
   ],
 
   alternates: {
@@ -58,10 +82,10 @@ export const metadata: Metadata = {
 
   openGraph: {
     title:
-      "Premium Website Design & Development | Vertex Studio Works",
+      "Vertex Studio Works | Websites, E-Commerce & Business Systems",
 
     description:
-      "Premium websites at affordable pricing. Modern, fast, mobile-friendly websites built to help businesses grow online.",
+      "Modern websites, e-commerce experiences, and custom business systems built around your business and designed for growth.",
 
     url: "https://www.vertexstudioworks.com/",
 
@@ -77,7 +101,7 @@ export const metadata: Metadata = {
         width: 1536,
         height: 1024,
         alt:
-          "Vertex Studio Works premium website design and development",
+          "Vertex Studio Works — Websites, E-Commerce & Business Systems",
       },
     ],
   },
@@ -86,10 +110,10 @@ export const metadata: Metadata = {
     card: "summary_large_image",
 
     title:
-      "Premium Website Design & Development | Vertex Studio Works",
+      "Vertex Studio Works | Websites, E-Commerce & Business Systems",
 
     description:
-      "Premium websites at affordable pricing for startups, entrepreneurs, and growing businesses.",
+      "Modern websites, e-commerce experiences, and custom business systems built for growing businesses.",
 
     images: ["/vertex-preview.png"],
   },
@@ -118,10 +142,20 @@ const structuredData = {
         "https://www.vertexstudioworks.com/icon.png",
 
       description:
-        "Vertex Studio Works designs and develops premium websites at affordable pricing for startups, entrepreneurs, and small businesses.",
+        "Vertex Studio Works builds modern websites, e-commerce experiences, and custom business systems for startups, entrepreneurs, and growing businesses.",
 
       image:
         "https://www.vertexstudioworks.com/vertex-preview.png",
+
+      knowsAbout: [
+        "Website Design",
+        "Web Development",
+        "E-Commerce",
+        "Business Systems",
+        "Digital Growth",
+        "Marketing Automation",
+        "Website Maintenance",
+      ],
     },
 
     {
@@ -136,7 +170,7 @@ const structuredData = {
         "https://www.vertexstudioworks.com/",
 
       description:
-        "Premium website design and development at affordable pricing for startups, entrepreneurs, and growing businesses.",
+        "Modern websites, e-commerce experiences, and custom business systems built for startups, entrepreneurs, and growing businesses.",
 
       publisher: {
         "@id":
@@ -156,10 +190,10 @@ const structuredData = {
         "https://www.vertexstudioworks.com/",
 
       name:
-        "Premium Website Design & Development | Vertex Studio Works",
+        "Vertex Studio Works | Websites, E-Commerce & Business Systems",
 
       description:
-        "Premium websites at affordable pricing for startups, entrepreneurs, and small businesses.",
+        "Modern websites, e-commerce experiences, and custom business systems designed to help businesses launch, grow, and evolve.",
 
       isPartOf: {
         "@id":

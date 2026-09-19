@@ -34,9 +34,9 @@ const projects = [
   {
     title: "Nova Home E-Commerce",
     description:
-      "A premium furniture ecommerce experience designed around timeless interiors, thoughtful product presentation, and modern living.",
+      "A premium furniture e-commerce experience designed around product discovery, thoughtful presentation, online shopping, and modern living.",
     image: "/projects/ecommerce.png",
-    tags: ["E-Commerce", "Furniture", "Premium Design"],
+    tags: ["E-Commerce", "Furniture", "Online Store"],
     link: "/work/novahome",
     type: "live",
   },
@@ -44,9 +44,9 @@ const projects = [
   {
     title: "Horizon Realty",
     description:
-      "A premium real estate experience designed around luxury properties, thoughtful service, property discovery, and high-end visual storytelling.",
+      "A premium real estate experience designed around property discovery, luxury listings, thoughtful service, and high-end visual storytelling.",
     image: "/projects/realestate.png",
-    tags: ["Real Estate", "Listings", "Premium Design"],
+    tags: ["Real Estate", "Listings", "Property"],
     link: "/work/horizon-realty",
     type: "live",
   },
@@ -64,7 +64,7 @@ const projects = [
   {
     title: "SaaS Startup Website",
     description:
-      "Modern startup websites designed to explain products, build credibility, and convert visitors.",
+      "A modern startup experience designed to explain products, build credibility, communicate value, and convert visitors.",
     image: "/projects/saas.png",
     tags: ["SaaS", "Startup", "Growth"],
     type: "concept",
@@ -73,7 +73,7 @@ const projects = [
   {
     title: "Hotel & Resort Website",
     description:
-      "Beautiful hospitality websites designed to highlight experiences, destinations, and booking opportunities.",
+      "A hospitality experience designed to showcase destinations, accommodations, guest experiences, and booking opportunities.",
     image: "/projects/hotel.png",
     tags: ["Hospitality", "Booking", "Experience"],
     type: "concept",
@@ -82,9 +82,9 @@ const projects = [
   {
     title: "Beauty & Wellness Website",
     description:
-      "Elegant websites for salons, spas, and wellness brands designed around premium presentation and convenient booking.",
+      "An elegant digital experience for beauty and wellness brands focused on premium presentation, services, and convenient booking.",
     image: "/projects/wellness.png",
-    tags: ["Beauty", "Booking", "Mobile"],
+    tags: ["Beauty", "Wellness", "Booking"],
     type: "concept",
   },
 ];
@@ -93,40 +93,149 @@ export default function Portfolio() {
   return (
     <section
       id="portfolio"
-      className="relative overflow-hidden bg-[#050816] py-24 sm:py-28 lg:py-32"
+      className="
+        relative
+        overflow-hidden
+        bg-[#050816]
+        py-24
+        sm:py-28
+        lg:py-32
+      "
+      aria-labelledby="portfolio-heading"
     >
+      {/* =====================================================
+          BACKGROUND GLOW
+      ===================================================== */}
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          left-1/2
+          top-32
+          h-[500px]
+          w-[500px]
+          -translate-x-1/2
+          rounded-full
+          bg-blue-500/[0.04]
+          blur-[140px]
+        "
+        aria-hidden="true"
+      />
+
       <Container>
+
         {/* =====================================================
             SECTION HEADER
         ===================================================== */}
 
         <div className="max-w-3xl">
+
           <div className="mb-6 flex items-center gap-4">
             <span className="h-px w-10 bg-blue-500" />
 
-            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-blue-400">
+            <p
+              className="
+                text-[10px]
+                font-bold
+                uppercase
+                tracking-[0.3em]
+                text-blue-400
+              "
+            >
               Selected Work
             </p>
           </div>
 
-          <h2 className="text-4xl font-bold leading-tight tracking-[-0.04em] text-white sm:text-5xl lg:text-6xl">
-            Websites built to{" "}
+          <h2
+            id="portfolio-heading"
+            className="
+              text-4xl
+              font-bold
+              leading-tight
+              tracking-[-0.04em]
+              text-white
+              sm:text-5xl
+              lg:text-6xl
+            "
+          >
+            Built for different businesses.
+            <br />
+
             <span className="text-blue-400">
-              move businesses forward.
+              Designed around their goals.
             </span>
           </h2>
 
-          <p className="mt-6 max-w-2xl text-base leading-8 text-slate-400">
-            Explore a selection of websites we've designed and developed for
-            businesses, brands, and ambitious ideas.
+          <p
+            className="
+              mt-6
+              max-w-2xl
+              text-base
+              leading-8
+              text-slate-400
+            "
+          >
+            From restaurants and healthcare to e-commerce, real estate,
+            hospitality, SaaS, and professional services, we create
+            digital experiences around the people, products, and goals
+            behind each business.
           </p>
+
+        </div>
+
+        {/* =====================================================
+            INDUSTRY RANGE
+        ===================================================== */}
+
+        <div
+          className="
+            mt-10
+            flex
+            flex-wrap
+            gap-3
+          "
+        >
+          {[
+            "Business",
+            "E-Commerce",
+            "Healthcare",
+            "Hospitality",
+            "Real Estate",
+            "SaaS",
+            "Professional Services",
+          ].map((category) => (
+            <span
+              key={category}
+              className="
+                rounded-full
+                border
+                border-white/10
+                bg-white/[0.03]
+                px-4
+                py-2
+                text-xs
+                text-slate-400
+              "
+            >
+              {category}
+            </span>
+          ))}
         </div>
 
         {/* =====================================================
             PORTFOLIO GRID
         ===================================================== */}
 
-        <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div
+          className="
+            mt-16
+            grid
+            gap-8
+            md:grid-cols-2
+            lg:grid-cols-3
+          "
+        >
           {projects.map((project) => (
             <article
               key={project.title}
@@ -142,13 +251,24 @@ export default function Portfolio() {
                 hover:-translate-y-2
                 hover:border-white/20
                 hover:bg-white/[0.06]
+                hover:shadow-2xl
+                hover:shadow-blue-500/[0.05]
               "
             >
+
               {/* =================================================
                   IMAGE
               ================================================= */}
 
-              <div className="relative h-64 overflow-hidden bg-[#111827]">
+              <div
+                className="
+                  relative
+                  h-64
+                  overflow-hidden
+                  bg-[#111827]
+                "
+              >
+
                 <img
                   src={project.image}
                   alt={project.title}
@@ -164,18 +284,73 @@ export default function Portfolio() {
 
                 {/* IMAGE OVERLAY */}
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60" />
+                <div
+                  className="
+                    absolute
+                    inset-0
+                    bg-gradient-to-t
+                    from-black/50
+                    via-transparent
+                    to-transparent
+                    opacity-70
+                  "
+                />
 
-                {/* LIVE BADGE */}
+                {/* =================================================
+                    PROJECT STATUS
+                ================================================= */}
 
-                {project.type === "live" && (
-                  <div className="absolute left-5 top-5">
-                    <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/40 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.14em] text-white backdrop-blur-md">
+                <div className="absolute left-5 top-5">
+
+                  {project.type === "live" ? (
+                    <span
+                      className="
+                        inline-flex
+                        items-center
+                        gap-2
+                        rounded-full
+                        border
+                        border-white/15
+                        bg-black/40
+                        px-3
+                        py-1.5
+                        text-[10px]
+                        font-medium
+                        uppercase
+                        tracking-[0.14em]
+                        text-white
+                        backdrop-blur-md
+                      "
+                    >
                       <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
                       Live Project
                     </span>
-                  </div>
-                )}
+                  ) : (
+                    <span
+                      className="
+                        inline-flex
+                        items-center
+                        gap-2
+                        rounded-full
+                        border
+                        border-white/15
+                        bg-black/40
+                        px-3
+                        py-1.5
+                        text-[10px]
+                        font-medium
+                        uppercase
+                        tracking-[0.14em]
+                        text-white
+                        backdrop-blur-md
+                      "
+                    >
+                      <span className="h-1.5 w-1.5 rounded-full bg-blue-400" />
+                      Concept
+                    </span>
+                  )}
+
+                </div>
               </div>
 
               {/* =================================================
@@ -183,21 +358,44 @@ export default function Portfolio() {
               ================================================= */}
 
               <div className="p-8">
+
                 {/* TITLE */}
 
-                <h3 className="text-2xl font-bold tracking-tight text-white">
+                <h3
+                  className="
+                    text-2xl
+                    font-bold
+                    tracking-tight
+                    text-white
+                  "
+                >
                   {project.title}
                 </h3>
 
                 {/* DESCRIPTION */}
 
-                <p className="mt-4 leading-7 text-slate-400">
+                <p
+                  className="
+                    mt-4
+                    leading-7
+                    text-slate-400
+                  "
+                >
                   {project.description}
                 </p>
 
-                {/* TAGS */}
+                {/* =================================================
+                    TAGS
+                ================================================= */}
 
-                <div className="mt-6 flex flex-wrap gap-2.5">
+                <div
+                  className="
+                    mt-6
+                    flex
+                    flex-wrap
+                    gap-2.5
+                  "
+                >
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
@@ -257,10 +455,74 @@ export default function Portfolio() {
                     <span>→</span>
                   </span>
                 )}
+
               </div>
             </article>
           ))}
         </div>
+
+        {/* =====================================================
+            BOTTOM STATEMENT
+        ===================================================== */}
+
+        <div
+          className="
+            mt-14
+            border-t
+            border-white/10
+            pt-10
+          "
+        >
+          <div
+            className="
+              flex
+              flex-col
+              justify-between
+              gap-6
+              md:flex-row
+              md:items-center
+            "
+          >
+
+            <div>
+              <p className="text-lg font-semibold text-white">
+                Different businesses. Different challenges.
+              </p>
+
+              <p className="mt-2 text-sm text-slate-500">
+                One goal: build a digital experience that moves the
+                business forward.
+              </p>
+            </div>
+
+            <a
+              href="#contact"
+              className="
+                inline-flex
+                w-fit
+                items-center
+                gap-2
+                rounded-full
+                border
+                border-white/10
+                bg-white/[0.04]
+                px-6
+                py-3
+                text-sm
+                font-semibold
+                text-white
+                transition
+                hover:border-blue-500/40
+                hover:bg-blue-500/10
+              "
+            >
+              Start Your Project
+              <span>→</span>
+            </a>
+
+          </div>
+        </div>
+
       </Container>
     </section>
   );

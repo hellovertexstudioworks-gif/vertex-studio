@@ -116,6 +116,7 @@ export default function Navbar() {
           py-5
         "
       >
+
         {/* =====================================================
             LOGO
         ===================================================== */}
@@ -166,13 +167,13 @@ export default function Navbar() {
                 mt-1
                 text-[10px]
                 uppercase
-                tracking-[0.28em]
+                tracking-[0.2em]
                 text-blue-400
                 lg:text-[11px]
-                lg:tracking-[0.35em]
+                lg:tracking-[0.25em]
               "
             >
-              Web Design & Development
+              Websites • Systems • Growth
             </p>
           </div>
         </a>

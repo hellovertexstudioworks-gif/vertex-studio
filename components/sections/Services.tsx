@@ -1,192 +1,305 @@
 import Container from "../ui/Container";
 import SectionTitle from "../ui/SectionTitle";
 
-
 const services = [
   {
-    icon: "🎨",
-    title: "Strategic Website Design",
+    number: "01",
+    icon: "✦",
+    title: "Websites & Digital Experiences",
     description:
-      "Modern, conversion-focused designs created to build trust, showcase your brand, and create a professional first impression.",
+      "Modern digital experiences designed around your brand, your audience, and the goals of your business.",
     features: [
-      "Custom UI/UX Design",
-      "Brand-Focused Layouts",
-      "Mobile Responsive Design",
+      "Custom Website Design",
+      "UI/UX & Responsive Development",
+      "Landing & Business Websites",
+      "SEO-Ready Foundations",
     ],
   },
 
   {
-    icon: "⚡",
-    title: "Web Development",
+    number: "02",
+    icon: "◈",
+    title: "E-Commerce & Online Platforms",
     description:
-      "Fast, secure, and responsive websites built with modern technologies that deliver a smooth user experience.",
+      "Powerful online experiences that help businesses showcase products, accept customers, and sell online.",
     features: [
-      "Custom Development",
-      "Performance Optimization",
-      "Responsive Across Devices",
+      "E-Commerce Stores",
+      "Product Catalogs & Search",
+      "Shopping Cart & Checkout",
+      "Customer Accounts & Orders",
     ],
   },
 
   {
-    icon: "📈",
-    title: "SEO & Digital Growth",
+    number: "03",
+    icon: "▦",
+    title: "Business Systems",
     description:
-      "Improve your online visibility and create a website structure designed to attract and convert more customers.",
+      "Custom digital tools that connect the important parts of your business and make everyday operations easier.",
     features: [
-      "SEO Setup",
-      "Google Optimization",
-      "Growth Recommendations",
+      "Business Dashboards",
+      "CRM & Customer Portals",
+      "Inventory & Order Management",
+      "Custom Internal Tools",
     ],
   },
 
   {
-    icon: "🛠️",
-    title: "Website Care",
+    number: "04",
+    icon: "↗",
+    title: "Growth & Automation",
     description:
-      "Ongoing maintenance and support to keep your website secure, updated, and performing after launch.",
+      "Technology that helps businesses understand their customers, improve their processes, and create new opportunities.",
     features: [
-      "Updates & Maintenance",
-      "Security Monitoring",
-      "Performance Checks",
+      "Analytics & Reporting",
+      "Lead & Marketing Systems",
+      "Workflow Automation",
+      "AI & Third-Party Integrations",
     ],
   },
 ];
 
-
-
 export default function Services() {
-
   return (
-
     <section
       id="services"
       className="bg-[#050816] py-28"
+      aria-labelledby="services-heading"
     >
-
       <Container>
 
+        {/* =====================================================
+            SECTION INTRO
+        ===================================================== */}
 
         <SectionTitle
-          badge="OUR SERVICES"
-          title="Everything You Need"
-          highlight="To Grow Online"
+          badge="WHAT WE BUILD"
+          title="From Your First Website"
+          highlight="To Your Next Big System"
           description="
-          We create premium websites that combine design,
-          technology, and strategy to help businesses build
-          credibility and grow online.
+            Vertex Studio Works builds digital experiences and
+            business technology around what your business needs
+            today — and where you want to take it tomorrow.
           "
         />
 
-
+        {/* =====================================================
+            SERVICE GRID
+        ===================================================== */}
 
         <div
           className="
-          mt-20
-          grid
-          gap-8
-          md:grid-cols-2
-          xl:grid-cols-4
+            mt-20
+            grid
+            gap-6
+            md:grid-cols-2
           "
         >
 
-
-          {
-            services.map((service)=>(
-
-
-              <div
-
-                key={service.title}
-
-                className="
+          {services.map((service) => (
+            <div
+              key={service.title}
+              className="
+                group
+                relative
+                overflow-hidden
                 rounded-3xl
                 border
                 border-white/10
-                bg-white/5
+                bg-white/[0.035]
                 p-8
                 transition-all
                 duration-300
                 hover:-translate-y-2
-                hover:border-blue-500/50
-                hover:bg-white/10
+                hover:border-blue-500/40
+                hover:bg-white/[0.06]
+              "
+            >
+
+              {/* =================================================
+                  BACKGROUND GLOW
+              ================================================= */}
+
+              <div
+                className="
+                  pointer-events-none
+                  absolute
+                  -right-20
+                  -top-20
+                  h-40
+                  w-40
+                  rounded-full
+                  bg-blue-500/10
+                  blur-3xl
+                  transition-opacity
+                  duration-300
+                  group-hover:bg-blue-500/20
                 "
+                aria-hidden="true"
+              />
 
-              >
+              {/* =================================================
+                  TOP ROW
+              ================================================= */}
 
+              <div className="relative flex items-start justify-between">
 
-                <div className="mb-6 text-5xl">
+                <div
+                  className="
+                    flex
+                    h-14
+                    w-14
+                    items-center
+                    justify-center
+                    rounded-2xl
+                    border
+                    border-blue-500/20
+                    bg-blue-500/10
+                    text-2xl
+                    text-blue-400
+                  "
+                >
                   {service.icon}
                 </div>
 
-
-
-                <h3
+                <span
                   className="
-                  text-2xl
-                  font-bold
-                  text-white
+                    text-sm
+                    font-semibold
+                    tracking-[0.2em]
+                    text-slate-600
                   "
                 >
-                  {service.title}
-                </h3>
-
-
-
-                <p
-                  className="
-                  mt-4
-                  leading-7
-                  text-slate-400
-                  "
-                >
-                  {service.description}
-                </p>
-
-
-
-
-                <ul
-                  className="
-                  mt-6
-                  space-y-3
-                  text-sm
-                  text-slate-300
-                  "
-                >
-
-                  {
-                    service.features.map((feature)=>(
-
-                      <li key={feature}>
-                        <span className="mr-2 text-blue-400">
-                          ✓
-                        </span>
-
-                        {feature}
-                      </li>
-
-                    ))
-                  }
-
-                </ul>
-
-
+                  {service.number}
+                </span>
 
               </div>
 
+              {/* =================================================
+                  TITLE
+              ================================================= */}
 
-            ))
-          }
+              <h3
+                className="
+                  relative
+                  mt-8
+                  text-2xl
+                  font-bold
+                  leading-tight
+                  text-white
+                "
+              >
+                {service.title}
+              </h3>
 
+              {/* =================================================
+                  DESCRIPTION
+              ================================================= */}
+
+              <p
+                className="
+                  relative
+                  mt-4
+                  max-w-xl
+                  leading-7
+                  text-slate-400
+                "
+              >
+                {service.description}
+              </p>
+
+              {/* =================================================
+                  FEATURES
+              ================================================= */}
+
+              <ul
+                className="
+                  relative
+                  mt-7
+                  grid
+                  gap-3
+                  sm:grid-cols-2
+                "
+              >
+                {service.features.map((feature) => (
+                  <li
+                    key={feature}
+                    className="
+                      flex
+                      items-center
+                      gap-3
+                      text-sm
+                      text-slate-300
+                    "
+                  >
+                    <span
+                      className="
+                        flex
+                        h-5
+                        w-5
+                        shrink-0
+                        items-center
+                        justify-center
+                        rounded-full
+                        bg-blue-500/10
+                        text-xs
+                        text-blue-400
+                      "
+                    >
+                      ✓
+                    </span>
+
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+
+            </div>
+          ))}
 
         </div>
 
+        {/* =====================================================
+            BOTTOM STATEMENT
+        ===================================================== */}
+
+        <div
+          className="
+            mt-10
+            rounded-3xl
+            border
+            border-white/10
+            bg-gradient-to-r
+            from-blue-500/[0.08]
+            via-white/[0.03]
+            to-cyan-500/[0.06]
+            px-8
+            py-10
+            text-center
+          "
+        >
+          <p
+            className="
+              text-xl
+              font-semibold
+              text-white
+              md:text-2xl
+            "
+          >
+            Start with what your business needs today.
+          </p>
+
+          <p
+            className="
+              mt-3
+              text-slate-400
+            "
+          >
+            Build what you need tomorrow.
+          </p>
+        </div>
 
       </Container>
-
-
     </section>
-
   );
-
 }

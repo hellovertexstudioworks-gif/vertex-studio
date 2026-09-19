@@ -73,11 +73,11 @@ export default function Hero() {
               text-sm
               font-semibold
               uppercase
-              tracking-[0.4em]
+              tracking-[0.35em]
               text-blue-400
             "
           >
-            Custom Website Design & Development
+            Websites • Digital Experiences • Business Systems
           </p>
 
           {/* =================================================
@@ -89,17 +89,17 @@ export default function Hero() {
             className="
               text-6xl
               font-extrabold
-              leading-[1.05]
+              leading-[1.02]
               text-white
               md:text-7xl
               lg:text-8xl
             "
           >
-            We Build.
+            Build Better.
 
             <br />
 
-            We Grow.
+            Grow Faster.
 
             <br />
 
@@ -121,11 +121,10 @@ export default function Hero() {
               text-slate-300
             "
           >
-            Vertex Studio Works designs and develops premium,
-            affordable websites for startups, entrepreneurs,
-            and growing businesses. We create modern, fast,
-            mobile-friendly websites that build credibility,
-            attract customers, and help businesses grow online.
+            From high-converting websites and e-commerce
+            experiences to the digital systems behind your
+            business, Vertex Studio Works builds modern
+            technology designed to help businesses grow.
           </p>
 
           {/* =================================================
@@ -140,12 +139,14 @@ export default function Hero() {
               gap-5
             "
           >
+            {/* PRIMARY CTA */}
+
             <a
-              href="https://calendly.com/hello-vertexstudioworks/30min"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#portfolio"
               className="
-                inline-block
+                inline-flex
+                items-center
+                justify-center
                 rounded-full
                 bg-gradient-to-r
                 from-blue-600
@@ -160,11 +161,13 @@ export default function Hero() {
                 hover:shadow-blue-500/30
               "
             >
-              Book a Free Discovery Call
+              Explore Our Work
             </a>
 
+            {/* SECONDARY CTA */}
+
             <a
-              href="#portfolio"
+              href="#contact"
               className="
                 inline-flex
                 items-center
@@ -181,12 +184,12 @@ export default function Hero() {
                 hover:text-black
               "
             >
-              View Portfolio
+              Build With Vertex
             </a>
           </div>
 
           {/* =================================================
-              TRUST + EMAIL
+              TRUST POINTS
           ================================================= */}
 
           <div
@@ -194,38 +197,44 @@ export default function Hero() {
               mt-10
               flex
               flex-wrap
-              gap-8
+              gap-x-8
+              gap-y-3
               text-sm
               text-slate-400
             "
           >
             <span>
-              ✓ Founder-Led Support
-            </span>
-
-            <span>
               ✓ Startup-Friendly Pricing
             </span>
 
             <span>
-              ✓ 3 Months Guidance
+              ✓ Custom-Built
             </span>
 
-            <a
-              href="mailto:hello.vertexstudioworks@gmail.com"
-              className="
-                text-blue-400
-                transition
-                hover:text-cyan-400
-              "
-            >
-              ✉ hello.vertexstudioworks@gmail.com
-            </a>
+            <span>
+              ✓ Founder-Led Support
+            </span>
           </div>
+
+          {/* EMAIL */}
+
+          <a
+            href="mailto:hello.vertexstudioworks@gmail.com"
+            className="
+              mt-5
+              inline-block
+              text-sm
+              text-blue-400
+              transition
+              hover:text-cyan-400
+            "
+          >
+            ✉ hello.vertexstudioworks@gmail.com
+          </a>
         </div>
 
         {/* =================================================
-            RIGHT WEBSITE MOCKUP
+            RIGHT SIDE — BUSINESS PLATFORM VISUAL
         ================================================= */}
 
         <div
@@ -244,113 +253,481 @@ export default function Hero() {
           "
           aria-hidden="true"
         >
-          {/* BROWSER HEADER */}
+
+          {/* =================================================
+              BROWSER HEADER
+          ================================================= */}
 
           <div
             className="
               flex
               items-center
-              gap-2
+              justify-between
               border-b
               border-white/10
               pb-4
             "
           >
-            <span className="h-3 w-3 rounded-full bg-red-400" />
-
-            <span className="h-3 w-3 rounded-full bg-yellow-400" />
-
-            <span className="h-3 w-3 rounded-full bg-green-400" />
-          </div>
-
-          {/* WEBSITE PREVIEW */}
-
-          <div
-            className="
-              mt-6
-              rounded-2xl
-              bg-gradient-to-br
-              from-blue-600
-              to-cyan-400
-              p-8
-            "
-          >
-            <p
-              className="
-                text-xs
-                uppercase
-                tracking-[0.3em]
-                text-white/80
-              "
-            >
-              Premium Website
-            </p>
-
-            <h2
-              className="
-                mt-8
-                text-4xl
-                font-bold
-                text-white
-              "
-            >
-              Your Brand.
-              <br />
-              Online.
-            </h2>
+            <div className="flex items-center gap-2">
+              <span className="h-3 w-3 rounded-full bg-red-400" />
+              <span className="h-3 w-3 rounded-full bg-yellow-400" />
+              <span className="h-3 w-3 rounded-full bg-green-400" />
+            </div>
 
             <span
               className="
-                mt-8
-                inline-flex
-                rounded-full
-                bg-white
-                px-6
-                py-3
-                font-semibold
-                text-black
+                text-xs
+                font-medium
+                uppercase
+                tracking-[0.2em]
+                text-slate-500
               "
             >
-              Get Started
+              Vertex Business
             </span>
           </div>
 
-          {/* FEATURE CARDS */}
+          {/* =================================================
+              DASHBOARD HEADER
+          ================================================= */}
+
+          <div className="mt-6">
+
+            <div className="flex items-end justify-between">
+
+              <div>
+                <p
+                  className="
+                    text-xs
+                    uppercase
+                    tracking-[0.25em]
+                    text-blue-400
+                  "
+                >
+                  Business Platform
+                </p>
+
+                <h2
+                  className="
+                    mt-2
+                    text-2xl
+                    font-bold
+                    text-white
+                  "
+                >
+                  Your business. Connected.
+                </h2>
+              </div>
+
+              <div
+                className="
+                  rounded-full
+                  border
+                  border-emerald-400/20
+                  bg-emerald-400/10
+                  px-3
+                  py-1
+                  text-xs
+                  font-medium
+                  text-emerald-300
+                "
+              >
+                Live Demo
+              </div>
+
+            </div>
+          </div>
+
+          {/* =================================================
+              STAT CARDS
+          ================================================= */}
+
+          <div className="mt-6 grid grid-cols-3 gap-3">
+
+            {/* REVENUE */}
+
+            <div
+              className="
+                rounded-xl
+                border
+                border-white/10
+                bg-white/5
+                p-4
+              "
+            >
+              <p
+                className="
+                  text-[10px]
+                  uppercase
+                  tracking-wider
+                  text-slate-500
+                "
+              >
+                Revenue
+              </p>
+
+              <p
+                className="
+                  mt-2
+                  text-xl
+                  font-bold
+                  text-white
+                "
+              >
+                $48.2K
+              </p>
+
+              <p
+                className="
+                  mt-1
+                  text-[10px]
+                  text-emerald-400
+                "
+              >
+                +18.4%
+              </p>
+            </div>
+
+            {/* CUSTOMERS */}
+
+            <div
+              className="
+                rounded-xl
+                border
+                border-white/10
+                bg-white/5
+                p-4
+              "
+            >
+              <p
+                className="
+                  text-[10px]
+                  uppercase
+                  tracking-wider
+                  text-slate-500
+                "
+              >
+                Customers
+              </p>
+
+              <p
+                className="
+                  mt-2
+                  text-xl
+                  font-bold
+                  text-white
+                "
+              >
+                2,841
+              </p>
+
+              <p
+                className="
+                  mt-1
+                  text-[10px]
+                  text-cyan-400
+                "
+              >
+                +12.7%
+              </p>
+            </div>
+
+            {/* LEADS */}
+
+            <div
+              className="
+                rounded-xl
+                border
+                border-white/10
+                bg-white/5
+                p-4
+              "
+            >
+              <p
+                className="
+                  text-[10px]
+                  uppercase
+                  tracking-wider
+                  text-slate-500
+                "
+              >
+                Leads
+              </p>
+
+              <p
+                className="
+                  mt-2
+                  text-xl
+                  font-bold
+                  text-white
+                "
+              >
+                486
+              </p>
+
+              <p
+                className="
+                  mt-1
+                  text-[10px]
+                  text-blue-400
+                "
+              >
+                This month
+              </p>
+            </div>
+
+          </div>
+
+          {/* =================================================
+              BUSINESS OVERVIEW
+          ================================================= */}
+
+          <div
+            className="
+              mt-4
+              rounded-2xl
+              border
+              border-white/10
+              bg-white/5
+              p-5
+            "
+          >
+
+            <div className="flex items-center justify-between">
+
+              <div>
+                <p
+                  className="
+                    text-sm
+                    font-semibold
+                    text-white
+                  "
+                >
+                  Business Overview
+                </p>
+
+                <p
+                  className="
+                    mt-1
+                    text-xs
+                    text-slate-500
+                  "
+                >
+                  Everything working together
+                </p>
+              </div>
+
+              <span
+                className="
+                  text-xs
+                  text-slate-500
+                "
+              >
+                Last 30 days
+              </span>
+
+            </div>
+
+            {/* FAKE CHART */}
+
+            <div
+              className="
+                mt-6
+                flex
+                h-28
+                items-end
+                gap-2
+              "
+            >
+              <div className="h-[28%] flex-1 rounded-t bg-blue-500/30" />
+              <div className="h-[42%] flex-1 rounded-t bg-blue-500/40" />
+              <div className="h-[35%] flex-1 rounded-t bg-blue-500/40" />
+              <div className="h-[55%] flex-1 rounded-t bg-blue-500/50" />
+              <div className="h-[48%] flex-1 rounded-t bg-blue-500/50" />
+              <div className="h-[72%] flex-1 rounded-t bg-blue-500/70" />
+              <div className="h-[64%] flex-1 rounded-t bg-cyan-400/70" />
+              <div className="h-[86%] flex-1 rounded-t bg-cyan-400" />
+              <div className="h-[78%] flex-1 rounded-t bg-cyan-400/90" />
+              <div className="h-[96%] flex-1 rounded-t bg-cyan-400" />
+            </div>
+
+          </div>
+
+          {/* =================================================
+              BUSINESS SYSTEMS
+          ================================================= */}
+
+          <div className="mt-4 grid grid-cols-2 gap-3">
+
+            {/* COMMERCE */}
+
+            <div
+              className="
+                rounded-xl
+                border
+                border-white/10
+                bg-white/5
+                p-4
+              "
+            >
+              <p
+                className="
+                  text-xs
+                  font-semibold
+                  text-white
+                "
+              >
+                Commerce
+              </p>
+
+              <p
+                className="
+                  mt-2
+                  text-[11px]
+                  leading-5
+                  text-slate-400
+                "
+              >
+                Products · Orders · Inventory
+              </p>
+            </div>
+
+            {/* GROWTH */}
+
+            <div
+              className="
+                rounded-xl
+                border
+                border-white/10
+                bg-white/5
+                p-4
+              "
+            >
+              <p
+                className="
+                  text-xs
+                  font-semibold
+                  text-white
+                "
+              >
+                Growth
+              </p>
+
+              <p
+                className="
+                  mt-2
+                  text-[11px]
+                  leading-5
+                  text-slate-400
+                "
+              >
+                Leads · Marketing · Analytics
+              </p>
+            </div>
+
+            {/* CUSTOMER EXPERIENCE */}
+
+            <div
+              className="
+                rounded-xl
+                border
+                border-white/10
+                bg-white/5
+                p-4
+              "
+            >
+              <p
+                className="
+                  text-xs
+                  font-semibold
+                  text-white
+                "
+              >
+                Customer Experience
+              </p>
+
+              <p
+                className="
+                  mt-2
+                  text-[11px]
+                  leading-5
+                  text-slate-400
+                "
+              >
+                CRM · Support · Accounts
+              </p>
+            </div>
+
+            {/* AUTOMATION */}
+
+            <div
+              className="
+                rounded-xl
+                border
+                border-white/10
+                bg-white/5
+                p-4
+              "
+            >
+              <p
+                className="
+                  text-xs
+                  font-semibold
+                  text-white
+                "
+              >
+                Automation
+              </p>
+
+              <p
+                className="
+                  mt-2
+                  text-[11px]
+                  leading-5
+                  text-slate-400
+                "
+              >
+                AI · Workflows · Integrations
+              </p>
+            </div>
+
+          </div>
+
+          {/* =================================================
+              FOOTER
+          ================================================= */}
 
           <div
             className="
               mt-5
-              grid
-              grid-cols-2
-              gap-4
+              flex
+              items-center
+              justify-between
             "
           >
-            <div
+            <span
               className="
-                rounded-xl
-                border
-                border-white/10
-                bg-white/5
-                p-4
-                text-white
+                text-[10px]
+                uppercase
+                tracking-[0.2em]
+                text-slate-600
               "
             >
-              SEO Ready
-            </div>
+              One platform
+            </span>
 
-            <div
+            <span
               className="
-                rounded-xl
-                border
-                border-white/10
-                bg-white/5
-                p-4
-                text-white
+                text-[10px]
+                uppercase
+                tracking-[0.2em]
+                text-blue-400
               "
             >
-              Fast Performance
-            </div>
+              Build · Manage · Grow
+            </span>
           </div>
+
         </div>
       </div>
     </section>

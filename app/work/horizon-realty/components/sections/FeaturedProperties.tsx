@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const properties = [
   {
     number: "01",
@@ -31,28 +33,18 @@ export default function FeaturedProperties() {
       id="properties"
       className="relative overflow-hidden bg-[#F2F3EF] py-28 sm:py-36"
     >
-      {/* =====================================================
-          DECORATIVE BACKGROUND
-      ===================================================== */}
-
+      {/* Decorative Background */}
       <div className="pointer-events-none absolute -right-48 top-24 h-[34rem] w-[34rem] rounded-full border border-[#1F5C5B]/10" />
 
       <div className="pointer-events-none absolute -left-40 bottom-0 h-80 w-80 rounded-full border border-[#111719]/[0.06]" />
 
-      {/* =====================================================
-          CONTENT
-      ===================================================== */}
-
+      {/* Content */}
       <div className="relative mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
 
-        {/* =====================================================
-            HEADER
-        ===================================================== */}
-
+        {/* Header */}
         <div className="grid gap-10 lg:grid-cols-[1fr_0.7fr] lg:items-end">
 
-          {/* LEFT */}
-
+          {/* Left */}
           <div>
             <div className="mb-7 flex items-center gap-4">
               <span className="h-px w-10 bg-[#1F5C5B]" />
@@ -71,8 +63,7 @@ export default function FeaturedProperties() {
             </h2>
           </div>
 
-          {/* RIGHT */}
-
+          {/* Right */}
           <div className="max-w-md lg:ml-auto">
             <p className="text-sm leading-7 text-[#111719]/60 sm:text-base sm:leading-8">
               Explore a curated collection of exceptional residences,
@@ -96,176 +87,148 @@ export default function FeaturedProperties() {
 
         </div>
 
-        {/* =====================================================
-            PROPERTY GRID
-        ===================================================== */}
-
+        {/* Property Grid */}
         <div className="mt-16 grid gap-5 lg:grid-cols-12">
 
-          {/* =================================================
-              PROPERTY 01 — LARGE
-          ================================================= */}
-
+          {/* Property 01 */}
           <article className="group lg:col-span-7">
             <div className="relative aspect-[16/11] overflow-hidden bg-[#111719]">
 
-              <img
-                src={properties[0].image}
-                alt={properties[0].name}
-                className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-105"
+              <Image
+                src="/images/realestate/property-01.jpg"
+                alt="The Glass House"
+                fill
+                sizes="(max-width: 1024px) 100vw, 58vw"
+                className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                priority
               />
 
               <div className="absolute inset-0 bg-gradient-to-t from-[#071011]/85 via-[#071011]/10 to-transparent" />
 
-              {/* NUMBER */}
-
+              {/* Number */}
               <div className="absolute left-6 top-6">
                 <span className="font-serif text-3xl italic text-white/70">
-                  {properties[0].number}
+                  01
                 </span>
               </div>
 
-              {/* PROPERTY TYPE */}
-
+              {/* Property Type */}
               <div className="absolute right-6 top-6">
                 <span className="border border-white/20 bg-[#111719]/30 px-4 py-2 text-[8px] font-bold uppercase tracking-[0.2em] text-white backdrop-blur-md">
-                  {properties[0].type}
+                  Modern Residence
                 </span>
               </div>
 
-              {/* PROPERTY INFO */}
-
+              {/* Property Info */}
               <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
-
                 <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-white/55">
-                  {properties[0].location}
+                  Miami, Florida
                 </p>
 
                 <div className="mt-2 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-
                   <h3 className="font-serif text-3xl text-white sm:text-4xl">
-                    {properties[0].name}
+                    The Glass House
                   </h3>
 
                   <p className="font-serif text-2xl text-[#7BC1BB]">
-                    {properties[0].price}
+                    $1,250,000
                   </p>
-
                 </div>
-
               </div>
 
             </div>
           </article>
 
-          {/* =================================================
-              PROPERTY 02
-          ================================================= */}
-
+          {/* Property 02 */}
           <article className="group lg:col-span-5">
             <div className="relative aspect-[4/5] overflow-hidden bg-[#111719]">
 
-              <img
-                src={properties[1].image}
-                alt={properties[1].name}
-                className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-105"
+              <Image
+                src="/images/realestate/property-02.jpg"
+                alt="Hillside Estate"
+                fill
+                sizes="(max-width: 1024px) 100vw, 42vw"
+                className="object-cover transition-transform duration-1000 group-hover:scale-105"
               />
 
               <div className="absolute inset-0 bg-gradient-to-t from-[#071011]/85 via-transparent to-transparent" />
 
-              {/* NUMBER */}
-
+              {/* Number */}
               <div className="absolute left-6 top-6">
                 <span className="font-serif text-3xl italic text-white/70">
-                  {properties[1].number}
+                  02
                 </span>
               </div>
 
-              {/* PROPERTY INFO */}
-
+              {/* Property Info */}
               <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
-
                 <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-white/55">
-                  {properties[1].location}
+                  Austin, Texas
                 </p>
 
                 <h3 className="mt-2 font-serif text-3xl text-white">
-                  {properties[1].name}
+                  Hillside Estate
                 </h3>
 
                 <div className="mt-5 flex items-center justify-between border-t border-white/20 pt-4">
-
                   <span className="text-[8px] font-bold uppercase tracking-[0.2em] text-white/55">
-                    {properties[1].type}
+                    Private Estate
                   </span>
 
                   <span className="font-serif text-xl text-[#7BC1BB]">
-                    {properties[1].price}
+                    $1,850,000
                   </span>
-
                 </div>
-
               </div>
 
             </div>
           </article>
 
-          {/* =================================================
-              PROPERTY 03
-          ================================================= */}
-
+          {/* Property 03 */}
           <article className="group lg:col-span-5">
             <div className="relative aspect-[4/3] overflow-hidden bg-[#111719]">
 
-              <img
-                src={properties[2].image}
-                alt={properties[2].name}
-                className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-105"
+              <Image
+                src="/images/realestate/property-03.jpg"
+                alt="The Coastal Villa"
+                fill
+                sizes="(max-width: 1024px) 100vw, 42vw"
+                className="object-cover transition-transform duration-1000 group-hover:scale-105"
               />
 
               <div className="absolute inset-0 bg-gradient-to-t from-[#071011]/85 via-transparent to-transparent" />
 
-              {/* NUMBER */}
-
+              {/* Number */}
               <div className="absolute left-6 top-6">
                 <span className="font-serif text-3xl italic text-white/70">
-                  {properties[2].number}
+                  03
                 </span>
               </div>
 
-              {/* PROPERTY INFO */}
-
+              {/* Property Info */}
               <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
-
                 <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-white/55">
-                  {properties[2].location}
+                  Malibu, California
                 </p>
 
                 <div className="mt-2 flex items-end justify-between gap-4">
-
                   <h3 className="font-serif text-3xl text-white">
-                    {properties[2].name}
+                    The Coastal Villa
                   </h3>
 
                   <p className="whitespace-nowrap font-serif text-xl text-[#7BC1BB]">
-                    {properties[2].price}
+                    $2,400,000
                   </p>
-
                 </div>
-
               </div>
 
             </div>
           </article>
 
-          {/* =================================================
-              STATEMENT PANEL
-          ================================================= */}
-
+          {/* Statement Panel */}
           <div className="flex flex-col justify-between border-t border-[#111719]/10 pt-8 lg:col-span-7 lg:border-t-0 lg:pt-0">
 
             <div>
-
               <span className="font-serif text-5xl italic text-[#1F5C5B]/25">
                 03
               </span>
@@ -282,15 +245,12 @@ export default function FeaturedProperties() {
                 Realty brings thoughtful service and local expertise to
                 every step of the journey.
               </p>
-
             </div>
 
-            {/* BOTTOM DETAIL */}
-
+            {/* Bottom Detail */}
             <div className="mt-10 flex items-center justify-between border-t border-[#111719]/10 pt-6">
 
               <div>
-
                 <p className="text-[8px] font-bold uppercase tracking-[0.22em] text-[#111719]/40">
                   Horizon Realty
                 </p>
@@ -298,7 +258,6 @@ export default function FeaturedProperties() {
                 <p className="mt-2 font-serif text-lg italic text-[#111719]">
                   Your next chapter.
                 </p>
-
               </div>
 
               <a

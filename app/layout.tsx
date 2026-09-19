@@ -22,28 +22,52 @@ export const metadata: Metadata = {
 
   title: {
     default:
-      "Vertex Studio Works | Premium Website Design & Development",
+      "Vertex Studio Works | Websites, E-Commerce & Business Systems",
     template: "%s | Vertex Studio Works",
   },
 
   description:
-    "Vertex Studio Works designs and develops premium custom websites for startups, entrepreneurs, and growing businesses. Modern, fast, mobile-friendly, and built to turn visitors into customers.",
+    "Vertex Studio Works builds modern websites, e-commerce experiences, and custom business systems for startups, entrepreneurs, and growing businesses. Designed for growth, built around your business.",
 
   keywords: [
     "Vertex Studio Works",
     "Vertex Studio",
+
+    // Websites
     "website design",
     "web development",
     "custom website design",
     "business website design",
     "professional website design",
-    "website development",
-    "web design agency",
     "custom web development",
-    "SEO website design",
     "modern website design",
     "startup website design",
     "small business website",
+
+    // E-Commerce
+    "e-commerce website design",
+    "ecommerce development",
+    "online store development",
+    "e-commerce development",
+    "custom online store",
+
+    // Business Systems
+    "business systems",
+    "custom business systems",
+    "business website solutions",
+    "digital business solutions",
+    "custom web solutions",
+
+    // Growth
+    "SEO website design",
+    "digital growth",
+    "business growth",
+    "website growth",
+    "marketing automation",
+
+    // Support
+    "website maintenance",
+    "website care",
   ],
 
   /* =====================================================
@@ -84,7 +108,7 @@ export const metadata: Metadata = {
 
   creator: "Vertex Studio Works",
   publisher: "Vertex Studio Works",
-  category: "Web Design and Development",
+  category: "Websites, E-Commerce, Business Systems & Digital Growth",
 
   /* =====================================================
      FAVICON
@@ -100,10 +124,10 @@ export const metadata: Metadata = {
 
   openGraph: {
     title:
-      "Vertex Studio Works | Premium Website Design & Development",
+      "Vertex Studio Works | Websites, E-Commerce & Business Systems",
 
     description:
-      "Premium custom websites for startups, entrepreneurs, and growing businesses. Modern design, strong performance, and experiences built to grow your business online.",
+      "Modern websites, e-commerce experiences, and custom business systems built around your business and designed for growth.",
 
     url: "https://www.vertexstudioworks.com/",
 
@@ -119,7 +143,7 @@ export const metadata: Metadata = {
         width: 1536,
         height: 1024,
         alt:
-          "Vertex Studio Works — Premium Website Design & Development",
+          "Vertex Studio Works — Websites, E-Commerce & Business Systems",
       },
     ],
   },
@@ -132,10 +156,10 @@ export const metadata: Metadata = {
     card: "summary_large_image",
 
     title:
-      "Vertex Studio Works | Premium Website Design",
+      "Vertex Studio Works | Websites, E-Commerce & Business Systems",
 
     description:
-      "Premium custom websites for startups, entrepreneurs, and growing businesses.",
+      "Modern websites, e-commerce experiences, and custom business systems built for growing businesses.",
 
     images: ["/vertex-preview.png"],
   },
@@ -177,7 +201,7 @@ export default function RootLayout({
               },
 
               description:
-                "Vertex Studio Works designs and develops premium custom websites for startups, entrepreneurs, and growing businesses. Modern, fast, mobile-friendly, and built to turn visitors into customers.",
+                "Vertex Studio Works builds modern websites, e-commerce experiences, and custom business systems for startups, entrepreneurs, and growing businesses.",
 
               sameAs: [],
             }),
