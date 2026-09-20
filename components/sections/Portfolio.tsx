@@ -124,13 +124,11 @@ export default function Portfolio() {
       />
 
       <Container>
-
         {/* =====================================================
             SECTION HEADER
         ===================================================== */}
 
         <div className="max-w-3xl">
-
           <div className="mb-6 flex items-center gap-4">
             <span className="h-px w-10 bg-blue-500" />
 
@@ -181,7 +179,6 @@ export default function Portfolio() {
             digital experiences around the people, products, and goals
             behind each business.
           </p>
-
         </div>
 
         {/* =====================================================
@@ -255,7 +252,6 @@ export default function Portfolio() {
                 hover:shadow-blue-500/[0.05]
               "
             >
-
               {/* =================================================
                   IMAGE
               ================================================= */}
@@ -268,7 +264,6 @@ export default function Portfolio() {
                   bg-[#111827]
                 "
               >
-
                 <img
                   src={project.image}
                   alt={project.title}
@@ -301,7 +296,6 @@ export default function Portfolio() {
                 ================================================= */}
 
                 <div className="absolute left-5 top-5">
-
                   {project.type === "live" ? (
                     <span
                       className="
@@ -349,7 +343,6 @@ export default function Portfolio() {
                       Concept
                     </span>
                   )}
-
                 </div>
               </div>
 
@@ -358,7 +351,6 @@ export default function Portfolio() {
               ================================================= */}
 
               <div className="p-8">
-
                 {/* TITLE */}
 
                 <h3
@@ -455,7 +447,6 @@ export default function Portfolio() {
                     <span>→</span>
                   </span>
                 )}
-
               </div>
             </article>
           ))}
@@ -483,7 +474,6 @@ export default function Portfolio() {
               md:items-center
             "
           >
-
             <div>
               <p className="text-lg font-semibold text-white">
                 Different businesses. Different challenges.
@@ -495,34 +485,96 @@ export default function Portfolio() {
               </p>
             </div>
 
-            <a
-              href="#contact"
+            {/* =================================================
+                CTA BUTTONS
+            ================================================= */}
+
+            <div
               className="
-                inline-flex
-                w-fit
-                items-center
-                gap-2
-                rounded-full
-                border
-                border-white/10
-                bg-white/[0.04]
-                px-6
-                py-3
-                text-sm
-                font-semibold
-                text-white
-                transition
-                hover:border-blue-500/40
-                hover:bg-blue-500/10
+                flex
+                flex-col
+                gap-3
+                sm:flex-row
+                sm:items-center
               "
             >
-              Start Your Project
-              <span>→</span>
-            </a>
+              {/* BOOK A CALL */}
 
+              <a
+                href="https://calendly.com/hello-vertexstudioworks/30min"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="
+                  inline-flex
+                  w-fit
+                  shrink-0
+                  items-center
+                  justify-center
+                  gap-2
+                  rounded-full
+                  bg-gradient-to-r
+                  from-blue-600
+                  to-cyan-500
+                  px-6
+                  py-3
+                  text-sm
+                  font-semibold
+                  text-white
+                  transition
+                  hover:-translate-y-1
+                  hover:shadow-lg
+                  hover:shadow-blue-500/20
+                "
+              >
+                <span aria-hidden="true">▣</span>
+                Book a Call
+              </a>
+
+              {/* DIVIDER */}
+
+              <div
+                className="
+                  hidden
+                  h-8
+                  w-px
+                  bg-white/15
+                  sm:block
+                "
+                aria-hidden="true"
+              />
+
+              {/* START YOUR PROJECT */}
+
+              <a
+                href="#contact"
+                className="
+                  inline-flex
+                  w-fit
+                  shrink-0
+                  items-center
+                  justify-center
+                  gap-2
+                  rounded-full
+                  border
+                  border-white/10
+                  bg-white/[0.04]
+                  px-6
+                  py-3
+                  text-sm
+                  font-semibold
+                  text-white
+                  transition
+                  hover:-translate-y-1
+                  hover:border-blue-500/40
+                  hover:bg-blue-500/10
+                "
+              >
+                Start Your Project
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
           </div>
         </div>
-
       </Container>
     </section>
   );

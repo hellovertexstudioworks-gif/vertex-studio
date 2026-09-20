@@ -1,6 +1,9 @@
 import Container from "../ui/Container";
 import SectionTitle from "../ui/SectionTitle";
 
+const calendlyLink =
+  "https://calendly.com/hello-vertexstudioworks/30min";
+
 const steps = [
   {
     number: "01",
@@ -20,14 +23,22 @@ const steps = [
 
   {
     number: "03",
-    title: "Build",
+    title: "Design",
     description:
-      "We design and develop your website, e-commerce experience, application, or business system using modern technology and thoughtful design.",
+      "We create a modern, professional design that reflects your brand, connects with your audience, and is built for a seamless user experience.",
     icon: "◇",
   },
 
   {
     number: "04",
+    title: "Develop",
+    description:
+      "We bring the design to life with clean, scalable code and the right integrations, ensuring your website or system is fast, secure, and ready for growth.",
+    icon: "<>",
+  },
+
+  {
+    number: "05",
     title: "Launch",
     description:
       "We test the experience, refine the details, optimize performance, and prepare everything for your customers and team.",
@@ -35,7 +46,7 @@ const steps = [
   },
 
   {
-    number: "05",
+    number: "06",
     title: "Grow",
     description:
       "After launch, we can continue improving your digital experience, adding capabilities, analyzing performance, and scaling your system as your business evolves.",
@@ -51,7 +62,6 @@ export default function Process() {
       aria-labelledby="process-heading"
     >
       <Container>
-
         {/* =====================================================
             SECTION HEADER
         ===================================================== */}
@@ -77,7 +87,7 @@ export default function Process() {
             grid
             gap-6
             md:grid-cols-2
-            lg:grid-cols-5
+            lg:grid-cols-6
           "
         >
           {steps.map((step) => (
@@ -86,12 +96,13 @@ export default function Process() {
               className="
                 group
                 relative
+                min-h-[355px]
                 overflow-hidden
                 rounded-3xl
                 border
                 border-white/10
                 bg-white/[0.035]
-                p-8
+                p-7
                 transition-all
                 duration-300
                 hover:-translate-y-2
@@ -99,9 +110,8 @@ export default function Process() {
                 hover:bg-white/[0.06]
               "
             >
-
               {/* =================================================
-                  STEP NUMBER
+                  STEP NUMBER + ICON
               ================================================= */}
 
               <div
@@ -138,6 +148,7 @@ export default function Process() {
                     transition
                     duration-300
                     group-hover:scale-110
+                    group-hover:bg-blue-500/15
                   "
                 >
                   {step.icon}
@@ -178,28 +189,26 @@ export default function Process() {
                   STEP LINE
               ================================================= */}
 
-              {step.number !== "05" && (
-                <div
-                  className="
-                    mt-8
-                    hidden
-                    h-px
-                    w-full
-                    bg-gradient-to-r
-                    from-blue-500/40
-                    to-transparent
-                    lg:block
-                  "
-                  aria-hidden="true"
-                />
-              )}
-
+              <div
+                className="
+                  absolute
+                  bottom-7
+                  left-7
+                  right-7
+                  h-px
+                  bg-gradient-to-r
+                  from-blue-500/50
+                  via-blue-500/20
+                  to-transparent
+                "
+                aria-hidden="true"
+              />
             </div>
           ))}
         </div>
 
         {/* =====================================================
-            BOTTOM MESSAGE
+            BOTTOM CTA
         ===================================================== */}
 
         <div
@@ -220,12 +229,15 @@ export default function Process() {
             className="
               flex
               flex-col
-              gap-4
+              gap-6
               md:flex-row
               md:items-center
               md:justify-between
             "
           >
+            {/* =================================================
+                CTA CONTENT
+            ================================================= */}
 
             <div>
               <p
@@ -253,36 +265,96 @@ export default function Process() {
               </p>
             </div>
 
-            <a
-              href="#contact"
+            {/* =================================================
+                CTA BUTTONS
+            ================================================= */}
+
+            <div
               className="
-                inline-flex
-                w-fit
-                shrink-0
-                items-center
-                gap-2
-                rounded-full
-                bg-gradient-to-r
-                from-blue-600
-                to-cyan-500
-                px-6
-                py-3
-                text-sm
-                font-semibold
-                text-white
-                transition
-                hover:-translate-y-1
-                hover:shadow-lg
-                hover:shadow-blue-500/20
+                flex
+                flex-col
+                gap-3
+                sm:flex-row
+                sm:items-center
               "
             >
-              Start Your Project
-              <span>→</span>
-            </a>
+              {/* BOOK A CALL */}
 
+              <a
+                href={calendlyLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="
+                  inline-flex
+                  w-fit
+                  shrink-0
+                  items-center
+                  justify-center
+                  gap-2
+                  rounded-full
+                  bg-gradient-to-r
+                  from-blue-600
+                  to-cyan-500
+                  px-6
+                  py-3
+                  text-sm
+                  font-semibold
+                  text-white
+                  transition
+                  hover:-translate-y-1
+                  hover:shadow-lg
+                  hover:shadow-blue-500/20
+                "
+              >
+                <span aria-hidden="true">▣</span>
+                Book a Call
+              </a>
+
+              {/* DIVIDER */}
+
+              <div
+                className="
+                  hidden
+                  h-8
+                  w-px
+                  bg-white/15
+                  sm:block
+                "
+                aria-hidden="true"
+              />
+
+              {/* START YOUR PROJECT */}
+
+              <a
+                href="#contact"
+                className="
+                  inline-flex
+                  w-fit
+                  shrink-0
+                  items-center
+                  justify-center
+                  gap-2
+                  rounded-full
+                  border
+                  border-white/10
+                  bg-white/[0.04]
+                  px-6
+                  py-3
+                  text-sm
+                  font-semibold
+                  text-white
+                  transition
+                  hover:-translate-y-1
+                  hover:border-blue-500/40
+                  hover:bg-blue-500/10
+                "
+              >
+                Start Your Project
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
           </div>
         </div>
-
       </Container>
     </section>
   );

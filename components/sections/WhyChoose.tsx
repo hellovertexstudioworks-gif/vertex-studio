@@ -1,6 +1,9 @@
 import Container from "../ui/Container";
 import SectionTitle from "../ui/SectionTitle";
 
+const calendlyLink =
+  "https://calendly.com/hello-vertexstudioworks/30min";
+
 const reasons = [
   {
     title: "Built Around Your Business",
@@ -53,7 +56,6 @@ export default function WhyChoose() {
       aria-labelledby="whychoose-heading"
     >
       <Container>
-
         {/* =====================================================
             SECTION HEADER
         ===================================================== */}
@@ -101,7 +103,6 @@ export default function WhyChoose() {
                 hover:bg-white/[0.06]
               "
             >
-
               {/* =================================================
                   BACKGROUND GLOW
               ================================================= */}
@@ -180,7 +181,6 @@ export default function WhyChoose() {
               >
                 {reason.description}
               </p>
-
             </div>
           ))}
         </div>
@@ -207,12 +207,15 @@ export default function WhyChoose() {
             className="
               flex
               flex-col
-              gap-4
+              gap-6
               md:flex-row
               md:items-center
               md:justify-between
             "
           >
+            {/* =================================================
+                CTA CONTENT
+            ================================================= */}
 
             <div>
               <p
@@ -240,35 +243,96 @@ export default function WhyChoose() {
               </p>
             </div>
 
-            <a
-              href="#contact"
+            {/* =================================================
+                CTA BUTTONS
+            ================================================= */}
+
+            <div
               className="
-                inline-flex
-                w-fit
-                shrink-0
-                items-center
-                gap-2
-                rounded-full
-                border
-                border-white/10
-                bg-white/[0.04]
-                px-6
-                py-3
-                text-sm
-                font-semibold
-                text-white
-                transition
-                hover:border-blue-500/40
-                hover:bg-blue-500/10
+                flex
+                flex-col
+                gap-3
+                sm:flex-row
+                sm:items-center
               "
             >
-              Work With Vertex
-              <span>→</span>
-            </a>
+              {/* BOOK A CALL */}
 
+              <a
+                href={calendlyLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="
+                  inline-flex
+                  w-fit
+                  shrink-0
+                  items-center
+                  justify-center
+                  gap-2
+                  rounded-full
+                  bg-gradient-to-r
+                  from-blue-600
+                  to-cyan-500
+                  px-6
+                  py-3
+                  text-sm
+                  font-semibold
+                  text-white
+                  transition
+                  hover:-translate-y-1
+                  hover:shadow-lg
+                  hover:shadow-blue-500/20
+                "
+              >
+                <span aria-hidden="true">▣</span>
+                Book a Call
+              </a>
+
+              {/* DIVIDER */}
+
+              <div
+                className="
+                  hidden
+                  h-8
+                  w-px
+                  bg-white/15
+                  sm:block
+                "
+                aria-hidden="true"
+              />
+
+              {/* WORK WITH VERTEX */}
+
+              <a
+                href="#contact"
+                className="
+                  inline-flex
+                  w-fit
+                  shrink-0
+                  items-center
+                  justify-center
+                  gap-2
+                  rounded-full
+                  border
+                  border-white/10
+                  bg-white/[0.04]
+                  px-6
+                  py-3
+                  text-sm
+                  font-semibold
+                  text-white
+                  transition
+                  hover:-translate-y-1
+                  hover:border-blue-500/40
+                  hover:bg-blue-500/10
+                "
+              >
+                Work With Vertex
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
           </div>
         </div>
-
       </Container>
     </section>
   );

@@ -1,6 +1,9 @@
 import Container from "../ui/Container";
 import SectionTitle from "../ui/SectionTitle";
 
+const calendlyLink =
+  "https://calendly.com/hello-vertexstudioworks/30min";
+
 const expectations = [
   {
     icon: "◉",
@@ -45,51 +48,6 @@ const expectations = [
   },
 ];
 
-const carePlans = [
-  {
-    name: "Care 20",
-    price: "$20",
-    description:
-      "Simple ongoing care for businesses that want their website kept up to date.",
-    features: [
-      "Basic website maintenance",
-      "Software & dependency updates",
-      "Minor content updates",
-      "Basic performance checks",
-      "Standard support",
-    ],
-  },
-
-  {
-    name: "Care 49",
-    price: "$49",
-    description:
-      "More ongoing attention for businesses that regularly update and improve their digital presence.",
-    features: [
-      "Everything in Care 20",
-      "More frequent content updates",
-      "Performance & SEO checks",
-      "Minor design adjustments",
-      "Priority support",
-    ],
-    popular: true,
-  },
-
-  {
-    name: "Care 79",
-    price: "$79",
-    description:
-      "Hands-on ongoing support for businesses that want more active digital maintenance and improvements.",
-    features: [
-      "Everything in Care 49",
-      "More ongoing website updates",
-      "Advanced performance monitoring",
-      "Priority improvements",
-      "More hands-on support",
-    ],
-  },
-];
-
 export default function Expect() {
   return (
     <section
@@ -98,7 +56,6 @@ export default function Expect() {
       aria-labelledby="expect-heading"
     >
       <Container>
-
         {/* =====================================================
             SECTION HEADER
         ===================================================== */}
@@ -146,7 +103,6 @@ export default function Expect() {
                 hover:bg-white/[0.06]
               "
             >
-
               {/* =================================================
                   BACKGROUND GLOW
               ================================================= */}
@@ -225,332 +181,12 @@ export default function Expect() {
               >
                 {item.description}
               </p>
-
             </div>
           ))}
         </div>
 
         {/* =====================================================
-            VERTEX CARE
-        ===================================================== */}
-
-        <div
-          className="
-            mt-24
-            rounded-[2rem]
-            border
-            border-white/10
-            bg-gradient-to-br
-            from-blue-500/[0.08]
-            via-white/[0.025]
-            to-cyan-500/[0.06]
-            p-8
-            md:p-10
-            lg:p-12
-          "
-        >
-
-          {/* =================================================
-              CARE HEADER
-          ================================================= */}
-
-          <div
-            className="
-              flex
-              flex-col
-              gap-6
-              lg:flex-row
-              lg:items-end
-              lg:justify-between
-            "
-          >
-
-            <div className="max-w-2xl">
-
-              <div className="flex items-center gap-3">
-
-                <span
-                  className="
-                    rounded-full
-                    border
-                    border-blue-500/20
-                    bg-blue-500/10
-                    px-4
-                    py-1.5
-                    text-[10px]
-                    font-bold
-                    uppercase
-                    tracking-[0.25em]
-                    text-blue-400
-                  "
-                >
-                  Vertex Care
-                </span>
-
-                <span className="text-xs text-slate-600">
-                  Optional monthly support
-                </span>
-
-              </div>
-
-              <h2
-                className="
-                  mt-5
-                  text-3xl
-                  font-bold
-                  leading-tight
-                  text-white
-                  md:text-4xl
-                "
-              >
-                Keep Your Digital Presence
-                <br />
-                <span className="text-blue-400">
-                  Running Smoothly.
-                </span>
-              </h2>
-
-              <p
-                className="
-                  mt-5
-                  max-w-xl
-                  leading-7
-                  text-slate-400
-                "
-              >
-                Your website shouldn't be something you launch and
-                forget. Vertex Care gives you affordable ongoing
-                maintenance, updates, improvements, and support
-                as your business continues to grow.
-              </p>
-
-            </div>
-
-            <div className="max-w-sm">
-
-              <p className="text-sm leading-6 text-slate-500">
-                Choose the level of ongoing support that makes sense
-                for your business. You can always start simple and
-                move to a higher plan as your needs change.
-              </p>
-
-            </div>
-
-          </div>
-
-          {/* =================================================
-              CARE PLANS
-          ================================================= */}
-
-          <div
-            className="
-              mt-10
-              grid
-              gap-5
-              lg:grid-cols-3
-            "
-          >
-            {carePlans.map((plan) => (
-              <div
-                key={plan.name}
-                className={`
-                  relative
-                  rounded-3xl
-                  border
-                  p-7
-                  transition-all
-                  duration-300
-                  hover:-translate-y-1
-                  ${
-                    plan.popular
-                      ? "border-blue-500/40 bg-blue-500/[0.07]"
-                      : "border-white/10 bg-white/[0.035]"
-                  }
-                `}
-              >
-
-                {/* =================================================
-                    POPULAR BADGE
-                ================================================= */}
-
-                {plan.popular && (
-                  <div
-                    className="
-                      absolute
-                      right-5
-                      top-5
-                      rounded-full
-                      bg-blue-500/10
-                      px-3
-                      py-1
-                      text-[10px]
-                      font-bold
-                      uppercase
-                      tracking-[0.15em]
-                      text-blue-400
-                    "
-                  >
-                    Popular
-                  </div>
-                )}
-
-                {/* =================================================
-                    PLAN NAME
-                ================================================= */}
-
-                <p
-                  className="
-                    text-sm
-                    font-semibold
-                    uppercase
-                    tracking-[0.2em]
-                    text-blue-400
-                  "
-                >
-                  {plan.name}
-                </p>
-
-                {/* =================================================
-                    PRICE
-                ================================================= */}
-
-                <div className="mt-5 flex items-end gap-2">
-
-                  <span
-                    className="
-                      text-5xl
-                      font-bold
-                      tracking-tight
-                      text-white
-                    "
-                  >
-                    {plan.price}
-                  </span>
-
-                  <span className="mb-2 text-sm text-slate-500">
-                    / month
-                  </span>
-
-                </div>
-
-                {/* =================================================
-                    DESCRIPTION
-                ================================================= */}
-
-                <p
-                  className="
-                    mt-5
-                    min-h-[72px]
-                    text-sm
-                    leading-6
-                    text-slate-400
-                  "
-                >
-                  {plan.description}
-                </p>
-
-                {/* =================================================
-                    DIVIDER
-                ================================================= */}
-
-                <div className="my-6 h-px bg-white/10" />
-
-                {/* =================================================
-                    FEATURES
-                ================================================= */}
-
-                <ul className="space-y-3">
-
-                  {plan.features.map((feature) => (
-                    <li
-                      key={feature}
-                      className="
-                        flex
-                        items-start
-                        gap-3
-                        text-sm
-                        text-slate-300
-                      "
-                    >
-                      <span
-                        className="
-                          mt-0.5
-                          flex
-                          h-5
-                          w-5
-                          shrink-0
-                          items-center
-                          justify-center
-                          rounded-full
-                          bg-blue-500/10
-                          text-xs
-                          text-blue-400
-                        "
-                      >
-                        ✓
-                      </span>
-
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-
-                </ul>
-
-                {/* =================================================
-                    PLAN CTA
-                ================================================= */}
-
-                <a
-                  href="#contact"
-                  className={`
-                    mt-8
-                    flex
-                    w-full
-                    items-center
-                    justify-center
-                    rounded-full
-                    px-5
-                    py-3
-                    text-sm
-                    font-semibold
-                    transition
-                    ${
-                      plan.popular
-                        ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/20"
-                        : "border border-white/10 bg-white/[0.04] text-white hover:border-blue-500/30 hover:bg-blue-500/10"
-                    }
-                  `}
-                >
-                  Choose {plan.name}
-                </a>
-
-              </div>
-            ))}
-          </div>
-
-          {/* =================================================
-              CARE NOTE
-          ================================================= */}
-
-          <p
-            className="
-              mt-7
-              text-center
-              text-xs
-              leading-5
-              text-slate-600
-            "
-          >
-            Care plans cover ongoing maintenance and support within
-            the scope of each plan. Larger feature development,
-            new pages, custom systems, and major projects can be
-            quoted separately.
-          </p>
-
-        </div>
-
-        {/* =====================================================
-            BOTTOM MESSAGE
+            BOTTOM CTA
         ===================================================== */}
 
         <div
@@ -564,20 +200,21 @@ export default function Expect() {
             py-10
           "
         >
-
           <div
             className="
               flex
               flex-col
-              gap-4
+              gap-6
               md:flex-row
               md:items-center
               md:justify-between
             "
           >
+            {/* =================================================
+                CTA CONTENT
+            ================================================= */}
 
             <div>
-
               <p
                 className="
                   text-xl
@@ -602,39 +239,80 @@ export default function Expect() {
                 building a larger digital system, we focus on
                 creating a foundation you can build on.
               </p>
-
             </div>
 
-            <a
-              href="#contact"
+            {/* =================================================
+                CTA BUTTONS
+            ================================================= */}
+
+            <div
               className="
-                inline-flex
-                w-fit
-                shrink-0
-                items-center
-                gap-2
-                rounded-full
-                border
-                border-white/10
-                bg-white/[0.04]
-                px-6
-                py-3
-                text-sm
-                font-semibold
-                text-white
-                transition
-                hover:border-blue-500/40
-                hover:bg-blue-500/10
+                flex
+                flex-col
+                gap-3
+                sm:flex-row
+                sm:items-center
               "
             >
-              Let's Build
-              <span>→</span>
-            </a>
+              {/* BOOK A CALL */}
 
+              <a
+                href={calendlyLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="
+                  inline-flex
+                  items-center
+                  justify-center
+                  gap-2
+                  rounded-full
+                  bg-gradient-to-r
+                  from-blue-600
+                  to-cyan-500
+                  px-6
+                  py-3
+                  text-sm
+                  font-semibold
+                  text-white
+                  transition
+                  hover:-translate-y-0.5
+                  hover:shadow-lg
+                  hover:shadow-blue-500/20
+                "
+              >
+                <span aria-hidden="true">▣</span>
+                Book a Call
+              </a>
+
+              {/* LET'S BUILD */}
+
+              <a
+                href="#contact"
+                className="
+                  inline-flex
+                  items-center
+                  justify-center
+                  gap-2
+                  rounded-full
+                  border
+                  border-white/10
+                  bg-white/[0.04]
+                  px-6
+                  py-3
+                  text-sm
+                  font-semibold
+                  text-white
+                  transition
+                  hover:border-blue-500/40
+                  hover:bg-blue-500/10
+                "
+              >
+                Let's Build
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
           </div>
-
         </div>
-
       </Container>
     </section>
   );
