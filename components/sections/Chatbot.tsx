@@ -715,6 +715,7 @@ How can I help?`,
 
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [isQuickQuestionsOpen, setIsQuickQuestionsOpen] = useState(false);
 
   // Local Vertex Intelligence state.
   // This keeps the assistant contextual without calling an external AI API.
@@ -723,6 +724,7 @@ How can I help?`,
   );
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
   const timer = window.setTimeout(() => {
@@ -803,6 +805,27 @@ Tell me what you're trying to build and I'll help you figure out the right start
     sendMessage();
   };
 
+  useEffect(() => {
+    if (!isOpen || isTyping) {
+      return;
+    }
+
+    // Run after React has finished enabling/rendering the input.
+    const timer = window.setTimeout(() => {
+      const inputElement = inputRef.current;
+
+      if (inputElement && !inputElement.disabled) {
+        inputElement.focus();
+        inputElement.setSelectionRange(
+          inputElement.value.length,
+          inputElement.value.length
+        );
+      }
+    }, 50);
+
+    return () => window.clearTimeout(timer);
+  }, [isOpen, isTyping]);
+
   return (
     <>
       {/* =====================================================
@@ -860,7 +883,7 @@ Tell me what you're trying to build and I'll help you figure out the right start
                   </div>
                 )}
 
-                <div
+                <p
                   className={`
                     max-w-[86%]
                     whitespace-pre-line
@@ -879,7 +902,7 @@ Tell me what you're trying to build and I'll help you figure out the right start
                   {message.sender === "bot"
                     ? renderBotMessage(message.text)
                     : message.text}
-                </div>
+                </p>
               </div>
             ))}
 
@@ -911,33 +934,75 @@ Tell me what you're trying to build and I'll help you figure out the right start
           </div>
 
           {/* Quick Actions */}
-          <div className="shrink-0 border-t border-white/10 px-4 pb-3 pt-3 sm:px-5">
-            <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-500">
-              Quick questions
-            </p>
+          <div className="shrink-0 border-t border-white/10 px-4 pb-3 pt-2 sm:px-5">
+            <button
+              type="button"
+              onClick={() => setIsQuickQuestionsOpen((current) => !current)}
+              aria-expanded={isQuickQuestionsOpen}
+              aria-controls="vertex-quick-questions"
+              className="flex w-full items-center justify-between rounded-xl px-1 py-2 text-left transition hover:bg-white/[0.03]"
+            >
+              <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-500">
+                Quick questions
+              </span>
 
-            <div className="grid grid-cols-2 gap-2">
-              {quickActions.map((action) => (
-                <button
-                  key={action.label}
-                  type="button"
-                  onClick={() => sendMessage(action.message)}
-                  disabled={isTyping}
-                  className="rounded-xl border border-white/10 bg-white/[0.025] px-3 py-2.5 text-left text-xs font-medium text-slate-300 transition hover:border-cyan-400/30 hover:bg-cyan-400/10 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
-                >
-                  {action.label}
-                </button>
-              ))}
-
-              <a
-                href={calendlyLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="col-span-2 flex items-center justify-center gap-2 rounded-xl border border-cyan-400/30 bg-cyan-400/10 px-3 py-2.5 text-xs font-semibold text-cyan-200 transition hover:border-cyan-300/50 hover:bg-cyan-400/15 hover:text-white"
+              <span
+                className="flex h-7 w-7 items-center justify-center rounded-lg border border-white/10 text-slate-400 transition"
+                aria-hidden="true"
               >
-                <span>Book a Call with Vertex</span>
-                <span aria-hidden="true">→</span>
-              </a>
+                <svg
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  className={`h-4 w-4 transition-transform duration-200 ${
+                    isQuickQuestionsOpen ? "rotate-180" : ""
+                  }`}
+                >
+                  <path
+                    d="M5 7.5L10 12.5L15 7.5"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+            </button>
+
+            <div
+              id="vertex-quick-questions"
+              className={`overflow-hidden transition-all duration-300 ease-out ${
+                isQuickQuestionsOpen
+                  ? "max-h-48 pt-1 opacity-100"
+                  : "max-h-0 pt-0 opacity-0"
+              }`}
+              aria-hidden={!isQuickQuestionsOpen}
+            >
+              <div className="grid grid-cols-2 gap-2">
+                {quickActions.map((action) => (
+                  <button
+                    key={action.label}
+                    type="button"
+                    onClick={() => {
+                      sendMessage(action.message);
+                      setIsQuickQuestionsOpen(false);
+                    }}
+                    disabled={isTyping}
+                    className="rounded-xl border border-white/10 bg-white/[0.025] px-3 py-2.5 text-left text-xs font-medium text-slate-300 transition hover:border-cyan-400/30 hover:bg-cyan-400/10 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    {action.label}
+                  </button>
+                ))}
+
+                <a
+                  href={calendlyLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="col-span-2 flex items-center justify-center gap-2 rounded-xl border border-cyan-400/30 bg-cyan-400/10 px-3 py-2.5 text-xs font-semibold text-cyan-200 transition hover:border-cyan-300/50 hover:bg-cyan-400/15 hover:text-white"
+                >
+                  <span>Book a Call with Vertex</span>
+                  <span aria-hidden="true">→</span>
+                </a>
+              </div>
             </div>
           </div>
 
@@ -948,6 +1013,7 @@ Tell me what you're trying to build and I'll help you figure out the right start
               className="flex items-center gap-2 rounded-2xl border border-cyan-400/40 bg-[#0a1427] p-1.5 shadow-[0_0_30px_rgba(34,211,238,0.08)] transition focus-within:border-cyan-400/70"
             >
               <input
+                ref={inputRef}
                 type="text"
                 value={input}
                 onChange={(event) => setInput(event.target.value)}
