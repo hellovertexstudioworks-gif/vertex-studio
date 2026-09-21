@@ -118,13 +118,53 @@ const robotIcon = (
 
 
 function renderBotMessage(text: string) {
-  const pattern = /(\[[^\]]+\]\(https?:\/\/[^)]+\)|\*\*[^*]+\*\*|https?:\/\/[^\s]+)/g;
+  /*
+   * Supports the small Markdown subset used by Vertex Intelligence:
+   * - [label](https://...)
+   * - **bold**
+   * - **[label](https://...)**
+   * - raw https:// URLs
+   *
+   * The bold-wrapped link case is important because the intelligence
+   * engine intentionally generates:
+   *
+   * **[Book a call with Vertex](https://calendly.com/...)**
+   *
+   * We render that as a real clickable link and never expose the raw
+   * Calendly URL to the visitor.
+   */
+  const pattern =
+    /(\*\*\[[^\]]+\]\(https?:\/\/[^)]+\)\*\*|\[[^\]]+\]\(https?:\/\/[^)]+\)|\*\*[^*]+\*\*|https?:\/\/[^\s]+)/g;
+
   const parts = text.split(pattern);
 
   return parts.map((part, index) => {
     if (!part) return null;
 
-    const markdownLink = part.match(/^\[([^\]]+)\]\((https?:\/\/[^)]+)\)$/);
+    // **[Book a call with Vertex](https://...)**
+    const boldMarkdownLink = part.match(
+      /^\*\*\[([^\]]+)\]\((https?:\/\/[^)]+)\)\*\*$/
+    );
+
+    if (boldMarkdownLink) {
+      return (
+        <a
+          key={`bold-link-${index}`}
+          href={boldMarkdownLink[2]}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-semibold text-cyan-300 underline decoration-cyan-400/50 underline-offset-2 transition hover:text-cyan-200"
+        >
+          {boldMarkdownLink[1]}
+        </a>
+      );
+    }
+
+    // [Book a call with Vertex](https://...)
+    const markdownLink = part.match(
+      /^\[([^\]]+)\]\((https?:\/\/[^)]+)\)$/
+    );
+
     if (markdownLink) {
       return (
         <a
@@ -139,6 +179,7 @@ function renderBotMessage(text: string) {
       );
     }
 
+    // **bold**
     if (part.startsWith("**") && part.endsWith("**")) {
       return (
         <strong key={`bold-${index}`} className="font-semibold text-white">
@@ -147,6 +188,7 @@ function renderBotMessage(text: string) {
       );
     }
 
+    // Raw URL fallback
     if (/^https?:\/\//.test(part)) {
       return (
         <a
