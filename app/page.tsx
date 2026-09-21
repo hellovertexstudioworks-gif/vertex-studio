@@ -11,6 +11,7 @@ import Process from "@/components/sections/Process";
 import Expect from "@/components/sections/Expect";
 import Pricing from "@/components/sections/Pricing";
 import Contact from "@/components/sections/Contact";
+import Chatbot from "@/components/sections/Chatbot";
 
 import Footer from "@/components/layout/Footer";
 
@@ -254,6 +255,12 @@ export default function Home() {
 
         <Footer />
       </main>
+
+      {/* =====================================================
+          VERTEX ASSISTANT
+      ===================================================== */}
+
+      <Chatbot />
     </>
   );
 }

@@ -1,4 +1,70 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
+const dashboardStates = [
+  {
+    revenue: "$48.2K",
+    revenueGrowth: "+18.4%",
+    customers: "2,841",
+    customerGrowth: "+12.7%",
+    leads: "486",
+    bars: [28, 42, 35, 55, 48, 72, 64, 86, 78, 96],
+  },
+
+  {
+    revenue: "$48.7K",
+    revenueGrowth: "+18.9%",
+    customers: "2,864",
+    customerGrowth: "+13.1%",
+    leads: "492",
+    bars: [34, 48, 42, 61, 54, 77, 69, 88, 82, 98],
+  },
+
+  {
+    revenue: "$49.1K",
+    revenueGrowth: "+19.3%",
+    customers: "2,891",
+    customerGrowth: "+13.5%",
+    leads: "501",
+    bars: [30, 53, 46, 66, 58, 81, 73, 91, 86, 100],
+  },
+
+  {
+    revenue: "$49.8K",
+    revenueGrowth: "+20.1%",
+    customers: "2,917",
+    customerGrowth: "+14.2%",
+    leads: "514",
+    bars: [39, 57, 51, 70, 63, 85, 77, 94, 90, 100],
+  },
+
+  {
+    revenue: "$50.3K",
+    revenueGrowth: "+20.7%",
+    customers: "2,944",
+    customerGrowth: "+14.8%",
+    leads: "526",
+    bars: [35, 61, 56, 74, 67, 89, 81, 96, 93, 100],
+  },
+];
+
 export default function Hero() {
+  const [dashboardIndex, setDashboardIndex] = useState(0);
+  const [showPromo, setShowPromo] = useState(true);
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setDashboardIndex(
+        (current) => (current + 1) % dashboardStates.length
+      );
+    }, 2200);
+
+    return () => window.clearInterval(interval);
+  }, []);
+
+  const dashboard = dashboardStates[dashboardIndex];
+
   return (
     <section
       className="
@@ -9,6 +75,7 @@ export default function Hero() {
       "
       aria-labelledby="hero-heading"
     >
+
       {/* =====================================================
           BACKGROUND GLOW
       ===================================================== */}
@@ -42,6 +109,189 @@ export default function Hero() {
       />
 
       {/* =====================================================
+          $10 OFF FLOATING PROMO
+      ===================================================== */}
+
+      {showPromo && (
+        <div
+          className="
+            absolute
+            right-5
+            top-24
+            z-30
+            hidden
+            md:block
+          "
+        >
+          <div
+            className="
+              relative
+              w-[230px]
+              overflow-hidden
+              rounded-2xl
+              border
+              border-blue-400/30
+              bg-[#0b1224]/95
+              p-4
+              shadow-2xl
+              shadow-blue-500/20
+              backdrop-blur-xl
+              transition-all
+              duration-300
+              hover:-translate-y-1
+              hover:border-cyan-400/50
+              hover:shadow-blue-500/30
+            "
+          >
+
+            {/* GLOW */}
+
+            <div
+              className="
+                pointer-events-none
+                absolute
+                -right-10
+                -top-10
+                h-24
+                w-24
+                rounded-full
+                bg-blue-500/20
+                blur-2xl
+              "
+              aria-hidden="true"
+            />
+
+            {/* CLOSE BUTTON */}
+
+            <button
+              type="button"
+              aria-label="Close offer"
+              onClick={() => setShowPromo(false)}
+              className="
+                absolute
+                right-2
+                top-2
+                z-10
+                flex
+                h-6
+                w-6
+                items-center
+                justify-center
+                rounded-full
+                text-xs
+                text-slate-400
+                transition
+                hover:bg-white/10
+                hover:text-white
+              "
+            >
+              ×
+            </button>
+
+            {/* OFFER HEADER */}
+
+            <div className="relative flex items-center gap-3">
+
+              {/* GIFT */}
+
+              <div
+                className="
+                  flex
+                  h-12
+                  w-12
+                  shrink-0
+                  items-center
+                  justify-center
+                  rounded-xl
+                  border
+                  border-blue-400/20
+                  bg-blue-500/10
+                  text-2xl
+                  animate-pulse
+                "
+              >
+                🎁
+              </div>
+
+              {/* OFFER TEXT */}
+
+              <div>
+                <p
+                  className="
+                    text-[10px]
+                    font-bold
+                    uppercase
+                    tracking-[0.18em]
+                    text-blue-400
+                  "
+                >
+                  Limited Offer
+                </p>
+
+                <p
+                  className="
+                    mt-0.5
+                    text-2xl
+                    font-extrabold
+                    leading-none
+                    text-white
+                  "
+                >
+                  $10 OFF
+                </p>
+
+                <p
+                  className="
+                    mt-1
+                    text-xs
+                    text-slate-400
+                  "
+                >
+                  Your first Vertex service
+                </p>
+              </div>
+
+            </div>
+
+            {/* CLAIM BUTTON */}
+
+            <a
+              href="https://calendly.com/hello-vertexstudioworks/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="
+                relative
+                mt-4
+                flex
+                w-full
+                items-center
+                justify-center
+                gap-2
+                rounded-full
+                bg-gradient-to-r
+                from-blue-600
+                to-cyan-500
+                px-4
+                py-2.5
+                text-xs
+                font-bold
+                text-white
+                transition-all
+                duration-300
+                hover:-translate-y-0.5
+                hover:shadow-lg
+                hover:shadow-blue-500/30
+              "
+            >
+              Claim Now
+              <span aria-hidden="true">→</span>
+            </a>
+
+          </div>
+        </div>
+      )}
+
+      {/* =====================================================
           HERO CONTAINER
       ===================================================== */}
 
@@ -59,6 +309,7 @@ export default function Hero() {
           pt-24
         "
       >
+
         {/* =================================================
             LEFT SIDE
         ================================================= */}
@@ -139,6 +390,7 @@ export default function Hero() {
               gap-5
             "
           >
+
             {/* PRIMARY CTA */}
 
             <a
@@ -186,6 +438,7 @@ export default function Hero() {
             >
               Build With Vertex
             </a>
+
           </div>
 
           {/* =================================================
@@ -231,6 +484,7 @@ export default function Hero() {
           >
             ✉ hello.vertexstudioworks@gmail.com
           </a>
+
         </div>
 
         {/* =================================================
@@ -251,7 +505,7 @@ export default function Hero() {
             backdrop-blur-xl
             lg:block
           "
-          aria-hidden="true"
+          aria-label="Animated Vertex Business dashboard demo"
         >
 
           {/* =================================================
@@ -268,6 +522,7 @@ export default function Hero() {
               pb-4
             "
           >
+
             <div className="flex items-center gap-2">
               <span className="h-3 w-3 rounded-full bg-red-400" />
               <span className="h-3 w-3 rounded-full bg-yellow-400" />
@@ -285,6 +540,7 @@ export default function Hero() {
             >
               Vertex Business
             </span>
+
           </div>
 
           {/* =================================================
@@ -296,6 +552,7 @@ export default function Hero() {
             <div className="flex items-end justify-between">
 
               <div>
+
                 <p
                   className="
                     text-xs
@@ -317,10 +574,14 @@ export default function Hero() {
                 >
                   Your business. Connected.
                 </h2>
+
               </div>
 
               <div
                 className="
+                  flex
+                  items-center
+                  gap-2
                   rounded-full
                   border
                   border-emerald-400/20
@@ -332,10 +593,12 @@ export default function Hero() {
                   text-emerald-300
                 "
               >
+                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
                 Live Demo
               </div>
 
             </div>
+
           </div>
 
           {/* =================================================
@@ -355,6 +618,7 @@ export default function Hero() {
                 p-4
               "
             >
+
               <p
                 className="
                   text-[10px]
@@ -372,9 +636,11 @@ export default function Hero() {
                   text-xl
                   font-bold
                   text-white
+                  transition-all
+                  duration-700
                 "
               >
-                $48.2K
+                {dashboard.revenue}
               </p>
 
               <p
@@ -382,10 +648,13 @@ export default function Hero() {
                   mt-1
                   text-[10px]
                   text-emerald-400
+                  transition-all
+                  duration-700
                 "
               >
-                +18.4%
+                {dashboard.revenueGrowth}
               </p>
+
             </div>
 
             {/* CUSTOMERS */}
@@ -399,6 +668,7 @@ export default function Hero() {
                 p-4
               "
             >
+
               <p
                 className="
                   text-[10px]
@@ -416,9 +686,11 @@ export default function Hero() {
                   text-xl
                   font-bold
                   text-white
+                  transition-all
+                  duration-700
                 "
               >
-                2,841
+                {dashboard.customers}
               </p>
 
               <p
@@ -426,10 +698,13 @@ export default function Hero() {
                   mt-1
                   text-[10px]
                   text-cyan-400
+                  transition-all
+                  duration-700
                 "
               >
-                +12.7%
+                {dashboard.customerGrowth}
               </p>
+
             </div>
 
             {/* LEADS */}
@@ -443,6 +718,7 @@ export default function Hero() {
                 p-4
               "
             >
+
               <p
                 className="
                   text-[10px]
@@ -460,9 +736,11 @@ export default function Hero() {
                   text-xl
                   font-bold
                   text-white
+                  transition-all
+                  duration-700
                 "
               >
-                486
+                {dashboard.leads}
               </p>
 
               <p
@@ -474,6 +752,7 @@ export default function Hero() {
               >
                 This month
               </p>
+
             </div>
 
           </div>
@@ -496,6 +775,7 @@ export default function Hero() {
             <div className="flex items-center justify-between">
 
               <div>
+
                 <p
                   className="
                     text-sm
@@ -515,6 +795,7 @@ export default function Hero() {
                 >
                   Everything working together
                 </p>
+
               </div>
 
               <span
@@ -528,7 +809,7 @@ export default function Hero() {
 
             </div>
 
-            {/* FAKE CHART */}
+            {/* ANIMATED CHART */}
 
             <div
               className="
@@ -539,16 +820,28 @@ export default function Hero() {
                 gap-2
               "
             >
-              <div className="h-[28%] flex-1 rounded-t bg-blue-500/30" />
-              <div className="h-[42%] flex-1 rounded-t bg-blue-500/40" />
-              <div className="h-[35%] flex-1 rounded-t bg-blue-500/40" />
-              <div className="h-[55%] flex-1 rounded-t bg-blue-500/50" />
-              <div className="h-[48%] flex-1 rounded-t bg-blue-500/50" />
-              <div className="h-[72%] flex-1 rounded-t bg-blue-500/70" />
-              <div className="h-[64%] flex-1 rounded-t bg-cyan-400/70" />
-              <div className="h-[86%] flex-1 rounded-t bg-cyan-400" />
-              <div className="h-[78%] flex-1 rounded-t bg-cyan-400/90" />
-              <div className="h-[96%] flex-1 rounded-t bg-cyan-400" />
+
+              {dashboard.bars.map((height, index) => (
+                <div
+                  key={index}
+                  className={`
+                    flex-1
+                    rounded-t
+                    transition-all
+                    duration-[1800ms]
+                    ease-in-out
+                    ${
+                      index < 6
+                        ? "bg-blue-500/50"
+                        : "bg-cyan-400/80"
+                    }
+                  `}
+                  style={{
+                    height: `${height}%`,
+                  }}
+                />
+              ))}
+
             </div>
 
           </div>
@@ -568,8 +861,13 @@ export default function Hero() {
                 border-white/10
                 bg-white/5
                 p-4
+                transition
+                duration-500
+                hover:border-blue-500/30
+                hover:bg-white/[0.07]
               "
             >
+
               <p
                 className="
                   text-xs
@@ -590,6 +888,7 @@ export default function Hero() {
               >
                 Products · Orders · Inventory
               </p>
+
             </div>
 
             {/* GROWTH */}
@@ -601,8 +900,13 @@ export default function Hero() {
                 border-white/10
                 bg-white/5
                 p-4
+                transition
+                duration-500
+                hover:border-blue-500/30
+                hover:bg-white/[0.07]
               "
             >
+
               <p
                 className="
                   text-xs
@@ -623,6 +927,7 @@ export default function Hero() {
               >
                 Leads · Marketing · Analytics
               </p>
+
             </div>
 
             {/* CUSTOMER EXPERIENCE */}
@@ -634,8 +939,13 @@ export default function Hero() {
                 border-white/10
                 bg-white/5
                 p-4
+                transition
+                duration-500
+                hover:border-blue-500/30
+                hover:bg-white/[0.07]
               "
             >
+
               <p
                 className="
                   text-xs
@@ -656,6 +966,7 @@ export default function Hero() {
               >
                 CRM · Support · Accounts
               </p>
+
             </div>
 
             {/* AUTOMATION */}
@@ -667,8 +978,13 @@ export default function Hero() {
                 border-white/10
                 bg-white/5
                 p-4
+                transition
+                duration-500
+                hover:border-blue-500/30
+                hover:bg-white/[0.07]
               "
             >
+
               <p
                 className="
                   text-xs
@@ -689,6 +1005,7 @@ export default function Hero() {
               >
                 AI · Workflows · Integrations
               </p>
+
             </div>
 
           </div>
@@ -705,6 +1022,7 @@ export default function Hero() {
               justify-between
             "
           >
+
             <span
               className="
                 text-[10px]
@@ -726,10 +1044,13 @@ export default function Hero() {
             >
               Build · Manage · Grow
             </span>
+
           </div>
 
         </div>
+
       </div>
+
     </section>
   );
 }
