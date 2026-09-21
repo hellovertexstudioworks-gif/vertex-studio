@@ -35,53 +35,6 @@ const quickActions = [
   },
 ];
 
-function renderMessageText(text: string, sender: Message["sender"]) {
-  const urlPattern = /(https?:\/\/[^\s]+)/g;
-  const lines = text.split("\n");
-
-  return lines.map((line, lineIndex) => {
-    const parts = line.split(urlPattern);
-
-    return (
-      <span key={`line-${lineIndex}`}>
-        {parts.map((part, partIndex) => {
-          const isUrl = /^https?:\/\/\S+$/i.test(part);
-
-          if (!isUrl) {
-            return (
-              <span key={`text-${lineIndex}-${partIndex}`}>
-                {part}
-              </span>
-            );
-          }
-
-          const cleanUrl = part.replace(/[),.!?]+$/, "");
-          const trailing = part.slice(cleanUrl.length);
-
-          return (
-            <span key={`url-${lineIndex}-${partIndex}`}>
-              <a
-                href={cleanUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={
-                  sender === "bot"
-                    ? "font-medium text-cyan-300 underline decoration-cyan-400/50 underline-offset-2 transition hover:text-cyan-200"
-                    : "underline"
-                }
-              >
-                {cleanUrl}
-              </a>
-              {trailing}
-            </span>
-          );
-        })}
-        {lineIndex < lines.length - 1 && <br />}
-      </span>
-    );
-  });
-}
-
 const robotIcon = (
   <svg
     viewBox="0 0 64 64"
@@ -162,6 +115,55 @@ const robotIcon = (
     </defs>
   </svg>
 );
+
+
+function renderBotMessage(text: string) {
+  const pattern = /(\[[^\]]+\]\(https?:\/\/[^)]+\)|\*\*[^*]+\*\*|https?:\/\/[^\s]+)/g;
+  const parts = text.split(pattern);
+
+  return parts.map((part, index) => {
+    if (!part) return null;
+
+    const markdownLink = part.match(/^\[([^\]]+)\]\((https?:\/\/[^)]+)\)$/);
+    if (markdownLink) {
+      return (
+        <a
+          key={`link-${index}`}
+          href={markdownLink[2]}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-semibold text-cyan-300 underline decoration-cyan-400/50 underline-offset-2 transition hover:text-cyan-200"
+        >
+          {markdownLink[1]}
+        </a>
+      );
+    }
+
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return (
+        <strong key={`bold-${index}`} className="font-semibold text-white">
+          {part.slice(2, -2)}
+        </strong>
+      );
+    }
+
+    if (/^https?:\/\//.test(part)) {
+      return (
+        <a
+          key={`url-${index}`}
+          href={part}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200"
+        >
+          {part}
+        </a>
+      );
+    }
+
+    return <span key={`text-${index}`}>{part}</span>;
+  });
+}
 
 function getResponse(message: string) {
   const lower = message.toLowerCase().trim();
@@ -679,24 +681,41 @@ How can I help?`,
   );
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
-  const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({
-      behavior: "smooth",
+  const timer = window.setTimeout(() => {
+    setIsOpen(true);
+
+    setMessages((current) => {
+      if (
+        current.some(
+          (message) =>
+            message.id === 999999 &&
+            message.sender === "bot"
+        )
+      ) {
+        return current;
+      }
+
+      return [
+        ...current,
+        {
+          id: 999999,
+          sender: "bot",
+          text: `👋 Welcome to Vertex Studio Works!
+
+Are you looking for a website, online store, or business system?
+
+Tell me what you're trying to build and I'll help you figure out the right starting point.`,
+        },
+      ];
     });
-  }, [messages, isTyping]);
+  }, 2000);
 
-  // Keep the chat ready for the next message. After the assistant
-  // finishes replying, the input automatically gets focus again so
-  // visitors can continue typing without clicking the box.
-  useEffect(() => {
-    if (isOpen && !isTyping) {
-      window.requestAnimationFrame(() => {
-        inputRef.current?.focus();
-      });
-    }
-  }, [isOpen, isTyping, messages.length]);
+  return () => {
+    window.clearTimeout(timer);
+  };
+}, []);
 
   const sendMessage = (message?: string) => {
     const trimmedMessage = (message ?? input).trim();
@@ -815,7 +834,9 @@ How can I help?`,
                     }
                   `}
                 >
-                  {renderMessageText(message.text, message.sender)}
+                  {message.sender === "bot"
+                    ? renderBotMessage(message.text)
+                    : message.text}
                 </div>
               </div>
             ))}
@@ -865,6 +886,16 @@ How can I help?`,
                   {action.label}
                 </button>
               ))}
+
+              <a
+                href={calendlyLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="col-span-2 flex items-center justify-center gap-2 rounded-xl border border-cyan-400/30 bg-cyan-400/10 px-3 py-2.5 text-xs font-semibold text-cyan-200 transition hover:border-cyan-300/50 hover:bg-cyan-400/15 hover:text-white"
+              >
+                <span>Book a Call with Vertex</span>
+                <span aria-hidden="true">→</span>
+              </a>
             </div>
           </div>
 
@@ -875,7 +906,6 @@ How can I help?`,
               className="flex items-center gap-2 rounded-2xl border border-cyan-400/40 bg-[#0a1427] p-1.5 shadow-[0_0_30px_rgba(34,211,238,0.08)] transition focus-within:border-cyan-400/70"
             >
               <input
-                ref={inputRef}
                 type="text"
                 value={input}
                 onChange={(event) => setInput(event.target.value)}
@@ -930,7 +960,7 @@ How can I help?`,
               rel="noopener noreferrer"
               className="flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 px-4 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/20"
             >
-              Talk to Vertex
+              Book a Call with Vertex
               <span aria-hidden="true">→</span>
             </a>
           </div>
