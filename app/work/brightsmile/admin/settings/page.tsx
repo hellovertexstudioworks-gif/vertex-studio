@@ -137,8 +137,8 @@ export default function SettingsPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-slate-50">
-      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
+    <main className="w-full bg-slate-50 px-5 py-6 sm:px-8 sm:py-8">
+      <div className="w-full">
         {/* Demo notice */}
         <div className="mb-6 flex flex-col gap-3 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-start gap-3">

@@ -20,9 +20,6 @@ import {
   X,
 } from "lucide-react";
 
-import AdminHeader from "../components/AdminHeader";
-import AdminSidebar from "../components/AdminSidebar";
-
 type InvoiceStatus = "Paid" | "Pending" | "Partial";
 
 type Invoice = {
@@ -226,13 +223,7 @@ export default function BillingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900">
-      <AdminSidebar />
-
-      <div className="lg:pl-64">
-        <AdminHeader />
-
-        <main className="px-5 py-6 sm:px-8 sm:py-8">
+    <main className="w-full px-5 py-6 sm:px-8 sm:py-8 xl:px-10">
           <div className="flex flex-col gap-5 xl:flex-row xl:items-end xl:justify-between">
             <div>
               <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1.5 text-[10px] font-black uppercase tracking-wider text-emerald-600">
@@ -807,8 +798,6 @@ export default function BillingPage() {
               </p>
             </div>
           </section>
-        </main>
-      </div>
-    </div>
+    </main>
   );
 }
