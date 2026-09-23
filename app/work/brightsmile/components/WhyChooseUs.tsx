@@ -9,6 +9,7 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import Link from "next/link";
+import SectionBubbles from "./SectionBubbles";
 
 const reasons = [
   {
@@ -41,10 +42,11 @@ export default function WhyChooseUs() {
   return (
     <section
       id="why-choose-us"
-      className="bg-white py-24 sm:py-28"
+      className="relative overflow-hidden bg-white py-24 sm:py-28"
     >
-      <div className="mx-auto max-w-7xl px-6">
+      <SectionBubbles />
 
+      <div className="relative z-10 mx-auto max-w-7xl px-6">
         {/* Heading */}
         <motion.div
           initial={{
@@ -84,7 +86,6 @@ export default function WhyChooseUs() {
 
         {/* Reasons */}
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4">
-
           {reasons.map((reason, index) => {
             const Icon = reason.icon;
 
@@ -125,21 +126,22 @@ export default function WhyChooseUs() {
                   sm:p-8
                 "
               >
-
                 {/* Icon */}
-                <div className="
-                  flex
-                  h-14
-                  w-14
-                  items-center
-                  justify-center
-                  rounded-2xl
-                  bg-blue-50
-                  transition-all
-                  duration-300
-                  group-hover:scale-105
-                  group-hover:bg-blue-600
-                ">
+                <div
+                  className="
+                    flex
+                    h-14
+                    w-14
+                    items-center
+                    justify-center
+                    rounded-2xl
+                    bg-blue-50
+                    transition-all
+                    duration-300
+                    group-hover:scale-105
+                    group-hover:bg-blue-600
+                  "
+                >
                   <Icon
                     size={26}
                     strokeWidth={2}
@@ -153,54 +155,60 @@ export default function WhyChooseUs() {
                 </div>
 
                 {/* Number */}
-                <p className="
-                  mt-7
-                  text-xs
-                  font-bold
-                  uppercase
-                  tracking-[0.18em]
-                  text-slate-300
-                ">
+                <p
+                  className="
+                    mt-7
+                    text-xs
+                    font-bold
+                    uppercase
+                    tracking-[0.18em]
+                    text-slate-300
+                  "
+                >
                   0{index + 1}
                 </p>
 
                 {/* Title */}
-                <h3 className="
-                  mt-2
-                  text-xl
-                  font-black
-                  tracking-tight
-                  text-slate-900
-                ">
+                <h3
+                  className="
+                    mt-2
+                    text-xl
+                    font-black
+                    tracking-tight
+                    text-slate-900
+                  "
+                >
                   {reason.title}
                 </h3>
 
                 {/* Description */}
-                <p className="
-                  mt-4
-                  text-sm
-                  leading-7
-                  text-slate-500
-                ">
+                <p
+                  className="
+                    mt-4
+                    text-sm
+                    leading-7
+                    text-slate-500
+                  "
+                >
                   {reason.description}
                 </p>
 
                 {/* Accent */}
-                <div className="
-                  mt-7
-                  h-1
-                  w-8
-                  rounded-full
-                  bg-blue-600
-                  transition-all
-                  duration-300
-                  group-hover:w-14
-                " />
-
+                <div
+                  className="
+                    mt-7
+                    h-1
+                    w-8
+                    rounded-full
+                    bg-blue-600
+                    transition-all
+                    duration-300
+                    group-hover:w-14
+                  "
+                />
               </motion.article>
             );
           })}
-
         </div>
 
         {/* Bottom CTA */}
@@ -252,7 +260,6 @@ export default function WhyChooseUs() {
             />
           </Link>
         </motion.div>
-
       </div>
     </section>
   );

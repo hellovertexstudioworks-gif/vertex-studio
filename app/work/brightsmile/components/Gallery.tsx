@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import SectionBubbles from "./SectionBubbles";
 
 const galleryImages = [
   {
@@ -35,10 +36,11 @@ export default function Gallery() {
   return (
     <section
       id="gallery"
-      className="bg-slate-50 py-24 sm:py-28"
+      className="relative overflow-hidden bg-slate-50 py-24 sm:py-28"
     >
-      <div className="mx-auto max-w-7xl px-6">
+      <SectionBubbles />
 
+      <div className="relative z-10 mx-auto max-w-7xl px-6">
         {/* Heading */}
         <motion.div
           initial={{
@@ -76,17 +78,18 @@ export default function Gallery() {
         </motion.div>
 
         {/* Gallery */}
-        <div className="
-          mt-14
-          grid
-          auto-rows-[220px]
-          gap-4
-          sm:grid-cols-2
-          sm:gap-5
-          lg:mt-16
-          lg:grid-cols-3
-        ">
-
+        <div
+          className="
+            mt-14
+            grid
+            auto-rows-[220px]
+            gap-4
+            sm:grid-cols-2
+            sm:gap-5
+            lg:mt-16
+            lg:grid-cols-3
+          "
+        >
           {galleryImages.map((image, index) => (
             <motion.div
               key={image.src}
@@ -124,7 +127,6 @@ export default function Gallery() {
                 }
               `}
             >
-
               {/* Image */}
               <Image
                 src={image.src}
@@ -145,92 +147,100 @@ export default function Gallery() {
               />
 
               {/* Dark Overlay */}
-              <div className="
-                absolute
-                inset-0
-                bg-gradient-to-t
-                from-slate-950/60
-                via-slate-950/5
-                to-transparent
-                opacity-60
-                transition-opacity
-                duration-300
-                group-hover:opacity-100
-              " />
+              <div
+                className="
+                  absolute
+                  inset-0
+                  bg-gradient-to-t
+                  from-slate-950/60
+                  via-slate-950/5
+                  to-transparent
+                  opacity-60
+                  transition-opacity
+                  duration-300
+                  group-hover:opacity-100
+                "
+              />
 
               {/* Number */}
-              <div className="
-                absolute
-                left-5
-                top-5
-                flex
-                h-10
-                w-10
-                items-center
-                justify-center
-                rounded-xl
-                border
-                border-white/30
-                bg-white/90
-                text-xs
-                font-bold
-                text-slate-900
-                shadow-lg
-                backdrop-blur-xl
-              ">
+              <div
+                className="
+                  absolute
+                  left-5
+                  top-5
+                  flex
+                  h-10
+                  w-10
+                  items-center
+                  justify-center
+                  rounded-xl
+                  border
+                  border-white/30
+                  bg-white/90
+                  text-xs
+                  font-bold
+                  text-slate-900
+                  shadow-lg
+                  backdrop-blur-xl
+                "
+              >
                 {String(index + 1).padStart(2, "0")}
               </div>
 
               {/* Hover Action */}
-              <div className="
-                absolute
-                bottom-5
-                right-5
-                flex
-                h-11
-                w-11
-                items-center
-                justify-center
-                rounded-full
-                bg-white
-                text-slate-900
-                opacity-0
-                shadow-xl
-                transition-all
-                duration-300
-                group-hover:opacity-100
-                group-hover:translate-y-0
-                translate-y-2
-              ">
+              <div
+                className="
+                  absolute
+                  bottom-5
+                  right-5
+                  flex
+                  h-11
+                  w-11
+                  translate-y-2
+                  items-center
+                  justify-center
+                  rounded-full
+                  bg-white
+                  text-slate-900
+                  opacity-0
+                  shadow-xl
+                  transition-all
+                  duration-300
+                  group-hover:translate-y-0
+                  group-hover:opacity-100
+                "
+              >
                 <ArrowUpRight size={18} />
               </div>
 
               {/* Image Label */}
-              <div className="
-                absolute
-                bottom-5
-                left-5
-                max-w-[70%]
-                translate-y-2
-                opacity-0
-                transition-all
-                duration-300
-                group-hover:translate-y-0
-                group-hover:opacity-100
-              ">
-                <p className="
-                  text-sm
-                  font-semibold
-                  text-white
-                  drop-shadow-lg
-                ">
+              <div
+                className="
+                  absolute
+                  bottom-5
+                  left-5
+                  max-w-[70%]
+                  translate-y-2
+                  opacity-0
+                  transition-all
+                  duration-300
+                  group-hover:translate-y-0
+                  group-hover:opacity-100
+                "
+              >
+                <p
+                  className="
+                    text-sm
+                    font-semibold
+                    text-white
+                    drop-shadow-lg
+                  "
+                >
                   {image.alt}
                 </p>
               </div>
-
             </motion.div>
           ))}
-
         </div>
 
         {/* Bottom Note */}
@@ -255,7 +265,6 @@ export default function Gallery() {
             modern, and welcoming.
           </p>
         </motion.div>
-
       </div>
     </section>
   );

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import FloatingBubbles from "./components/FloatingBubbles";
 
 import Hero from "./components/hero";
 import Trust from "./components/Trust";
@@ -14,16 +15,10 @@ import Gallery from "./components/Gallery";
 import CTA from "./components/CTA";
 import Contact from "./components/Contact";
 
-/* =====================================================
-   BRIGHTSMILE SEO
-===================================================== */
-
 export const metadata: Metadata = {
   title: "BrightSmile Dental Website Design",
-
   description:
     "A modern dental website designed by Vertex Studio Works for BrightSmile Dental. The website focuses on patient trust, dental services, professional presentation, and convenient appointment booking.",
-
   keywords: [
     "dental website design",
     "dentist website design",
@@ -36,84 +31,54 @@ export const metadata: Metadata = {
     "Vertex Studio Works",
     "custom healthcare website",
   ],
-
   alternates: {
-    canonical:
-      "https://www.vertexstudioworks.com/work/brightsmile",
+    canonical: "https://www.vertexstudioworks.com/work/brightsmile",
   },
-
   openGraph: {
-    title:
-      "BrightSmile Dental Website | Vertex Studio Works",
-
+    title: "BrightSmile Dental Website | Vertex Studio Works",
     description:
       "A modern dental website designed to build patient trust, showcase services, and make appointments easier.",
-
-    url:
-      "https://www.vertexstudioworks.com/work/brightsmile",
-
+    url: "https://www.vertexstudioworks.com/work/brightsmile",
     siteName: "Vertex Studio Works",
-
     locale: "en_US",
-
     type: "website",
-
     images: [
       {
         url: "/projects/clinic.png",
         width: 1200,
         height: 630,
-        alt:
-          "BrightSmile Dental Website designed by Vertex Studio Works",
+        alt: "BrightSmile Dental Website designed by Vertex Studio Works",
       },
     ],
   },
-
   twitter: {
     card: "summary_large_image",
-
-    title:
-      "BrightSmile Dental Website | Vertex Studio Works",
-
+    title: "BrightSmile Dental Website | Vertex Studio Works",
     description:
       "Modern dental website design focused on trust, services, and appointment booking.",
-
     images: ["/projects/clinic.png"],
   },
 };
 
-/* =====================================================
-   BRIGHTSMILE PAGE
-===================================================== */
-
 export default function BrightSmilePage() {
   return (
-    <main className="min-h-screen overflow-x-hidden bg-white">
+    <main className="relative min-h-screen overflow-x-hidden bg-white">
+      <FloatingBubbles />
 
-      <Navbar />
-
-      <Hero />
-
-      <Trust />
-
-      <Services />
-
-      <About />
-
-      <WhyChooseUs />
-
-      <Doctors />
-
-      <Testimonials />
-
-      <Gallery />
-
-      <CTA />
-
-      <Contact />
-
-      <Footer />
-
+      <div className="relative z-10">
+        <Navbar />
+        <Hero />
+        <Trust />
+        <Services />
+        <About />
+        <WhyChooseUs />
+        <Doctors />
+        <Testimonials />
+        <Gallery />
+        <CTA />
+        <Contact />
+        <Footer />
+      </div>
     </main>
   );
 }
