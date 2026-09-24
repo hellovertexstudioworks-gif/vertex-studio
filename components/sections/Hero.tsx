@@ -4,47 +4,47 @@ import { useEffect, useState } from "react";
 
 const dashboardStates = [
   {
-    revenue: "$48.2K",
-    revenueGrowth: "+18.4%",
-    customers: "2,841",
-    customerGrowth: "+12.7%",
-    leads: "486",
+    revenue: "CRM",
+    revenueGrowth: "Tracking",
+    customers: "Analytics",
+    customerGrowth: "Connected",
+    leads: "Leads",
     bars: [28, 42, 35, 55, 48, 72, 64, 86, 78, 96],
   },
 
   {
-    revenue: "$48.7K",
-    revenueGrowth: "+18.9%",
-    customers: "2,864",
-    customerGrowth: "+13.1%",
-    leads: "492",
+    revenue: "CRM",
+    revenueGrowth: "Tracking",
+    customers: "Analytics",
+    customerGrowth: "Connected",
+    leads: "Leads",
     bars: [34, 48, 42, 61, 54, 77, 69, 88, 82, 98],
   },
 
   {
-    revenue: "$49.1K",
-    revenueGrowth: "+19.3%",
-    customers: "2,891",
-    customerGrowth: "+13.5%",
-    leads: "501",
+    revenue: "CRM",
+    revenueGrowth: "Tracking",
+    customers: "Analytics",
+    customerGrowth: "Connected",
+    leads: "Leads",
     bars: [30, 53, 46, 66, 58, 81, 73, 91, 86, 100],
   },
 
   {
-    revenue: "$49.8K",
-    revenueGrowth: "+20.1%",
-    customers: "2,917",
-    customerGrowth: "+14.2%",
-    leads: "514",
+    revenue: "CRM",
+    revenueGrowth: "Tracking",
+    customers: "Analytics",
+    customerGrowth: "Connected",
+    leads: "Leads",
     bars: [39, 57, 51, 70, 63, 85, 77, 94, 90, 100],
   },
 
   {
-    revenue: "$50.3K",
-    revenueGrowth: "+20.7%",
-    customers: "2,944",
-    customerGrowth: "+14.8%",
-    leads: "526",
+    revenue: "CRM",
+    revenueGrowth: "Tracking",
+    customers: "Analytics",
+    customerGrowth: "Connected",
+    leads: "Leads",
     bars: [35, 61, 56, 74, 67, 89, 81, 96, 93, 100],
   },
 ];
@@ -413,7 +413,7 @@ export default function Hero() {
                 hover:shadow-blue-500/30
               "
             >
-              Explore Our Work
+              See Our Work
             </a>
 
             {/* SECONDARY CTA */}
@@ -436,7 +436,7 @@ export default function Hero() {
                 hover:text-black
               "
             >
-              Build With Vertex
+              Start Your Project
             </a>
 
           </div>
@@ -594,7 +594,7 @@ export default function Hero() {
                 "
               >
                 <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
-                Live Demo
+                Illustrative Demo
               </div>
 
             </div>
@@ -627,7 +627,7 @@ export default function Hero() {
                   text-slate-500
                 "
               >
-                Revenue
+                Platform
               </p>
 
               <p
@@ -677,7 +677,7 @@ export default function Hero() {
                   text-slate-500
                 "
               >
-                Customers
+                Systems
               </p>
 
               <p

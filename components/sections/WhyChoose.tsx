@@ -43,7 +43,7 @@ const reasons = [
   {
     title: "One Digital Partner",
     description:
-      "Instead of piecing together disconnected solutions, Vertex can grow with your business across websites, e-commerce, systems, integrations, and digital experiences.",
+      "As your business grows, Vertex can support the next stage with websites, e-commerce, integrations, automation, and digital experiences.",
     icon: "◈",
   },
 ];
@@ -65,9 +65,9 @@ export default function WhyChoose() {
           title="Built With Your"
           highlight="Business In Mind"
           description="
-            We combine strategy, design, technology, and long-term
-            thinking to build digital experiences that can evolve
-            as your business grows.
+            We combine strategy, design, technology, and scalable
+            digital systems to create experiences that support your
+            business today and evolve with it over time.
           "
         />
 

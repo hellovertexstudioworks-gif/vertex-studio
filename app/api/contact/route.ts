@@ -36,8 +36,9 @@ export async function POST(request: Request) {
      */
     console.log("SAVING LEAD TO SUPABASE...");
 
-    const { data: leadData, error: leadError } =
-      await supabase.from("leads").insert({
+    const { error: leadError } = await supabase
+      .from("leads")
+      .insert({
         name,
         email,
         business,
@@ -45,10 +46,9 @@ export async function POST(request: Request) {
         message,
         status: "New",
         source: "Website",
-      }).select().single();
+      });
 
     console.log("SUPABASE LEAD RESPONSE:", {
-      data: leadData,
       error: leadError,
     });
 
@@ -71,18 +71,18 @@ export async function POST(request: Request) {
      */
     console.log("SAVING MESSAGE TO SUPABASE...");
 
-    const { data: messageData, error: messageError } =
-      await supabase.from("messages").insert({
+    const { error: messageError } = await supabase
+      .from("messages")
+      .insert({
         name,
         email,
         business,
         subject: "New Website Inquiry",
         message,
         status: "New",
-      }).select().single();
+      });
 
     console.log("SUPABASE MESSAGE RESPONSE:", {
-      data: messageData,
       error: messageError,
     });
 
@@ -215,8 +215,7 @@ export async function POST(request: Request) {
      */
     return NextResponse.json({
       success: true,
-      leadId: leadData?.id,
-      messageId: messageData?.id,
+      message: "Inquiry submitted successfully.",
       emailId: emailData?.id,
     });
 

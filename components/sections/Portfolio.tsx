@@ -18,7 +18,7 @@ const projects = [
 
     link: "/work/lunabistro",
 
-    type: "live",
+    type: "demo",
 
   },
 
@@ -34,12 +34,12 @@ const projects = [
 
     image: "/projects/clinic.png",
 
-    tags: ["Healthcare", "Booking", "Trust"],
+    tags: ["Healthcare", "Booking", "CRM", "Business Systems"],
 
     link: "/work/brightsmile",
     crmLink: "/work/brightsmile/admin/dashboard",
 
-    type: "live",
+    type: "demo",
 
   },
 
@@ -59,7 +59,7 @@ const projects = [
 
     link: "/work/forgebuild",
 
-    type: "live",
+    type: "demo",
 
   },
 
@@ -79,7 +79,7 @@ const projects = [
 
     link: "/work/novahome",
 
-    type: "live",
+    type: "demo",
 
   },
 
@@ -99,7 +99,7 @@ const projects = [
 
     link: "/work/horizon-realty",
 
-    type: "live",
+    type: "demo",
 
   },
 
@@ -119,7 +119,7 @@ const projects = [
 
     link: "/work/elevate-coaching",
 
-    type: "live",
+    type: "demo",
 
   },
 
@@ -595,7 +595,7 @@ export default function Portfolio() {
 
                 <div className="absolute left-5 top-5">
 
-                  {project.type === "live" ? (
+                  {project.type === "demo" ? (
 
                     <span
 
@@ -637,7 +637,7 @@ export default function Portfolio() {
 
                       <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
 
-                      Live Project
+                      Live Demo
 
                     </span>
 
@@ -825,7 +825,7 @@ export default function Portfolio() {
 
 
 
-                {project.type === "live" && project.link && (
+                {project.type === "demo" && project.link && (
                   <div className="mt-8 flex flex-wrap items-center gap-4">
                     <a
                       href={project.link}
@@ -841,7 +841,7 @@ export default function Portfolio() {
                         hover:text-blue-300
                       "
                     >
-                      View Website
+                      Explore Demo
                       <span>→</span>
                     </a>
 
@@ -900,7 +900,7 @@ export default function Portfolio() {
 
                   >
 
-                    View Concept
+                    Concept Preview
 
                     <span>→</span>
 

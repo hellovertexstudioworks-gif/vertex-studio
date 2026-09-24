@@ -7,7 +7,7 @@ const services = [
     icon: "✦",
     title: "Websites & Digital Experiences",
     description:
-      "Modern digital experiences designed around your brand, your audience, and the goals of your business.",
+      "Custom digital experiences designed around your brand, your audience, and the goals that matter most to your business.",
     features: [
       "Custom Website Design",
       "UI/UX & Responsive Development",
@@ -21,7 +21,7 @@ const services = [
     icon: "◈",
     title: "E-Commerce & Online Platforms",
     description:
-      "Powerful online experiences that help businesses showcase products, accept customers, and sell online.",
+      "Online experiences built to help businesses showcase products, serve customers, and create a smoother path from discovery to purchase.",
     features: [
       "E-Commerce Stores",
       "Product Catalogs & Search",
@@ -35,7 +35,7 @@ const services = [
     icon: "▦",
     title: "Business Systems",
     description:
-      "Custom digital tools that connect the important parts of your business and make everyday operations easier.",
+      "Custom digital tools that connect important parts of your business and make everyday operations easier to manage.",
     features: [
       "Business Dashboards",
       "CRM & Customer Portals",
@@ -49,7 +49,7 @@ const services = [
     icon: "↗",
     title: "Growth & Automation",
     description:
-      "Technology that helps businesses understand their customers, improve their processes, and create new opportunities.",
+      "Connected technology that helps businesses understand activity, improve workflows, manage leads, and create new opportunities.",
     features: [
       "Analytics & Reporting",
       "Lead & Marketing Systems",
@@ -67,7 +67,6 @@ export default function Services() {
       aria-labelledby="services-heading"
     >
       <Container>
-
         {/* =====================================================
             SECTION INTRO
         ===================================================== */}
@@ -95,7 +94,6 @@ export default function Services() {
             md:grid-cols-2
           "
         >
-
           {services.map((service) => (
             <div
               key={service.title}
@@ -115,7 +113,6 @@ export default function Services() {
                 hover:bg-white/[0.06]
               "
             >
-
               {/* =================================================
                   BACKGROUND GLOW
               ================================================= */}
@@ -143,7 +140,6 @@ export default function Services() {
               ================================================= */}
 
               <div className="relative flex items-start justify-between">
-
                 <div
                   className="
                     flex
@@ -172,7 +168,6 @@ export default function Services() {
                 >
                   {service.number}
                 </span>
-
               </div>
 
               {/* =================================================
@@ -253,10 +248,8 @@ export default function Services() {
                   </li>
                 ))}
               </ul>
-
             </div>
           ))}
-
         </div>
 
         {/* =====================================================
@@ -298,7 +291,6 @@ export default function Services() {
             Build what you need tomorrow.
           </p>
         </div>
-
       </Container>
     </section>
   );

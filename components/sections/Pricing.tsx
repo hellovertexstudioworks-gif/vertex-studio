@@ -8,10 +8,10 @@ const calendlyLink =
 const packages = [
   {
     name: "Launch",
-    price: "$25",
-    billing: "ONE-TIME PAYMENT",
+    price: "$39",
+    billing: "ONE-TIME PROJECT",
     description:
-      "Perfect for startups, entrepreneurs, and small businesses that need a professional website to establish credibility and start building opportunities online.",
+      "For startups, entrepreneurs, and small businesses that need a professional website to establish credibility and start building opportunities online.",
     button: "Start Your Project",
     link: calendlyLink,
     popular: false,
@@ -32,10 +32,10 @@ const packages = [
 
   {
     name: "Scale",
-    price: "$50",
-    billing: "ONE-TIME PAYMENT",
+    price: "$79",
+    billing: "ONE-TIME PROJECT",
     description:
-      "Built for growing businesses that want more than a website — combining growth tools, lead generation, customer engagement, and e-commerce capabilities.",
+      "For growing businesses that want more than a website — combining growth tools, lead generation, customer engagement, and e-commerce capabilities.",
     button: "Build With Vertex",
     link: calendlyLink,
     popular: true,
@@ -59,7 +59,6 @@ const packages = [
       "Chatbot Integration",
       "E-Commerce Solutions",
       "E-Commerce Pricing Based on Requirements",
-      "Ongoing Support",
       "4 Months Complimentary Vertex Care",
     ],
   },
@@ -161,9 +160,9 @@ export default function Pricing() {
           title="Websites Built"
           highlight="For Growth"
           description="
-            We don't just build your website. We help you turn it into
-            a growth system designed to attract visitors, capture leads,
-            and create opportunities for your business.
+            Start with the digital foundation your business needs today,
+            then add the systems, growth tools, and support you need as
+            your business evolves.
           "
         />
 
@@ -194,7 +193,7 @@ export default function Pricing() {
               text-blue-400
             "
           >
-            Simple, One-Time Website Pricing
+            Simple, One-Time Project Pricing
           </p>
 
           <p
@@ -205,9 +204,9 @@ export default function Pricing() {
               text-slate-400
             "
           >
-            No monthly website subscription required. Pay once for
-            your website project. Optional Vertex Care is available
-            separately for ongoing maintenance and support.
+            No monthly website subscription required. Pay once for your
+            website project. Optional Vertex Care is available separately
+            for ongoing maintenance and support.
           </p>
         </div>
 
@@ -240,10 +239,6 @@ export default function Pricing() {
                 }
               `}
             >
-              {/* =================================================
-                  RECOMMENDED BADGE
-              ================================================= */}
-
               {pkg.popular && (
                 <div
                   className="
@@ -261,13 +256,9 @@ export default function Pricing() {
                     text-white
                   "
                 >
-                  Recommended
+                  Most Popular
                 </div>
               )}
-
-              {/* =================================================
-                  PACKAGE NAME
-              ================================================= */}
 
               <h3
                 className="
@@ -279,10 +270,6 @@ export default function Pricing() {
                 {pkg.name}
               </h3>
 
-              {/* =================================================
-                  PRICE
-              ================================================= */}
-
               <p
                 className="
                   mt-5
@@ -293,10 +280,6 @@ export default function Pricing() {
               >
                 {pkg.price}
               </p>
-
-              {/* =================================================
-                  BILLING TYPE
-              ================================================= */}
 
               <div
                 className="
@@ -318,10 +301,6 @@ export default function Pricing() {
                 {pkg.billing}
               </div>
 
-              {/* =================================================
-                  DESCRIPTION
-              ================================================= */}
-
               <p
                 className="
                   mt-6
@@ -331,10 +310,6 @@ export default function Pricing() {
               >
                 {pkg.description}
               </p>
-
-              {/* =================================================
-                  FEATURES
-              ================================================= */}
 
               <ul
                 className="
@@ -352,9 +327,7 @@ export default function Pricing() {
                     "
                   >
                     <span
-                      className="
-                        text-blue-400
-                      "
+                      className="text-blue-400"
                       aria-hidden="true"
                     >
                       ✓
@@ -365,15 +338,7 @@ export default function Pricing() {
                 ))}
               </ul>
 
-              {/* =================================================
-                  CTA
-              ================================================= */}
-
-              <div
-                className="
-                  mt-10
-                "
-              >
+              <div className="mt-10">
                 <Button
                   href={pkg.link}
                   target="_blank"
@@ -416,11 +381,7 @@ export default function Pricing() {
             VERTEX CARE
         ===================================================== */}
 
-        <div
-          className="
-            mt-20
-          "
-        >
+        <div className="mt-20">
           <SectionTitle
             badge="VERTEX CARE"
             title="Keep Your Website"
@@ -609,7 +570,7 @@ export default function Pricing() {
               text-white
             "
           >
-            🚀 More Than Just A Website
+            More Than Just A Website
           </h3>
 
           <p
@@ -622,10 +583,10 @@ export default function Pricing() {
               text-slate-300
             "
           >
-            Your website should do more than look good. We can help
-            structure your website to capture leads, track opportunities,
-            improve conversions, support your outreach efforts, and connect
-            customers with your business through tools like chatbots.
+            Your website can become part of a larger growth system. We can
+            help structure your site to capture leads, organize opportunities,
+            support outreach, improve customer experiences, and connect the
+            tools your business already uses.
           </p>
 
           <div
@@ -638,8 +599,6 @@ export default function Pricing() {
               md:grid-cols-3
             "
           >
-            {/* CAPTURE */}
-
             <div
               className="
                 rounded-2xl
@@ -669,8 +628,6 @@ export default function Pricing() {
                 forms, calls-to-action, chatbots, and lead capture systems.
               </p>
             </div>
-
-            {/* TRACK */}
 
             <div
               className="
@@ -702,8 +659,6 @@ export default function Pricing() {
               </p>
             </div>
 
-            {/* REACH */}
-
             <div
               className="
                 rounded-2xl
@@ -730,7 +685,7 @@ export default function Pricing() {
                 "
               >
                 Build a structured outreach process with prospect lists,
-                cold-email templates, and follow-up workflows.
+                email templates, and follow-up workflows.
               </p>
             </div>
           </div>
@@ -758,7 +713,7 @@ export default function Pricing() {
               text-white
             "
           >
-            🚀 Startup Launch Program
+            Startup Launch Program
           </h3>
 
           <p

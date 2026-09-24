@@ -6,13 +6,11 @@ export default function About() {
       aria-labelledby="about-heading"
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-20 px-8">
-
         {/* =====================================================
             LEFT CONTENT
         ===================================================== */}
 
         <div className="w-full lg:w-1/2">
-
           <p className="mb-4 text-sm uppercase tracking-[0.4em] text-blue-400">
             About Vertex Studio Works
           </p>
@@ -45,8 +43,7 @@ export default function About() {
           ================================================= */}
 
           <div className="mt-10 grid grid-cols-2 gap-x-8 gap-y-10">
-
-            {/* MULTIPLE INDUSTRIES */}
+            {/* DEMO EXPERIENCES */}
 
             <div>
               <h3 className="text-4xl font-bold text-blue-500">
@@ -54,7 +51,7 @@ export default function About() {
               </h3>
 
               <p className="mt-2 text-slate-400">
-                Industries & Experiences
+                Demo Experiences
               </p>
             </div>
 
@@ -62,11 +59,11 @@ export default function About() {
 
             <div>
               <h3 className="text-4xl font-bold text-blue-500">
-                100%
+                Custom
               </h3>
 
               <p className="mt-2 text-slate-400">
-                Custom-Built Solutions
+                Built Around Your Business
               </p>
             </div>
 
@@ -86,14 +83,13 @@ export default function About() {
 
             <div>
               <h3 className="text-4xl font-bold text-blue-500">
-                Built
+                Scalable
               </h3>
 
               <p className="mt-2 text-slate-400">
-                For Long-Term Growth
+                Built For Growth
               </p>
             </div>
-
           </div>
         </div>
 
@@ -120,7 +116,6 @@ export default function About() {
           "
           aria-hidden="true"
         >
-
           <div
             className="
               rounded-2xl
@@ -131,13 +126,11 @@ export default function About() {
               shadow-2xl
             "
           >
-
             {/* =================================================
                 BROWSER DOTS
             ================================================= */}
 
             <div className="flex items-center justify-between">
-
               <div className="flex gap-2">
                 <span className="h-3 w-3 rounded-full bg-red-400" />
                 <span className="h-3 w-3 rounded-full bg-yellow-400" />
@@ -147,7 +140,6 @@ export default function About() {
               <span className="text-[10px] uppercase tracking-[0.2em] text-slate-600">
                 Vertex Studio Works
               </span>
-
             </div>
 
             {/* =================================================
@@ -155,7 +147,6 @@ export default function About() {
             ================================================= */}
 
             <div className="mt-8">
-
               <p className="text-sm uppercase tracking-widest text-blue-400">
                 One Digital Partner
               </p>
@@ -179,7 +170,6 @@ export default function About() {
               ================================================= */}
 
               <div className="mt-8 grid grid-cols-2 gap-3">
-
                 {/* WEBSITE */}
 
                 <div
@@ -259,7 +249,6 @@ export default function About() {
                     Analytics · Marketing · Automation
                   </p>
                 </div>
-
               </div>
 
               {/* =================================================
@@ -286,11 +275,9 @@ export default function About() {
                   Start simple. Scale when you&apos;re ready.
                 </p>
               </div>
-
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );

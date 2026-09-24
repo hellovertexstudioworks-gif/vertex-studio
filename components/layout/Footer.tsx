@@ -288,7 +288,7 @@ export default function Footer() {
             mt-14
             flex
             flex-col
-            gap-4
+            gap-5
             border-t
             border-white/10
             pt-8
@@ -299,13 +299,43 @@ export default function Footer() {
             md:justify-between
           "
         >
+
+          {/* COPYRIGHT */}
+
           <p>
             © {new Date().getFullYear()} Vertex Studio. All rights reserved.
           </p>
 
+          {/* TAGLINE */}
+
           <p>
             Websites • Systems • Growth
           </p>
+
+          {/* LEGAL LINKS */}
+
+          <div className="flex items-center gap-5">
+            <Link
+              href="/privacy"
+              className="
+                transition
+                hover:text-blue-400
+              "
+            >
+              Privacy Policy
+            </Link>
+
+            <Link
+              href="/terms"
+              className="
+                transition
+                hover:text-blue-400
+              "
+            >
+              Terms of Service
+            </Link>
+          </div>
+
         </div>
 
       </div>
