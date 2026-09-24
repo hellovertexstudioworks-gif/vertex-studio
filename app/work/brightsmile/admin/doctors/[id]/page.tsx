@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { use, useMemo, useState } from "react";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -58,6 +58,7 @@ const doctors: Record<string, Doctor> = {
     phone: "(555) 010-1001",
     bio: "Demo profile for the BrightSmile portfolio. Dr. Carter focuses on preventive, general, and cosmetic dental care.",
   },
+
   "2": {
     id: "2",
     name: "Dr. Michael Anderson",
@@ -71,6 +72,7 @@ const doctors: Record<string, Doctor> = {
     phone: "(555) 010-1002",
     bio: "Demo profile for the BrightSmile portfolio. Dr. Anderson provides orthodontic consultations and restorative treatment planning.",
   },
+
   "3": {
     id: "3",
     name: "Dr. Sophia Williams",
@@ -84,6 +86,7 @@ const doctors: Record<string, Doctor> = {
     phone: "(555) 010-1003",
     bio: "Demo profile for the BrightSmile portfolio. Dr. Williams specializes in pediatric and family dental care.",
   },
+
   "4": {
     id: "4",
     name: "Dr. Daniel Brooks",
@@ -97,6 +100,7 @@ const doctors: Record<string, Doctor> = {
     phone: "(555) 010-1004",
     bio: "Demo profile for the BrightSmile portfolio. Dr. Brooks handles oral surgery consultations and implant treatment planning.",
   },
+
   "5": {
     id: "5",
     name: "Dr. Olivia Bennett",
@@ -110,6 +114,7 @@ const doctors: Record<string, Doctor> = {
     phone: "(555) 010-1005",
     bio: "Demo profile for the BrightSmile portfolio. Dr. Bennett focuses on endodontic evaluation and root canal care.",
   },
+
   "6": {
     id: "6",
     name: "Dr. James Mitchell",
@@ -136,63 +141,137 @@ const week = [
 const emilySchedule: Record<string, TimeSlot[]> = {
   "21": [
     { time: "09:00 AM", status: "Available" },
-    { time: "09:45 AM", status: "Booked", patient: "Demo Patient A", service: "General Checkup" },
+    {
+      time: "09:45 AM",
+      status: "Booked",
+      patient: "Demo Patient A",
+      service: "General Checkup",
+    },
     { time: "10:30 AM", status: "Available" },
-    { time: "11:15 AM", status: "Booked", patient: "Demo Patient B", service: "Cosmetic Consultation" },
+    {
+      time: "11:15 AM",
+      status: "Booked",
+      patient: "Demo Patient B",
+      service: "Cosmetic Consultation",
+    },
     { time: "12:00 PM", status: "Break" },
     { time: "01:00 PM", status: "Available" },
-    { time: "01:45 PM", status: "Booked", patient: "Demo Patient C", service: "Teeth Whitening" },
+    {
+      time: "01:45 PM",
+      status: "Booked",
+      patient: "Demo Patient C",
+      service: "Teeth Whitening",
+    },
     { time: "02:30 PM", status: "Available" },
     { time: "03:15 PM", status: "Available" },
-    { time: "04:00 PM", status: "Booked", patient: "Demo Patient D", service: "Dental Cleaning" },
+    {
+      time: "04:00 PM",
+      status: "Booked",
+      patient: "Demo Patient D",
+      service: "Dental Cleaning",
+    },
   ],
+
   "22": [
     { time: "09:00 AM", status: "Available" },
     { time: "09:45 AM", status: "Available" },
-    { time: "10:30 AM", status: "Booked", patient: "Demo Patient E", service: "General Dentistry" },
+    {
+      time: "10:30 AM",
+      status: "Booked",
+      patient: "Demo Patient E",
+      service: "General Dentistry",
+    },
     { time: "11:15 AM", status: "Available" },
     { time: "12:00 PM", status: "Break" },
     { time: "01:00 PM", status: "Available" },
     { time: "01:45 PM", status: "Available" },
-    { time: "02:30 PM", status: "Booked", patient: "Demo Patient F", service: "Cosmetic Consultation" },
+    {
+      time: "02:30 PM",
+      status: "Booked",
+      patient: "Demo Patient F",
+      service: "Cosmetic Consultation",
+    },
     { time: "03:15 PM", status: "Available" },
     { time: "04:00 PM", status: "Available" },
   ],
+
   "23": [
     { time: "09:00 AM", status: "Available" },
-    { time: "09:45 AM", status: "Booked", patient: "Demo Patient G", service: "Dental Cleaning" },
+    {
+      time: "09:45 AM",
+      status: "Booked",
+      patient: "Demo Patient G",
+      service: "Dental Cleaning",
+    },
     { time: "10:30 AM", status: "Available" },
     { time: "11:15 AM", status: "Available" },
     { time: "12:00 PM", status: "Break" },
-    { time: "01:00 PM", status: "Booked", patient: "Demo Patient H", service: "General Checkup" },
+    {
+      time: "01:00 PM",
+      status: "Booked",
+      patient: "Demo Patient H",
+      service: "General Checkup",
+    },
     { time: "01:45 PM", status: "Available" },
     { time: "02:30 PM", status: "Available" },
-    { time: "03:15 PM", status: "Booked", patient: "Demo Patient I", service: "Whitening Consultation" },
+    {
+      time: "03:15 PM",
+      status: "Booked",
+      patient: "Demo Patient I",
+      service: "Whitening Consultation",
+    },
     { time: "04:00 PM", status: "Available" },
   ],
+
   "24": [
     { time: "09:00 AM", status: "Available" },
     { time: "09:45 AM", status: "Available" },
     { time: "10:30 AM", status: "Available" },
-    { time: "11:15 AM", status: "Booked", patient: "Demo Patient J", service: "General Checkup" },
+    {
+      time: "11:15 AM",
+      status: "Booked",
+      patient: "Demo Patient J",
+      service: "General Checkup",
+    },
     { time: "12:00 PM", status: "Break" },
     { time: "01:00 PM", status: "Available" },
     { time: "01:45 PM", status: "Available" },
-    { time: "02:30 PM", status: "Booked", patient: "Demo Patient K", service: "Cosmetic Consultation" },
+    {
+      time: "02:30 PM",
+      status: "Booked",
+      patient: "Demo Patient K",
+      service: "Cosmetic Consultation",
+    },
     { time: "03:15 PM", status: "Available" },
     { time: "04:00 PM", status: "Available" },
   ],
+
   "25": [
-    { time: "09:00 AM", status: "Booked", patient: "Demo Patient L", service: "Dental Cleaning" },
+    {
+      time: "09:00 AM",
+      status: "Booked",
+      patient: "Demo Patient L",
+      service: "Dental Cleaning",
+    },
     { time: "09:45 AM", status: "Available" },
     { time: "10:30 AM", status: "Available" },
     { time: "11:15 AM", status: "Available" },
     { time: "12:00 PM", status: "Break" },
-    { time: "01:00 PM", status: "Booked", patient: "Demo Patient M", service: "General Checkup" },
+    {
+      time: "01:00 PM",
+      status: "Booked",
+      patient: "Demo Patient M",
+      service: "General Checkup",
+    },
     { time: "01:45 PM", status: "Available" },
     { time: "02:30 PM", status: "Available" },
     { time: "03:15 PM", status: "Available" },
-    { time: "04:00 PM", status: "Booked", patient: "Demo Patient N", service: "Cosmetic Consultation" },
+    {
+      time: "04:00 PM",
+      status: "Booked",
+      patient: "Demo Patient N",
+      service: "Cosmetic Consultation",
+    },
   ],
 };
 
@@ -203,26 +282,39 @@ function fallbackSchedule(): Record<string, TimeSlot[]> {
       [
         { time: "09:00 AM", status: "Available" as const },
         { time: "09:45 AM", status: "Available" as const },
-        { time: "10:30 AM", status: "Booked" as const, patient: "Demo Patient", service: "Dental Consultation" },
+        {
+          time: "10:30 AM",
+          status: "Booked" as const,
+          patient: "Demo Patient",
+          service: "Dental Consultation",
+        },
         { time: "11:15 AM", status: "Available" as const },
         { time: "12:00 PM", status: "Break" as const },
         { time: "01:00 PM", status: "Available" as const },
         { time: "01:45 PM", status: "Available" as const },
-        { time: "02:30 PM", status: "Booked" as const, patient: "Demo Patient", service: "General Dentistry" },
+        {
+          time: "02:30 PM",
+          status: "Booked" as const,
+          patient: "Demo Patient",
+          service: "General Dentistry",
+        },
         { time: "03:15 PM", status: "Available" as const },
         { time: "04:00 PM", status: "Available" as const },
       ],
-    ]),
+    ])
   );
 }
 
 export default function DoctorSchedulePage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const doctor = doctors[params.id] ?? doctors["1"];
-  const schedule = doctor.id === "1" ? emilySchedule : fallbackSchedule();
+  const { id } = use(params);
+
+  const doctor = doctors[id] ?? doctors["1"];
+  const schedule =
+    doctor.id === "1" ? emilySchedule : fallbackSchedule();
 
   const [selectedDate, setSelectedDate] = useState("23");
   const [message, setMessage] = useState("");
@@ -230,26 +322,32 @@ export default function DoctorSchedulePage({
   const selectedSlots = schedule[selectedDate] ?? [];
 
   const availableCount = useMemo(
-    () => selectedSlots.filter((slot) => slot.status === "Available").length,
-    [selectedSlots],
+    () =>
+      selectedSlots.filter(
+        (slot) => slot.status === "Available"
+      ).length,
+    [selectedSlots]
   );
 
   const bookedCount = useMemo(
-    () => selectedSlots.filter((slot) => slot.status === "Booked").length,
-    [selectedSlots],
+    () =>
+      selectedSlots.filter(
+        (slot) => slot.status === "Booked"
+      ).length,
+    [selectedSlots]
   );
 
   const handleBook = (slot: TimeSlot) => {
     if (slot.status !== "Available") return;
 
     setMessage(
-      `Demo selection: ${doctor.name} at ${slot.time}. No real appointment was created.`,
+      `Demo selection: ${doctor.name} at ${slot.time}. No real appointment was created.`
     );
   };
 
   const handleWaitlist = () => {
     setMessage(
-      `Demo waitlist request for ${doctor.name}. No real patient information was submitted.`,
+      `Demo waitlist request for ${doctor.name}. No real patient information was submitted.`
     );
   };
 
@@ -308,12 +406,18 @@ export default function DoctorSchedulePage({
 
                   <div className="mt-4 flex flex-wrap gap-4 text-xs font-semibold text-slate-500">
                     <span className="inline-flex items-center gap-2">
-                      <Award size={15} className="text-blue-500" />
+                      <Award
+                        size={15}
+                        className="text-blue-500"
+                      />
                       {doctor.credentials}
                     </span>
 
                     <span className="inline-flex items-center gap-2">
-                      <Clock3 size={15} className="text-blue-500" />
+                      <Clock3
+                        size={15}
+                        className="text-blue-500"
+                      />
                       {doctor.experience}
                     </span>
                   </div>
@@ -342,32 +446,47 @@ export default function DoctorSchedulePage({
 
           <section className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <p className="text-xs font-semibold text-slate-400">Today's Hours</p>
+              <p className="text-xs font-semibold text-slate-400">
+                Today's Hours
+              </p>
+
               <p className="mt-2 text-xl font-black text-slate-900">
                 {doctor.schedule}
               </p>
             </div>
 
             <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <p className="text-xs font-semibold text-slate-400">Available Slots</p>
+              <p className="text-xs font-semibold text-slate-400">
+                Available Slots
+              </p>
+
               <p className="mt-2 text-3xl font-black text-emerald-600">
                 {availableCount}
               </p>
             </div>
 
             <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <p className="text-xs font-semibold text-slate-400">Booked Slots</p>
+              <p className="text-xs font-semibold text-slate-400">
+                Booked Slots
+              </p>
+
               <p className="mt-2 text-3xl font-black text-blue-600">
                 {bookedCount}
               </p>
             </div>
 
             <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <p className="text-xs font-semibold text-slate-400">Contact</p>
+              <p className="text-xs font-semibold text-slate-400">
+                Contact
+              </p>
+
               <p className="mt-2 truncate text-sm font-black text-slate-900">
                 {doctor.email}
               </p>
-              <p className="mt-1 text-xs text-slate-400">{doctor.phone}</p>
+
+              <p className="mt-1 text-xs text-slate-400">
+                {doctor.phone}
+              </p>
             </div>
           </section>
 
@@ -377,6 +496,7 @@ export default function DoctorSchedulePage({
                 <h2 className="text-lg font-black text-slate-900">
                   Weekly Schedule
                 </h2>
+
                 <p className="mt-1 text-xs text-slate-400">
                   Select a day to view available and booked time slots.
                 </p>
@@ -426,7 +546,10 @@ export default function DoctorSchedulePage({
                     <p className="text-[10px] font-bold tracking-wider">
                       {day.short}
                     </p>
-                    <p className="mt-1 text-lg font-black">{day.date}</p>
+
+                    <p className="mt-1 text-lg font-black">
+                      {day.date}
+                    </p>
                   </button>
                 );
               })}
@@ -436,8 +559,13 @@ export default function DoctorSchedulePage({
               <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <p className="text-sm font-black text-slate-900">
-                    {week.find((day) => day.date === selectedDate)?.label}
+                    {
+                      week.find(
+                        (day) => day.date === selectedDate
+                      )?.label
+                    }
                   </p>
+
                   <p className="mt-1 text-xs text-slate-400">
                     Click an available slot to simulate a booking selection.
                   </p>
@@ -486,15 +614,24 @@ export default function DoctorSchedulePage({
                         </span>
 
                         {isAvailable && (
-                          <CheckCircle2 size={16} className="text-emerald-500" />
+                          <CheckCircle2
+                            size={16}
+                            className="text-emerald-500"
+                          />
                         )}
 
                         {isBooked && (
-                          <CalendarDays size={16} className="text-blue-500" />
+                          <CalendarDays
+                            size={16}
+                            className="text-blue-500"
+                          />
                         )}
 
                         {slot.status === "Break" && (
-                          <Clock3 size={16} className="text-slate-400" />
+                          <Clock3
+                            size={16}
+                            className="text-slate-400"
+                          />
                         )}
                       </div>
 
@@ -515,6 +652,7 @@ export default function DoctorSchedulePage({
                           <p className="truncate text-xs font-bold text-slate-700">
                             {slot.patient}
                           </p>
+
                           <p className="mt-1 truncate text-[10px] text-slate-400">
                             {slot.service}
                           </p>
@@ -576,7 +714,10 @@ export default function DoctorSchedulePage({
                   "Patient confirms or joins the waitlist",
                   "Appointment appears in the admin schedule",
                 ].map((step, index) => (
-                  <div key={step} className="flex items-center gap-3">
+                  <div
+                    key={step}
+                    className="flex items-center gap-3"
+                  >
                     <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white text-[10px] font-black text-blue-600 shadow-sm">
                       {index + 1}
                     </span>

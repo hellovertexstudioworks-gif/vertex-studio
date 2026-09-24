@@ -10,6 +10,7 @@ import WhyChoose from "@/components/sections/WhyChoose";
 import Process from "@/components/sections/Process";
 import Expect from "@/components/sections/Expect";
 import Pricing from "@/components/sections/Pricing";
+import Booking from "@/components/sections/Booking";
 import Contact from "@/components/sections/Contact";
 import Chatbot from "@/components/sections/Chatbot";
 
@@ -250,6 +251,12 @@ export default function Home() {
         <Expect />
 
         <Pricing />
+
+        {/* =====================================================
+            CONSULTATION BOOKING
+        ===================================================== */}
+
+        <Booking />
 
         <Contact />
 
