@@ -6,12 +6,13 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 const navItems = [
-  { name: "Home", href: "#" },
-  { name: "About", href: "#about" },
-  { name: "Services", href: "#services" },
-  { name: "Portfolio", href: "#portfolio" },
-  { name: "Pricing", href: "#pricing" },
-  { name: "Contact", href: "#contact" },
+  { name: "Home", href: "/" },
+  { name: "About", href: "/#about" },
+  { name: "Services", href: "/#services" },
+  { name: "Portfolio", href: "/#portfolio" },
+  { name: "Resources", href: "/resources" },
+  { name: "Pricing", href: "/#pricing" },
+  { name: "Contact", href: "/#contact" },
 ];
 
 export default function Navbar() {
@@ -21,21 +22,28 @@ export default function Navbar() {
 
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [active, setActive] = useState("#");
+  const [active, setActive] = useState("/");
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
 
       if (isBrightSmile) {
-        setActive("#");
+        setActive("/");
+        return;
+      }
+
+      // Resources is a separate page, so don't try to
+      // detect homepage sections while viewing it.
+      if (pathname.startsWith("/resources")) {
+        setActive("/resources");
         return;
       }
 
       const sections =
         document.querySelectorAll<HTMLElement>("section[id]");
 
-      let current = "#";
+      let current = "/";
 
       sections.forEach((section) => {
         const top = section.offsetTop - 120;
@@ -45,12 +53,12 @@ export default function Navbar() {
           window.scrollY >= top &&
           window.scrollY < bottom
         ) {
-          current = `#${section.id}`;
+          current = `/#${section.id}`;
         }
       });
 
       if (window.scrollY < 150) {
-        current = "#";
+        current = "/";
       }
 
       setActive(current);
@@ -63,9 +71,15 @@ export default function Navbar() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [isBrightSmile]);
+  }, [isBrightSmile, pathname]);
 
   const getNavHref = (href: string) => {
+    // Real routes such as /resources and /#section
+    // should stay exactly as they are.
+    if (href.startsWith("/")) {
+      return href;
+    }
+
     if (!isBrightSmile) {
       return href;
     }
@@ -82,7 +96,19 @@ export default function Navbar() {
       return "/#contact";
     }
 
-    return "#contact";
+    return "/#contact";
+  };
+
+  const isNavItemActive = (href: string) => {
+    if (href === "/resources") {
+      return pathname.startsWith("/resources");
+    }
+
+    if (href === "/") {
+      return pathname === "/" && active === "/";
+    }
+
+    return active === href;
   };
 
   return (
@@ -116,13 +142,12 @@ export default function Navbar() {
           py-5
         "
       >
-
         {/* =====================================================
             LOGO
         ===================================================== */}
 
         <a
-          href={isBrightSmile ? "/" : "#"}
+          href={isBrightSmile ? "/" : "/"}
           className="
             group
             flex
@@ -186,54 +211,58 @@ export default function Navbar() {
           className="
             hidden
             items-center
-            gap-6
+            gap-5
             lg:flex
-            xl:gap-8
+            xl:gap-7
           "
           aria-label="Main navigation"
         >
-          {navItems.map((item) => (
-            <a
-              key={item.name}
-              href={getNavHref(item.href)}
-              className={`
-                relative
-                whitespace-nowrap
-                text-sm
-                font-medium
-                transition
-                duration-300
+          {navItems.map((item) => {
+            const itemActive = isNavItemActive(item.href);
 
-                ${
-                  active === item.href
-                    ? "text-blue-500"
-                    : isBrightSmile
-                      ? "text-slate-700 hover:text-blue-500"
-                      : "text-white hover:text-blue-400"
-                }
-              `}
-            >
-              {item.name}
-
-              <span
+            return (
+              <a
+                key={item.name}
+                href={getNavHref(item.href)}
                 className={`
-                  absolute
-                  -bottom-2
-                  left-0
-                  h-[2px]
-                  bg-blue-500
-                  transition-all
+                  relative
+                  whitespace-nowrap
+                  text-sm
+                  font-medium
+                  transition
                   duration-300
 
                   ${
-                    active === item.href
-                      ? "w-full"
-                      : "w-0"
+                    itemActive
+                      ? "text-blue-500"
+                      : isBrightSmile
+                        ? "text-slate-700 hover:text-blue-500"
+                        : "text-white hover:text-blue-400"
                   }
                 `}
-              />
-            </a>
-          ))}
+              >
+                {item.name}
+
+                <span
+                  className={`
+                    absolute
+                    -bottom-2
+                    left-0
+                    h-[2px]
+                    bg-blue-500
+                    transition-all
+                    duration-300
+
+                    ${
+                      itemActive
+                        ? "w-full"
+                        : "w-0"
+                    }
+                  `}
+                />
+              </a>
+            );
+          })}
         </nav>
 
         {/* =====================================================
@@ -311,7 +340,7 @@ export default function Navbar() {
 
           ${
             mobileOpen
-              ? "max-h-[600px]"
+              ? "max-h-[700px]"
               : "max-h-0"
           }
         `}
@@ -336,35 +365,39 @@ export default function Navbar() {
               py-6
             "
           >
-            {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={getNavHref(item.href)}
-                onClick={() => setMobileOpen(false)}
-                className={`
-                  border-b
-                  py-4
-                  text-base
-                  transition
+            {navItems.map((item) => {
+              const itemActive = isNavItemActive(item.href);
 
-                  ${
-                    isBrightSmile
-                      ? "border-slate-100"
-                      : "border-white/5"
-                  }
+              return (
+                <a
+                  key={item.name}
+                  href={getNavHref(item.href)}
+                  onClick={() => setMobileOpen(false)}
+                  className={`
+                    border-b
+                    py-4
+                    text-base
+                    transition
 
-                  ${
-                    active === item.href
-                      ? "text-blue-500"
-                      : isBrightSmile
-                        ? "text-slate-700 hover:text-blue-500"
-                        : "text-white hover:text-blue-400"
-                  }
-                `}
-              >
-                {item.name}
-              </a>
-            ))}
+                    ${
+                      isBrightSmile
+                        ? "border-slate-100"
+                        : "border-white/5"
+                    }
+
+                    ${
+                      itemActive
+                        ? "text-blue-500"
+                        : isBrightSmile
+                          ? "text-slate-700 hover:text-blue-500"
+                          : "text-white hover:text-blue-400"
+                    }
+                  `}
+                >
+                  {item.name}
+                </a>
+              );
+            })}
 
             <a
               href={getContactHref()}
