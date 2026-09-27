@@ -1,11 +1,9 @@
 @import "tailwindcss";
 
-
 :root {
   --background: #050816;
   --foreground: #ffffff;
 }
-
 
 @theme inline {
   --color-background: var(--background);
@@ -15,40 +13,24 @@
   --font-mono: var(--font-geist-mono);
 }
 
-
-
 * {
   scroll-behavior: smooth;
 }
-
-
 
 html {
   background: #050816;
 }
 
-
-
 body {
-
   background: #050816;
-
   color: #ffffff;
-
   font-family: var(--font-geist-sans), sans-serif;
-
   overflow-x: hidden;
-
 }
-
-
 
 /* Selection Color */
 
 ::selection {
-
   background: #2563eb;
-
   color: white;
-
 }

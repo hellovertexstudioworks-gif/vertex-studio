@@ -7,6 +7,7 @@ import {
   Mail,
   MessageSquare,
   Plus,
+  Trash2,
   Search,
   User,
   Users,
@@ -68,6 +69,9 @@ export default function LeadsPage() {
   const [error, setError] = useState("");
 
   const [updatingId, setUpdatingId] = useState<string | null>(null);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [deleteToast, setDeleteToast] = useState<string | null>(null);
+  const [leadPendingDelete, setLeadPendingDelete] = useState<Lead | null>(null);
 
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
 
@@ -150,6 +154,49 @@ export default function LeadsPage() {
     );
 
     setUpdatingId(null);
+  };
+
+  const handleDeleteLead = (lead: Lead) => {
+    setLeadPendingDelete(lead);
+  };
+
+  const confirmDeleteLead = async () => {
+    if (!leadPendingDelete) return;
+
+    const lead = leadPendingDelete;
+
+    setDeletingId(lead.id);
+    setError("");
+    setDeleteToast(null);
+
+    const { error: deleteError } = await supabase
+      .from("leads")
+      .delete()
+      .eq("id", lead.id);
+
+    if (deleteError) {
+      console.error("Failed to delete lead:", deleteError);
+      setError("Unable to delete the lead. Please try again.");
+      setDeletingId(null);
+      setLeadPendingDelete(null);
+      return;
+    }
+
+    setLeads((currentLeads) =>
+      currentLeads.filter((currentLead) => currentLead.id !== lead.id)
+    );
+
+    setSelectedLead((currentLead) =>
+      currentLead?.id === lead.id ? null : currentLead
+    );
+
+    setDeletingId(null);
+    setLeadPendingDelete(null);
+    setDeleteToast(`${lead.name || "Lead"} deleted successfully.`);
+
+    window.setTimeout(() => {
+      setDeleteToast(null);
+    }, 3500);
   };
 
   const handleCreateLead = async (
@@ -273,14 +320,104 @@ export default function LeadsPage() {
 
   return (
     <>
-      <main className="min-h-screen bg-[#070707] px-5 py-8 text-white sm:px-8 lg:px-10">
-        <div className="mx-auto max-w-7xl">
+      {leadPendingDelete && (
+        <div
+          className="fixed inset-0 z-[90] flex items-center justify-center bg-black/65 px-4 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="delete-lead-title"
+        >
+          <button
+            type="button"
+            aria-label="Close delete confirmation"
+            className="absolute inset-0 cursor-default"
+            onClick={() => {
+              if (!deletingId) setLeadPendingDelete(null);
+            }}
+          />
+
+          <div className="relative z-10 w-full max-w-md overflow-hidden rounded-2xl border border-white/10 bg-[#0b1020] shadow-[0_30px_100px_rgba(0,0,0,0.55)]">
+            <div className="p-6 sm:p-7">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-red-500/10 ring-1 ring-red-400/15">
+                <Trash2 size={19} className="text-red-400" />
+              </div>
+
+              <h2
+                id="delete-lead-title"
+                className="mt-5 text-lg font-semibold text-white"
+              >
+                Delete Lead?
+              </h2>
+
+              <p className="mt-2 text-sm leading-6 text-white/45">
+                Are you sure you want to delete{" "}
+                <span className="font-medium text-white/80">
+                  {leadPendingDelete.name || "this lead"}
+                </span>
+                ? This action cannot be undone.
+              </p>
+
+              <div className="mt-6 flex flex-col-reverse gap-2.5 sm:flex-row sm:justify-end">
+                <button
+                  type="button"
+                  onClick={() => setLeadPendingDelete(null)}
+                  disabled={Boolean(deletingId)}
+                  className="rounded-xl border border-white/10 px-4 py-2.5 text-sm font-medium text-white/60 transition hover:bg-white/5 hover:text-white disabled:opacity-40"
+                >
+                  Cancel
+                </button>
+
+                <button
+                  type="button"
+                  onClick={confirmDeleteLead}
+                  disabled={Boolean(deletingId)}
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-red-500 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-red-500/15 transition hover:bg-red-400 disabled:cursor-wait disabled:opacity-50"
+                >
+                  <Trash2 size={15} />
+                  {deletingId ? "Deleting..." : "Delete Lead"}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {deleteToast && (
+        <div
+          role="status"
+          aria-live="polite"
+          className="fixed right-5 top-5 z-[80] flex max-w-sm items-center gap-3 rounded-2xl border border-emerald-400/20 bg-[#0b1020]/95 px-4 py-3 text-sm text-white shadow-2xl shadow-black/40 backdrop-blur-xl"
+        >
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-400/15">
+            <span className="text-sm font-bold text-emerald-400">✓</span>
+          </div>
+
+          <div className="min-w-0">
+            <p className="font-semibold text-emerald-300">Lead deleted</p>
+            <p className="mt-0.5 truncate text-xs text-white/45">
+              {deleteToast}
+            </p>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setDeleteToast(null)}
+            className="ml-2 rounded-lg px-2 py-1 text-white/35 transition hover:bg-white/5 hover:text-white"
+            aria-label="Dismiss notification"
+          >
+            ×
+          </button>
+        </div>
+      )}
+
+      <main className="min-h-screen w-full bg-[#060914] px-5 py-8 text-white sm:px-8 sm:py-10 xl:px-10">
+        <div className="w-full">
           {/* Header */}
           <div className="mb-8 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10">
-                  <Users size={19} className="text-white/70" />
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400/15 via-blue-500/15 to-violet-500/15 ring-1 ring-white/5">
+                  <Users size={19} className="text-cyan-300" />
                 </div>
 
                 <div>
@@ -307,7 +444,7 @@ export default function LeadsPage() {
                 setNewLead(emptyForm);
                 setShowAddLead(true);
               }}
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-4 py-3 text-sm font-semibold text-black transition hover:bg-white/90"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 px-4 py-3 text-sm font-semibold text-slate-950 shadow-lg shadow-blue-500/15 transition hover:brightness-110"
             >
               <Plus size={17} />
               Add Lead
@@ -331,7 +468,7 @@ export default function LeadsPage() {
             ].map(([label, value]) => (
               <div
                 key={label}
-                className="rounded-2xl border border-white/10 bg-white/[0.025] p-5"
+                className="rounded-2xl border border-white/[0.08] bg-[#0b1020]/80 p-5"
               >
                 <p className="text-sm text-white/40">{label}</p>
 
@@ -343,7 +480,7 @@ export default function LeadsPage() {
           </section>
 
           {/* Lead Management */}
-          <section className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.025]">
+          <section className="overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0b1020]/80">
             {/* Toolbar */}
             <div className="flex flex-col gap-4 border-b border-white/10 p-5 lg:flex-row lg:items-center lg:justify-between">
               <div className="relative w-full max-w-md">
@@ -524,15 +661,28 @@ export default function LeadsPage() {
                         </td>
 
                         <td className="px-6 py-5">
-                          <button
-                            type="button"
-                            onClick={() =>
-                              setSelectedLead(lead)
-                            }
-                            className="text-xs text-white/45 transition hover:text-white"
-                          >
-                            View
-                          </button>
+                          <div className="flex items-center gap-3">
+                            <button
+                              type="button"
+                              onClick={() =>
+                                setSelectedLead(lead)
+                              }
+                              className="text-xs text-white/45 transition hover:text-white"
+                            >
+                              View
+                            </button>
+
+                            <button
+                              type="button"
+                              onClick={() => handleDeleteLead(lead)}
+                              disabled={deletingId === lead.id}
+                              className="inline-flex items-center gap-1.5 text-xs text-red-400/70 transition hover:text-red-300 disabled:cursor-wait disabled:opacity-40"
+                              title="Delete lead"
+                            >
+                              <Trash2 size={13} />
+                              {deletingId === lead.id ? "Deleting..." : "Delete"}
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     ))}
@@ -574,23 +724,6 @@ export default function LeadsPage() {
             )}
           </section>
 
-          {/* Footer Navigation */}
-          <div className="mt-8 flex flex-wrap items-center gap-5">
-            <a
-              href="/admin"
-              className="inline-flex items-center gap-2 text-sm text-white/40 transition hover:text-white"
-            >
-              <ArrowLeft size={16} />
-              Dashboard
-            </a>
-
-            <a
-              href="/admin/analytics"
-              className="text-sm text-white/40 transition hover:text-white"
-            >
-              Analytics →
-            </a>
-          </div>
         </div>
       </main>
 
@@ -989,7 +1122,7 @@ export default function LeadsPage() {
             {/* Modal Content */}
             <div className="p-6">
               {/* Status */}
-              <div className="mb-6 rounded-2xl border border-white/10 bg-white/[0.025] p-5">
+              <div className="mb-6 rounded-2xl border border-white/[0.08] bg-[#0b1020]/80 p-5">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                   <div>
                     <p className="text-xs uppercase tracking-[0.15em] text-white/30">
@@ -1047,7 +1180,7 @@ export default function LeadsPage() {
 
               {/* Information Grid */}
               <div className="grid gap-4 sm:grid-cols-2">
-                <div className="rounded-2xl border border-white/10 bg-white/[0.025] p-5">
+                <div className="rounded-2xl border border-white/[0.08] bg-[#0b1020]/80 p-5">
                   <div className="flex items-center gap-2 text-white/35">
                     <User size={16} />
                     <p className="text-xs uppercase tracking-[0.12em]">
@@ -1067,7 +1200,7 @@ export default function LeadsPage() {
                   </a>
                 </div>
 
-                <div className="rounded-2xl border border-white/10 bg-white/[0.025] p-5">
+                <div className="rounded-2xl border border-white/[0.08] bg-[#0b1020]/80 p-5">
                   <div className="flex items-center gap-2 text-white/35">
                     <Globe size={16} />
                     <p className="text-xs uppercase tracking-[0.12em]">
@@ -1080,7 +1213,7 @@ export default function LeadsPage() {
                   </p>
                 </div>
 
-                <div className="rounded-2xl border border-white/10 bg-white/[0.025] p-5">
+                <div className="rounded-2xl border border-white/[0.08] bg-[#0b1020]/80 p-5">
                   <div className="flex items-center gap-2 text-white/35">
                     <Globe size={16} />
                     <p className="text-xs uppercase tracking-[0.12em]">
@@ -1093,7 +1226,7 @@ export default function LeadsPage() {
                   </p>
                 </div>
 
-                <div className="rounded-2xl border border-white/10 bg-white/[0.025] p-5">
+                <div className="rounded-2xl border border-white/[0.08] bg-[#0b1020]/80 p-5">
                   <div className="flex items-center gap-2 text-white/35">
                     <CalendarDays size={16} />
                     <p className="text-xs uppercase tracking-[0.12em]">
@@ -1108,7 +1241,7 @@ export default function LeadsPage() {
               </div>
 
               {/* Message */}
-              <div className="mt-4 rounded-2xl border border-white/10 bg-white/[0.025] p-5">
+              <div className="mt-4 rounded-2xl border border-white/[0.08] bg-[#0b1020]/80 p-5">
                 <div className="flex items-center gap-2 text-white/35">
                   <MessageSquare size={16} />
                   <p className="text-xs uppercase tracking-[0.12em]">
@@ -1122,7 +1255,7 @@ export default function LeadsPage() {
               </div>
 
               {/* Source */}
-              <div className="mt-4 rounded-2xl border border-white/10 bg-white/[0.025] p-5">
+              <div className="mt-4 rounded-2xl border border-white/[0.08] bg-[#0b1020]/80 p-5">
                 <p className="text-xs uppercase tracking-[0.12em] text-white/30">
                   Lead Source
                 </p>
@@ -1136,11 +1269,21 @@ export default function LeadsPage() {
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <a
                   href={`mailto:${selectedLead.email}`}
-                  className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-white px-4 py-3 text-sm font-semibold text-black transition hover:bg-white/90"
+                  className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 px-4 py-3 text-sm font-semibold text-slate-950 shadow-lg shadow-blue-500/15 transition hover:brightness-110"
                 >
                   <Mail size={16} />
                   Email Lead
                 </a>
+
+                <button
+                  type="button"
+                  onClick={() => handleDeleteLead(selectedLead)}
+                  disabled={deletingId === selectedLead.id}
+                  className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl border border-red-400/20 bg-red-500/[0.06] px-4 py-3 text-sm font-medium text-red-300 transition hover:bg-red-500/[0.12] disabled:cursor-wait disabled:opacity-40"
+                >
+                  <Trash2 size={16} />
+                  {deletingId === selectedLead.id ? "Deleting..." : "Delete Lead"}
+                </button>
 
                 <button
                   type="button"

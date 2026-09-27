@@ -1,0 +1,247 @@
+/*
+  Vertex Admin global theme engine.
+  The admin pages can keep their existing Tailwind classes while this
+  layer remaps the shared accent/background utilities for the selected theme.
+*/
+
+:root {
+  --vertex-accent: #3b82f6;
+  --vertex-accent-strong: #2563eb;
+  --vertex-accent-soft: rgba(59, 130, 246, 0.12);
+  --vertex-accent-border: rgba(59, 130, 246, 0.28);
+  --vertex-accent-glow: rgba(59, 130, 246, 0.16);
+  --vertex-page: #060914;
+  --vertex-surface: #0b1020;
+  --vertex-surface-alt: #070b16;
+  --vertex-border: rgba(255, 255, 255, 0.10);
+  --vertex-text: #ffffff;
+  --vertex-muted: #94a3b8;
+}
+
+html[data-vertex-theme="purple"] {
+  --vertex-accent: #8b5cf6;
+  --vertex-accent-strong: #7c3aed;
+  --vertex-accent-soft: rgba(139, 92, 246, 0.12);
+  --vertex-accent-border: rgba(139, 92, 246, 0.28);
+  --vertex-accent-glow: rgba(139, 92, 246, 0.18);
+  --vertex-page: #090714;
+  --vertex-surface: #100b20;
+  --vertex-surface-alt: #0c0818;
+}
+
+html[data-vertex-theme="red"] {
+  --vertex-accent: #ef4444;
+  --vertex-accent-strong: #dc2626;
+  --vertex-accent-soft: rgba(239, 68, 68, 0.12);
+  --vertex-accent-border: rgba(239, 68, 68, 0.28);
+  --vertex-accent-glow: rgba(239, 68, 68, 0.18);
+  --vertex-page: #140709;
+  --vertex-surface: #1b0b0e;
+  --vertex-surface-alt: #12080a;
+}
+
+html[data-vertex-theme="green"] {
+  --vertex-accent: #10b981;
+  --vertex-accent-strong: #059669;
+  --vertex-accent-soft: rgba(16, 185, 129, 0.12);
+  --vertex-accent-border: rgba(16, 185, 129, 0.28);
+  --vertex-accent-glow: rgba(16, 185, 129, 0.18);
+  --vertex-page: #06120e;
+  --vertex-surface: #091a15;
+  --vertex-surface-alt: #07110d;
+}
+
+html[data-vertex-theme="orange"] {
+  --vertex-accent: #f97316;
+  --vertex-accent-strong: #ea580c;
+  --vertex-accent-soft: rgba(249, 115, 22, 0.12);
+  --vertex-accent-border: rgba(249, 115, 22, 0.28);
+  --vertex-accent-glow: rgba(249, 115, 22, 0.18);
+  --vertex-page: #140b05;
+  --vertex-surface: #1b1008;
+  --vertex-surface-alt: #120a05;
+}
+
+html[data-vertex-theme="cyan"] {
+  --vertex-accent: #06b6d4;
+  --vertex-accent-strong: #0891b2;
+  --vertex-accent-soft: rgba(6, 182, 212, 0.12);
+  --vertex-accent-border: rgba(6, 182, 212, 0.28);
+  --vertex-accent-glow: rgba(6, 182, 212, 0.18);
+  --vertex-page: #061116;
+  --vertex-surface: #081a20;
+  --vertex-surface-alt: #071115;
+}
+
+html[data-vertex-theme="dark"] {
+  --vertex-accent: #94a3b8;
+  --vertex-accent-strong: #64748b;
+  --vertex-accent-soft: rgba(148, 163, 184, 0.12);
+  --vertex-accent-border: rgba(148, 163, 184, 0.28);
+  --vertex-accent-glow: rgba(148, 163, 184, 0.15);
+  --vertex-page: #060914;
+  --vertex-surface: #0b1020;
+  --vertex-surface-alt: #070b16;
+}
+
+html[data-vertex-theme="light"] {
+  --vertex-accent: #2563eb;
+  --vertex-accent-strong: #1d4ed8;
+  --vertex-accent-soft: rgba(37, 99, 235, 0.10);
+  --vertex-accent-border: rgba(37, 99, 235, 0.22);
+  --vertex-accent-glow: rgba(37, 99, 235, 0.12);
+  --vertex-page: #f8fafc;
+  --vertex-surface: #ffffff;
+  --vertex-surface-alt: #f1f5f9;
+  --vertex-border: rgba(15, 23, 42, 0.10);
+  --vertex-text: #0f172a;
+  --vertex-muted: #64748b;
+}
+
+/* Shared backgrounds used throughout the current Admin pages. */
+html[data-vertex-theme]:is([data-vertex-theme="purple"], [data-vertex-theme="red"], [data-vertex-theme="green"], [data-vertex-theme="orange"], [data-vertex-theme="cyan"], [data-vertex-theme="dark"]) .bg-\[\#060914\] {
+  background-color: var(--vertex-page) !important;
+}
+
+html[data-vertex-theme]:is([data-vertex-theme="purple"], [data-vertex-theme="red"], [data-vertex-theme="green"], [data-vertex-theme="orange"], [data-vertex-theme="cyan"], [data-vertex-theme="dark"]) .bg-\[\#0b1020\] {
+  background-color: var(--vertex-surface) !important;
+}
+
+html[data-vertex-theme]:is([data-vertex-theme="purple"], [data-vertex-theme="red"], [data-vertex-theme="green"], [data-vertex-theme="orange"], [data-vertex-theme="cyan"], [data-vertex-theme="dark"]) .bg-\[\#070b16\] {
+  background-color: var(--vertex-surface-alt) !important;
+}
+
+/* Accent text. */
+html[data-vertex-theme] .text-cyan-400,
+html[data-vertex-theme] .text-cyan-300 {
+  color: var(--vertex-accent) !important;
+}
+
+/* Accent borders/backgrounds. */
+html[data-vertex-theme] .border-cyan-400\/20,
+html[data-vertex-theme] .border-cyan-400\/30,
+html[data-vertex-theme] .border-cyan-400\/40 {
+  border-color: var(--vertex-accent-border) !important;
+}
+
+html[data-vertex-theme] .bg-cyan-500\/10,
+html[data-vertex-theme] .bg-cyan-400\/10 {
+  background-color: var(--vertex-accent-soft) !important;
+}
+
+/* Blue utilities become the selected primary theme. */
+html[data-vertex-theme] .text-blue-400,
+html[data-vertex-theme] .text-blue-300,
+html[data-vertex-theme] .text-blue-500 {
+  color: var(--vertex-accent) !important;
+}
+
+html[data-vertex-theme] .bg-blue-500,
+html[data-vertex-theme] .bg-blue-600,
+html[data-vertex-theme] .from-blue-500,
+html[data-vertex-theme] .to-blue-600 {
+  background-color: var(--vertex-accent) !important;
+}
+
+html[data-vertex-theme] .border-blue-400\/20,
+html[data-vertex-theme] .border-blue-400\/30,
+html[data-vertex-theme] .border-blue-400\/40 {
+  border-color: var(--vertex-accent-border) !important;
+}
+
+html[data-vertex-theme] .bg-blue-500\/10,
+html[data-vertex-theme] .bg-blue-400\/10 {
+  background-color: var(--vertex-accent-soft) !important;
+}
+
+/* Common focus states. */
+html[data-vertex-theme] .focus\:border-cyan-400\/40:focus,
+html[data-vertex-theme] .focus\:border-blue-400\/40:focus {
+  border-color: var(--vertex-accent) !important;
+}
+
+/* The active sidebar state uses the theme accent. */
+html[data-vertex-theme] .bg-white\/\[0\.05\] {
+  transition: background-color 180ms ease;
+}
+
+/* Light mode: flip the shared Admin shell surfaces to a true light UI. */
+html[data-vertex-theme="light"] body {
+  background: var(--vertex-page);
+  color: var(--vertex-text);
+}
+
+html[data-vertex-theme="light"] .bg-\[\#060914\],
+html[data-vertex-theme="light"] .bg-\[\#0b1020\],
+html[data-vertex-theme="light"] .bg-\[\#070b16\] {
+  background-color: var(--vertex-surface) !important;
+}
+
+html[data-vertex-theme="light"] .text-white {
+  color: #0f172a !important;
+}
+
+html[data-vertex-theme="light"] .text-slate-300 {
+  color: #334155 !important;
+}
+
+html[data-vertex-theme="light"] .text-slate-400 {
+  color: #64748b !important;
+}
+
+html[data-vertex-theme="light"] .text-slate-500,
+html[data-vertex-theme="light"] .text-slate-600 {
+  color: #94a3b8 !important;
+}
+
+html[data-vertex-theme="light"] .border-white\/10,
+html[data-vertex-theme="light"] .border-white\/5 {
+  border-color: rgba(15, 23, 42, 0.10) !important;
+}
+
+html[data-vertex-theme="light"] .bg-white\/\[0\.03\],
+html[data-vertex-theme="light"] .bg-white\/\[0\.02\],
+html[data-vertex-theme="light"] .hover\:bg-white\/5:hover {
+  background-color: rgba(15, 23, 42, 0.04) !important;
+}
+
+/* Smooth theme transitions. */
+html[data-vertex-theme] .bg-cyan-500,
+html[data-vertex-theme] .bg-blue-500,
+html[data-vertex-theme] .bg-blue-600,
+html[data-vertex-theme] .text-cyan-400,
+html[data-vertex-theme] .text-blue-400,
+html[data-vertex-theme] .border-cyan-400\/20,
+html[data-vertex-theme] .border-blue-400\/20 {
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
+
+/* Theme the shared fixed Admin shell as well. */
+html[data-vertex-theme] .bg-\[\#080b14\] {
+  background-color: var(--vertex-surface-alt) !important;
+}
+
+html[data-vertex-theme] .bg-\[\#060914\] {
+  background-color: var(--vertex-page) !important;
+}
+
+html[data-vertex-theme] .bg-\[\#0b1020\] {
+  background-color: var(--vertex-surface) !important;
+}
+
+html[data-vertex-theme] .bg-\[\#070b16\] {
+  background-color: var(--vertex-surface-alt) !important;
+}
+
+html[data-vertex-theme] .bg-gradient-to-r.from-cyan-400\/10 {
+  background-image: linear-gradient(
+    to right,
+    var(--vertex-accent-soft),
+    rgba(255, 255, 255, 0.02),
+    var(--vertex-accent-glow)
+  ) !important;
+}
