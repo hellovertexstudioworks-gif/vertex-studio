@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
 function getDeviceType() {
@@ -17,12 +18,69 @@ function getDeviceType() {
   return "Desktop";
 }
 
+function generateId() {
+  return (
+    typeof crypto !== "undefined" &&
+    typeof crypto.randomUUID === "function"
+      ? crypto.randomUUID()
+      : `${Date.now()}-${Math.random()
+          .toString(36)
+          .slice(2)}-${Math.random()
+          .toString(36)
+          .slice(2)}`
+  );
+}
+
+function getOrCreateId(storage: Storage, key: string) {
+  let id = storage.getItem(key);
+
+  if (!id) {
+    id = generateId();
+    storage.setItem(key, id);
+  }
+
+  return id;
+}
+
+function getTrafficSource() {
+  const referrer = document.referrer;
+
+  if (!referrer) {
+    return "Direct";
+  }
+
+  try {
+    const referrerUrl = new URL(referrer);
+    const currentHostname = window.location.hostname;
+
+    // Internal navigation
+    if (referrerUrl.hostname === currentHostname) {
+      return "Internal";
+    }
+
+    return referrerUrl.hostname;
+  } catch {
+    return "Referral";
+  }
+}
+
 export default function VisitorTracker() {
+  const pathname = usePathname();
+
   useEffect(() => {
     async function trackVisitor() {
       try {
-        // Do not track admin or login pages.
-        const path = window.location.pathname;
+        /*
+         * ---------------------------------------------------------
+         * CURRENT PAGE
+         * ---------------------------------------------------------
+         */
+
+        const path = pathname || window.location.pathname;
+
+        /*
+         * Do not track Admin or Login pages.
+         */
 
         if (
           path.startsWith("/admin") ||
@@ -33,46 +91,126 @@ export default function VisitorTracker() {
 
         const supabase = createClient();
 
-        // Keep the same session ID while the visitor remains
-        // in the same browser session.
-        let sessionId = sessionStorage.getItem(
+        /*
+         * ---------------------------------------------------------
+         * VISITOR ID
+         * ---------------------------------------------------------
+         *
+         * Persists across browser sessions.
+         * This lets Client Reports calculate unique visitors.
+         */
+
+        const visitorId = getOrCreateId(
+          localStorage,
+          "vertex_visitor_id"
+        );
+
+        /*
+         * ---------------------------------------------------------
+         * SESSION ID
+         * ---------------------------------------------------------
+         *
+         * Persists while the visitor's browser session remains open.
+         */
+
+        const sessionId = getOrCreateId(
+          sessionStorage,
           "vertex_visitor_session"
         );
 
-        if (!sessionId) {
-          // Use crypto.randomUUID when available,
-          // with a fallback for browsers/environments
-          // where randomUUID is not supported.
-          sessionId =
-            typeof crypto !== "undefined" &&
-            typeof crypto.randomUUID === "function"
-              ? crypto.randomUUID()
-              : `${Date.now()}-${Math.random()
-                  .toString(36)
-                  .slice(2)}-${Math.random()
-                  .toString(36)
-                  .slice(2)}`;
+        /*
+         * ---------------------------------------------------------
+         * BASIC VISITOR INFORMATION
+         * ---------------------------------------------------------
+         */
 
-          sessionStorage.setItem(
-            "vertex_visitor_session",
-            sessionId
-          );
-        }
+        const deviceType = getDeviceType();
 
-        const { error } = await supabase
+        const referrer =
+          document.referrer || null;
+
+        const source = getTrafficSource();
+
+        /*
+         * ---------------------------------------------------------
+         * CLIENT / WEBSITE CONFIGURATION
+         * ---------------------------------------------------------
+         */
+
+        const clientId =
+          process.env.NEXT_PUBLIC_ANALYTICS_CLIENT_ID;
+
+        const websiteId =
+          process.env.NEXT_PUBLIC_ANALYTICS_WEBSITE_ID;
+
+        /*
+         * ---------------------------------------------------------
+         * EXISTING VISITOR TABLE
+         * ---------------------------------------------------------
+         *
+         * Keep this because the current Admin Analytics dashboard
+         * still reads from the visitors table.
+         */
+
+        const { error: visitorError } = await supabase
           .from("visitors")
           .insert({
             session_id: sessionId,
             page_path: path,
-            referrer: document.referrer || null,
+            referrer,
             user_agent: navigator.userAgent,
-            device_type: getDeviceType(),
+            device_type: deviceType,
           });
 
-        if (error) {
+        if (visitorError) {
           console.error(
             "VISITOR TRACKING ERROR:",
-            error
+            visitorError
+          );
+        }
+
+        /*
+         * ---------------------------------------------------------
+         * CLIENT ANALYTICS
+         * ---------------------------------------------------------
+         *
+         * If the website has not been configured with a client
+         * and website ID, keep the existing visitor tracking
+         * working but stop here.
+         */
+
+        if (!clientId || !websiteId) {
+          console.warn(
+            "CLIENT ANALYTICS: Missing NEXT_PUBLIC_ANALYTICS_CLIENT_ID or NEXT_PUBLIC_ANALYTICS_WEBSITE_ID."
+          );
+
+          return;
+        }
+
+        /*
+         * ---------------------------------------------------------
+         * ANALYTICS EVENT
+         * ---------------------------------------------------------
+         *
+         * This is what the Client Reports system uses.
+         */
+
+        const { error: analyticsError } = await supabase
+          .from("analytics_events")
+          .insert({
+            client_id: clientId,
+            website_id: websiteId,
+            event_type: "page_view",
+            page_path: path,
+            session_id: sessionId,
+            visitor_id: visitorId,
+            source,
+          });
+
+        if (analyticsError) {
+          console.error(
+            "CLIENT ANALYTICS ERROR:",
+            analyticsError
           );
         }
       } catch (error) {
@@ -84,7 +222,7 @@ export default function VisitorTracker() {
     }
 
     trackVisitor();
-  }, []);
+  }, [pathname]);
 
   return null;
 }
