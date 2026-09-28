@@ -16,6 +16,12 @@ import Chatbot from "@/components/sections/Chatbot";
 
 import Footer from "@/components/layout/Footer";
 
+/*
+ * Relative import used intentionally here because the new auth
+ * component is located outside the app directory.
+ */
+import InviteHashRedirect from "../components/auth/InviteHashRedirect";
+
 /* =====================================================
    HOMEPAGE SEO
 ===================================================== */
@@ -219,6 +225,12 @@ const structuredData = {
 export default function Home() {
   return (
     <>
+      {/* =====================================================
+          SUPABASE INVITE HASH REDIRECT
+      ===================================================== */}
+
+      <InviteHashRedirect />
+
       {/* =====================================================
           WEBSITE STRUCTURED DATA
       ===================================================== */}

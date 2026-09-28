@@ -1,5 +1,3 @@
-// app/invite/accept/page.tsx
-
 "use client";
 
 import { FormEvent, Suspense, useEffect, useState } from "react";
@@ -40,23 +38,128 @@ function InviteAcceptContent() {
         setState("loading");
         setError("");
 
+        /*
+         * =====================================================
+         * 1. HANDLE SUPABASE HASH-BASED INVITE
+         * =====================================================
+         *
+         * Supabase can return an invitation session like:
+         *
+         * https://vertexstudioworks.com/invite/accept
+         * #access_token=...
+         * &refresh_token=...
+         * &type=invite
+         *
+         * The hash is not available through useSearchParams(),
+         * so we must read window.location.hash directly.
+         */
+
+        if (typeof window !== "undefined") {
+          const hash = window.location.hash;
+
+          if (hash) {
+            const hashParams = new URLSearchParams(
+              hash.substring(1),
+            );
+
+            const accessToken = hashParams.get("access_token");
+            const refreshToken = hashParams.get("refresh_token");
+            const hashType = hashParams.get("type");
+            const hashError = hashParams.get("error");
+            const hashErrorCode = hashParams.get("error_code");
+            const hashErrorDescription =
+              hashParams.get("error_description");
+
+            /*
+             * Supabase may return an authentication error
+             * inside the URL hash.
+             */
+            if (hashError) {
+              throw new Error(
+                hashErrorDescription ||
+                  hashErrorCode ||
+                  "This invitation link is invalid or expired.",
+              );
+            }
+
+            /*
+             * Establish the Supabase session when the invite
+             * arrives through the implicit/hash flow.
+             */
+            if (accessToken && refreshToken) {
+              const { error: sessionError } =
+                await supabase.auth.setSession({
+                  access_token: accessToken,
+                  refresh_token: refreshToken,
+                });
+
+              if (sessionError) {
+                throw new Error(
+                  sessionError.message ||
+                    "This invitation link is invalid or expired.",
+                );
+              }
+
+              /*
+               * Remove the access token and refresh token from
+               * the visible URL after the session is established.
+               *
+               * This keeps the credentials from remaining in the
+               * browser address bar or browser history.
+               */
+              window.history.replaceState(
+                {},
+                document.title,
+                window.location.pathname +
+                  window.location.search,
+              );
+
+              /*
+               * Make sure this was actually an invitation flow.
+               * We don't block the session if Supabase omitted
+               * the type value, because the authenticated user
+               * still needs to be checked below.
+               */
+              if (hashType && hashType !== "invite") {
+                console.warn(
+                  "Invitation page received authentication type:",
+                  hashType,
+                );
+              }
+            }
+          }
+        }
+
+        /*
+         * =====================================================
+         * 2. HANDLE QUERY-STRING INVITATION FLOWS
+         * =====================================================
+         *
+         * Keep support for:
+         *
+         * ?token_hash=...
+         * &type=invite
+         *
+         * and PKCE:
+         *
+         * ?code=...
+         */
+
         const tokenHash = searchParams.get("token_hash");
         const type = searchParams.get("type");
         const code = searchParams.get("code");
 
-        /*
-         * Supabase invitation links normally arrive with token_hash + type.
-         * We also support PKCE-style links that arrive with a code.
-         */
         if (tokenHash && (type === "invite" || type === "signup")) {
-          const { error: verifyError } = await supabase.auth.verifyOtp({
-            token_hash: tokenHash,
-            type: type as "invite" | "signup",
-          });
+          const { error: verifyError } =
+            await supabase.auth.verifyOtp({
+              token_hash: tokenHash,
+              type: type as "invite" | "signup",
+            });
 
           if (verifyError) {
             throw new Error(
-              verifyError.message || "This invitation link is invalid or expired."
+              verifyError.message ||
+                "This invitation link is invalid or expired.",
             );
           }
         } else if (code) {
@@ -65,10 +168,17 @@ function InviteAcceptContent() {
 
           if (exchangeError) {
             throw new Error(
-              exchangeError.message || "This invitation link is invalid or expired."
+              exchangeError.message ||
+                "This invitation link is invalid or expired.",
             );
           }
         }
+
+        /*
+         * =====================================================
+         * 3. VERIFY AUTHENTICATED USER
+         * =====================================================
+         */
 
         const {
           data: { user },
@@ -77,11 +187,17 @@ function InviteAcceptContent() {
 
         if (userError || !user) {
           throw new Error(
-            "We could not verify this invitation. Please open the invitation link again from your email."
+            "We could not verify this invitation. Please open the invitation link again from your email.",
           );
         }
 
         if (cancelled) return;
+
+        /*
+         * =====================================================
+         * 4. LOAD USER INFORMATION
+         * =====================================================
+         */
 
         setEmail(user.email ?? "");
 
@@ -96,18 +212,37 @@ function InviteAcceptContent() {
           setFullName(metadataName);
         }
 
-        const { data: profile, error: profileError } = await supabase
-          .from("profiles")
-          .select("full_name, status")
-          .eq("id", user.id)
-          .maybeSingle();
+        /*
+         * =====================================================
+         * 5. LOAD VERTEX PROFILE
+         * =====================================================
+         */
+
+        const { data: profile, error: profileError } =
+          await supabase
+            .from("profiles")
+            .select("full_name, status")
+            .eq("id", user.id)
+            .maybeSingle();
 
         if (profileError) {
-          throw new Error("Unable to load your invitation profile.");
+          throw new Error(
+            "Unable to load your invitation profile.",
+          );
         }
 
+        /*
+         * If the profile is already active, the invitation
+         * has already been completed.
+         */
         if (profile?.status === "Active") {
           setState("success");
+
+          window.setTimeout(() => {
+            router.replace("/admin");
+            router.refresh();
+          }, 1200);
+
           return;
         }
 
@@ -119,13 +254,17 @@ function InviteAcceptContent() {
       } catch (err) {
         if (cancelled) return;
 
-        console.error("Invitation acceptance failed:", err);
+        console.error(
+          "Invitation acceptance failed:",
+          err,
+        );
 
         setError(
           err instanceof Error
             ? err.message
-            : "This invitation could not be verified."
+            : "This invitation could not be verified.",
         );
+
         setState("error");
       }
     }
@@ -135,15 +274,19 @@ function InviteAcceptContent() {
     return () => {
       cancelled = true;
     };
-  }, [searchParams, supabase]);
+  }, [searchParams, supabase, router]);
 
-  async function completeSetup(event: FormEvent<HTMLFormElement>) {
+  async function completeSetup(
+    event: FormEvent<HTMLFormElement>,
+  ) {
     event.preventDefault();
 
     if (submitting) return;
 
     if (password.length < 8) {
-      setError("Your password must be at least 8 characters.");
+      setError(
+        "Your password must be at least 8 characters.",
+      );
       return;
     }
 
@@ -152,10 +295,21 @@ function InviteAcceptContent() {
       return;
     }
 
+    if (!fullName.trim()) {
+      setError("Please enter your full name.");
+      return;
+    }
+
     setSubmitting(true);
     setError("");
 
     try {
+      /*
+       * =====================================================
+       * 1. VERIFY CURRENT SESSION
+       * =====================================================
+       */
+
       const {
         data: { user },
         error: userError,
@@ -163,22 +317,36 @@ function InviteAcceptContent() {
 
       if (userError || !user) {
         throw new Error(
-          "Your invitation session has expired. Please open the invitation email again."
+          "Your invitation session has expired. Please open the invitation email again.",
         );
       }
 
-      const { error: passwordError } = await supabase.auth.updateUser({
-        password,
-        data: {
-          full_name: fullName.trim(),
-        },
-      });
+      /*
+       * =====================================================
+       * 2. SET PASSWORD + FULL NAME
+       * =====================================================
+       */
+
+      const { error: passwordError } =
+        await supabase.auth.updateUser({
+          password,
+          data: {
+            full_name: fullName.trim(),
+          },
+        });
 
       if (passwordError) {
         throw new Error(
-          passwordError.message || "Unable to set your password."
+          passwordError.message ||
+            "Unable to set your password.",
         );
       }
+
+      /*
+       * =====================================================
+       * 3. ACTIVATE VERTEX PROFILE
+       * =====================================================
+       */
 
       const { error: profileError } = await supabase
         .from("profiles")
@@ -191,9 +359,15 @@ function InviteAcceptContent() {
 
       if (profileError) {
         throw new Error(
-          "Your password was created, but your profile could not be activated. Please contact the workspace owner."
+          "Your password was created, but your profile could not be activated. Please contact the workspace owner.",
         );
       }
+
+      /*
+       * =====================================================
+       * 4. SUCCESS
+       * =====================================================
+       */
 
       setState("success");
 
@@ -202,17 +376,26 @@ function InviteAcceptContent() {
         router.refresh();
       }, 1200);
     } catch (err) {
-      console.error("Account setup failed:", err);
+      console.error(
+        "Account setup failed:",
+        err,
+      );
 
       setError(
         err instanceof Error
           ? err.message
-          : "Unable to complete your account setup."
+          : "Unable to complete your account setup.",
       );
     } finally {
       setSubmitting(false);
     }
   }
+
+  /*
+   * =====================================================
+   * LOADING STATE
+   * =====================================================
+   */
 
   if (state === "loading") {
     return (
@@ -227,12 +410,19 @@ function InviteAcceptContent() {
           </h1>
 
           <p className="mt-2 max-w-sm text-sm leading-6 text-slate-400">
-            Please wait while we securely verify your invitation link.
+            Please wait while we securely verify your
+            invitation link.
           </p>
         </div>
       </InviteShell>
     );
   }
+
+  /*
+   * =====================================================
+   * ERROR STATE
+   * =====================================================
+   */
 
   if (state === "error") {
     return (
@@ -266,6 +456,12 @@ function InviteAcceptContent() {
     );
   }
 
+  /*
+   * =====================================================
+   * SUCCESS STATE
+   * =====================================================
+   */
+
   if (state === "success") {
     return (
       <InviteShell>
@@ -283,8 +479,9 @@ function InviteAcceptContent() {
           </h1>
 
           <p className="mt-3 max-w-md text-sm leading-6 text-slate-400">
-            Your workspace account is now active. Redirecting you to the
-            Vertex Admin dashboard...
+            Your workspace account is now active.
+            Redirecting you to the Vertex Admin
+            dashboard...
           </p>
 
           <div className="mt-7 flex items-center gap-2 text-sm text-slate-500">
@@ -295,6 +492,12 @@ function InviteAcceptContent() {
       </InviteShell>
     );
   }
+
+  /*
+   * =====================================================
+   * INVITATION SETUP FORM
+   * =====================================================
+   */
 
   return (
     <InviteShell>
@@ -308,7 +511,8 @@ function InviteAcceptContent() {
         </h1>
 
         <p className="mt-3 text-sm leading-6 text-slate-400">
-          Complete your account setup to access the Vertex Studio workspace.
+          Complete your account setup to access the
+          Vertex Studio workspace.
         </p>
       </div>
 
@@ -330,7 +534,10 @@ function InviteAcceptContent() {
         </div>
       </div>
 
-      <form onSubmit={completeSetup} className="space-y-5">
+      <form
+        onSubmit={completeSetup}
+        className="space-y-5"
+      >
         <Field
           label="Full Name"
           value={fullName}
@@ -346,7 +553,11 @@ function InviteAcceptContent() {
           onChange={setPassword}
           placeholder="At least 8 characters"
           visible={showPassword}
-          onToggle={() => setShowPassword((current) => !current)}
+          onToggle={() =>
+            setShowPassword(
+              (current) => !current,
+            )
+          }
           disabled={submitting}
         />
 
@@ -357,7 +568,9 @@ function InviteAcceptContent() {
           placeholder="Re-enter your password"
           visible={showConfirmPassword}
           onToggle={() =>
-            setShowConfirmPassword((current) => !current)
+            setShowConfirmPassword(
+              (current) => !current,
+            )
           }
           disabled={submitting}
         />
@@ -396,15 +609,24 @@ function InviteAcceptContent() {
         <LockKeyhole className="mt-0.5 h-4 w-4 shrink-0 text-slate-500" />
 
         <p className="text-xs leading-5 text-slate-500">
-          Your invitation is tied to this email address. Keep your password
-          private and do not share your account credentials.
+          Your invitation is tied to this email address.
+          Keep your password private and do not share
+          your account credentials.
         </p>
       </div>
     </InviteShell>
   );
 }
 
-function InviteShell({ children }: { children: React.ReactNode }) {
+/* =====================================================
+   INVITATION SHELL
+===================================================== */
+
+function InviteShell({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <main
       className="min-h-screen px-5 py-10 text-white"
@@ -421,6 +643,10 @@ function InviteShell({ children }: { children: React.ReactNode }) {
     </main>
   );
 }
+
+/* =====================================================
+   TEXT FIELD
+===================================================== */
 
 function Field({
   label,
@@ -450,7 +676,9 @@ function Field({
 
         <input
           value={value}
-          onChange={(event) => onChange(event.target.value)}
+          onChange={(event) =>
+            onChange(event.target.value)
+          }
           placeholder={placeholder}
           disabled={disabled}
           className="h-12 w-full rounded-xl border border-white/10 bg-white/[0.03] pl-10 pr-4 text-sm text-white outline-none placeholder:text-slate-600 transition focus:border-cyan-400/40 focus:ring-2 focus:ring-cyan-400/10 disabled:cursor-not-allowed disabled:opacity-60"
@@ -459,6 +687,10 @@ function Field({
     </label>
   );
 }
+
+/* =====================================================
+   PASSWORD FIELD
+===================================================== */
 
 function PasswordField({
   label,
@@ -489,7 +721,9 @@ function PasswordField({
         <input
           type={visible ? "text" : "password"}
           value={value}
-          onChange={(event) => onChange(event.target.value)}
+          onChange={(event) =>
+            onChange(event.target.value)
+          }
           placeholder={placeholder}
           disabled={disabled}
           className="h-12 w-full rounded-xl border border-white/10 bg-white/[0.03] pl-10 pr-11 text-sm text-white outline-none placeholder:text-slate-600 transition focus:border-cyan-400/40 focus:ring-2 focus:ring-cyan-400/10 disabled:cursor-not-allowed disabled:opacity-60"
@@ -499,7 +733,11 @@ function PasswordField({
           type="button"
           onClick={onToggle}
           disabled={disabled}
-          aria-label={visible ? "Hide password" : "Show password"}
+          aria-label={
+            visible
+              ? "Hide password"
+              : "Show password"
+          }
           className="absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-lg text-slate-500 transition hover:bg-white/5 hover:text-slate-200 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {visible ? (
@@ -513,6 +751,9 @@ function PasswordField({
   );
 }
 
+/* =====================================================
+   PAGE
+===================================================== */
 
 export default function InviteAcceptPage() {
   return (
@@ -529,7 +770,8 @@ export default function InviteAcceptPage() {
             </h1>
 
             <p className="mt-2 max-w-sm text-sm leading-6 text-slate-400">
-              Please wait while we prepare your invitation.
+              Please wait while we prepare your
+              invitation.
             </p>
           </div>
         </InviteShell>
