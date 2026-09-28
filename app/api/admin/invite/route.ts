@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
+
 import { createClient as createServerClient } from "@/lib/supabase/server";
 import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 
 type InviteRole = "Admin" | "Manager" | "Staff";
+
 type Theme =
   | "Blue"
   | "Purple"
@@ -38,7 +40,10 @@ export async function POST(request: NextRequest) {
 
     if (userError || !user) {
       return NextResponse.json(
-        { ok: false, error: "You must be signed in to invite a team member." },
+        {
+          ok: false,
+          error: "You must be signed in to invite a team member.",
+        },
         { status: 401 }
       );
     }
@@ -57,7 +62,10 @@ export async function POST(request: NextRequest) {
       profile.status !== "Active"
     ) {
       return NextResponse.json(
-        { ok: false, error: "Only an active Owner can invite Admin Team members." },
+        {
+          ok: false,
+          error: "Only an active Owner can invite Admin Team members.",
+        },
         { status: 403 }
       );
     }
@@ -67,16 +75,24 @@ export async function POST(request: NextRequest) {
 
     const name =
       typeof body?.name === "string" ? body.name.trim() : "";
+
     const email =
-      typeof body?.email === "string" ? body.email.trim().toLowerCase() : "";
+      typeof body?.email === "string"
+        ? body.email.trim().toLowerCase()
+        : "";
+
     const role =
       typeof body?.role === "string" ? body.role : "";
+
     const theme =
       typeof body?.theme === "string" ? body.theme : "";
 
     if (!name || name.length < 2 || name.length > 100) {
       return NextResponse.json(
-        { ok: false, error: "Please provide a valid full name." },
+        {
+          ok: false,
+          error: "Please provide a valid full name.",
+        },
         { status: 400 }
       );
     }
@@ -87,7 +103,10 @@ export async function POST(request: NextRequest) {
       !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
     ) {
       return NextResponse.json(
-        { ok: false, error: "Please provide a valid email address." },
+        {
+          ok: false,
+          error: "Please provide a valid email address.",
+        },
         { status: 400 }
       );
     }
@@ -96,7 +115,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           ok: false,
-          error: "Only Admin, Manager, and Staff can be invited through this flow.",
+          error:
+            "Only Admin, Manager, and Staff can be invited through this flow.",
         },
         { status: 400 }
       );
@@ -104,7 +124,10 @@ export async function POST(request: NextRequest) {
 
     if (!ALLOWED_THEMES.includes(theme as Theme)) {
       return NextResponse.json(
-        { ok: false, error: "Please select a valid Admin theme." },
+        {
+          ok: false,
+          error: "Please select a valid Admin theme.",
+        },
         { status: 400 }
       );
     }
@@ -141,9 +164,15 @@ export async function POST(request: NextRequest) {
       }
     );
 
-    // 6. Send the Supabase Auth invitation.
-    const redirectTo = `${request.nextUrl.origin}/invite/accept`;
+    // 6. Build the invitation redirect URL.
+    // Production uses NEXT_PUBLIC_SITE_URL.
+    // Local development falls back to the current request origin.
+    const siteUrl =
+      process.env.NEXT_PUBLIC_SITE_URL || request.nextUrl.origin;
 
+    const redirectTo = `${siteUrl.replace(/\/$/, "")}/invite/accept`;
+
+    // 7. Send the Supabase Auth invitation.
     const { data: inviteData, error: inviteError } =
       await adminSupabase.auth.admin.inviteUserByEmail(email, {
         data: {
@@ -153,13 +182,18 @@ export async function POST(request: NextRequest) {
       });
 
     if (inviteError || !inviteData.user) {
-      console.error("Supabase admin invitation failed:", inviteError);
+      console.error(
+        "Supabase admin invitation failed:",
+        inviteError
+      );
 
       const message =
         inviteError?.message || "Unable to send the invitation.";
 
       const alreadyExists =
-        /already registered|already exists|user already exists/i.test(message);
+        /already registered|already exists|user already exists/i.test(
+          message
+        );
 
       return NextResponse.json(
         {
@@ -174,7 +208,7 @@ export async function POST(request: NextRequest) {
 
     const invitedUserId = inviteData.user.id;
 
-    // 7. Create the authoritative Pending profile.
+    // 8. Create the authoritative Pending profile.
     // Role/theme are stored in profiles, not trusted from user_metadata.
     const { error: profileUpsertError } = await adminSupabase
       .from("profiles")
@@ -224,7 +258,10 @@ export async function POST(request: NextRequest) {
       message: "Invitation sent successfully.",
     });
   } catch (error) {
-    console.error("Unexpected admin invitation error:", error);
+    console.error(
+      "Unexpected admin invitation error:",
+      error
+    );
 
     return NextResponse.json(
       {
